@@ -2918,7 +2918,7 @@
         const SCENES = {
             nameInput: {
                 text: `<div id="name-input-panel">
-                    <h2>🏐 排球之星（北外内测版）</h2>
+                    <h2>🏐 欢迎来到排球之星（内测版）</h2>
                     <p style="margin-bottom: 20px; color: #666;">你即将开始一段从菜鸟到冠军的排球之旅</p>
                     <div id="name-input-container">
                         <input type="text" id="player-name-input" placeholder="请输入你的名字" maxlength="10" />
@@ -8349,13 +8349,22 @@
             }
             
             updateInitialSkillsDisplay() {
-                document.getElementById('init-serve').textContent = this.player.skills.serve;
-                document.getElementById('init-spike').textContent = this.player.skills.spike;
-                document.getElementById('init-block').textContent = this.player.skills.block;
-                document.getElementById('init-dig').textContent = this.player.skills.dig;
-                document.getElementById('init-set').textContent = this.player.skills.set;
-                document.getElementById('init-energy').textContent = this.player.maxEnergy;
-                document.getElementById('init-money').textContent = this.player.money;
+                const initServe = document.getElementById('init-serve');
+                const initSpike = document.getElementById('init-spike');
+                const initBlock = document.getElementById('init-block');
+                const initDig = document.getElementById('init-dig');
+                const initSet = document.getElementById('init-set');
+                const initEnergy = document.getElementById('init-energy');
+                const initMoney = document.getElementById('init-money');
+                
+                // 只有当元素存在时才更新（避免在非名字输入界面时报错）
+                if (initServe) initServe.textContent = this.player.skills.serve;
+                if (initSpike) initSpike.textContent = this.player.skills.spike;
+                if (initBlock) initBlock.textContent = this.player.skills.block;
+                if (initDig) initDig.textContent = this.player.skills.dig;
+                if (initSet) initSet.textContent = this.player.skills.set;
+                if (initEnergy) initEnergy.textContent = this.player.maxEnergy;
+                if (initMoney) initMoney.textContent = this.player.money;
             }
             
             submitName() {
@@ -10312,6 +10321,9 @@
                     document.getElementById('character-panel').classList.remove('show');
                     document.getElementById('game-header').classList.remove('show');
                     this.updateUI();
+                    
+                    // 先显示场景，再更新名字和技能显示
+                    this.showScene(this.currentScene);
                     
                     // 延迟更新名字输入框和初始技能显示
                     setTimeout(() => {
