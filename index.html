@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>排球之星 - 从菜鸟到冠军</title>
-    <!-- Version: 2.2.0 - Skill Growth Rebalance -->
+    <title>排球之星 v2.2.1</title>
+    <!-- Version: 2.2.1 - Skill Growth Rebalance -->
     
     <!-- SEO优化 -->
     <meta name="description" content="体验从大一新生到市级冠军的排球之旅！训练、比赛、成长，书写你的排球传奇！">
@@ -7156,7 +7156,9 @@
                         energy: isCasual ? 0 : -12,  // 野球不额外消耗体力，正式比赛消耗
                         mood: isCasual ? -3 : -10,
                         stress: isCasual ? 3 : 8,
-                        reputation: isCasual ? 0 : -2
+                        reputation: isCasual ? 0 : -2,
+                        // 野球失败也有收获：随机2个技能+1
+                        randomSkills: isCasual ? 2 : 0
                     };
                 }
             }
@@ -9736,6 +9738,20 @@
                         }
                     }
                 });
+                
+                // 处理随机技能提升（用于野球失败等场景）
+                if (effect.randomSkills && effect.randomSkills > 0) {
+                    const skills = ['serve', 'spike', 'block', 'dig', 'set'];
+                    const shuffled = skills.sort(() => Math.random() - 0.5);
+                    const selectedSkills = shuffled.slice(0, effect.randomSkills);
+                    
+                    selectedSkills.forEach(skill => {
+                        this.player.skills[skill] = Math.min(100, this.player.skills[skill] + 1);
+                    });
+                    
+                    console.log(`随机提升技能: ${selectedSkills.join(', ')}`);
+                }
+                
                 if (effect.energy) this.player.energy = Math.max(0, Math.min(this.player.maxEnergy, this.player.energy + effect.energy));
                 if (effect.maxEnergyBonus) this.player.maxEnergy = Math.min(150, this.player.maxEnergy + effect.maxEnergyBonus);
                 if (effect.mood) this.player.mood = Math.max(0, Math.min(100, this.player.mood + effect.mood));
