@@ -3,24 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>排球之星（北外内测版） - 从菜鸟到冠军</title>
+    <title>排球之星 - 从菜鸟到冠军</title>
     <!-- Version: 2.2.0 - Skill Growth Rebalance -->
     
     <!-- SEO优化 -->
     <meta name="description" content="体验从大一新生到市级冠军的排球之旅！训练、比赛、成长，书写你的排球传奇！">
-    <meta name="keywords" content="排球游戏,文字冒险,体育游戏,成长游戏,排球之星（北外内测版）">
+    <meta name="keywords" content="排球游戏,文字冒险,体育游戏,成长游戏,排球之星">
     <meta name="author" content="小水">
     
     <!-- 微信分享优化 -->
-    <meta property="og:title" content="排球之星（北外内测版） - 从菜鸟到冠军的成长之路" />
+    <meta property="og:title" content="排球之星 - 从菜鸟到冠军的成长之路" />
     <meta property="og:description" content="体验从大一新生到市级冠军的排球之旅！训练、比赛、成长，书写你的排球传奇！" />
     <meta property="og:type" content="website" />
-    <meta property="og:image" content="https://via.placeholder.com/1200x630/667eea/ffffff?text=排球之星（北外内测版）" />
+    <meta property="og:image" content="https://via.placeholder.com/1200x630/667eea/ffffff?text=排球之星" />
     
     <!-- 移动端优化 -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="排球之星（北外内测版）">
+    <meta name="apple-mobile-web-app-title" content="排球之星">
     <meta name="theme-color" content="#667eea">
     
     <style>
@@ -1737,7 +1737,7 @@
     <div id="game-container">
         <div id="game-header">
             <div style="display: flex; justify-content: space-between; align-items: center;">
-                <h1>🏐 排球之星（北外内测版）</h1>
+                <h1>🏐 排球之星</h1>
                 <button id="goals-tab-btn" class="tab-btn" onclick="game.toggleGoalsPanel()">🎯 目标</button>
             </div>
             <div id="current-goal">
@@ -1907,9 +1907,11 @@
             // 复姓
             '欧阳', '司马', '上官', '诸葛', '东方', '独孤', '南宫', '西门',
             '慕容', '轩辕', '令狐', '皇甫', '公孙', '澹台',
-            // 搞笑姓氏
+            // 排球专有名词姓氏
             '排', '球', '网', '场', '扣', '拦', '垫', '托', '发', '跳',
-            '二传', '主攻', '副攻', '接应', '自由人', '教练', '裁判', '队长'
+            '二传', '主攻', '副攻', '接应', '教练', '裁判', '队长',
+            '前排', '后排', '轮转', '换位', '暂停', '局点', '赛点', '冠军',
+            '扣球', '拦网', '垫球', '传球', '发球', '救球', '防守', '进攻'
         ];
         
         // 名字库（排球/运动相关）
@@ -1920,10 +1922,9 @@
             '二传', '三米线', '标志杆', '中线', '边线', '底线', '发球区',
             '进攻线', '自由区', '换人区', '暂停', '轮转', '换位', '掩护',
             
-            // 排球术语搞笑化
-            '25分', '局点', '赛点', '触网', '过网击球', '连击', '持球',
-            '四次击球', '位置错误', '发球违例', '界内', '界外', '擦网',
-            '探头球', '打手出界', '标志杆', '双人拦网', '单人拦网',
+            // 排球术语
+            '25分', '局点', '赛点', '触网', '连击', '持球',
+            '界内', '界外', '擦网', '探头球',
             
             // 运动特质相关
             '如风', '似电', '破空', '凌云', '冲天', '惊雷', '闪电', '疾风',
@@ -1952,11 +1953,11 @@
             '空中接力', '鱼跃救球', '滚翻救球', '倒地救球', '单手救球',
             
             // 单字名
-            '跃', '飞', '翔', '腾', '冲', '闯', '拼', '搏',
-            '强', '刚', '勇', '威', '猛', '锐', '峰', '杰',
-            '灵', '敏', '捷', '快', '迅', '疾', '速', '风',
-            '扣', '拦', '垫', '托', '传', '发', '攻', '守',
-            '网', '球', '场', '赛', '冠', '王', '霸', '尊'
+            '跃', '飞', '翔', '腾', '冲', '闯', '拼', '搏', '扛', '顶',
+            '强', '刚', '勇', '威', '猛', '锐', '峰', '杰', '霸', '尊',
+            '灵', '敏', '捷', '快', '迅', '疾', '速', '风', '雷', '电',
+            '扣', '拦', '垫', '托', '传', '发', '攻', '守', '防', '救',
+            '网', '球', '场', '赛', '冠', '王', '霸', '神', '仙', '圣'
         ];
         
         // 生成随机名字
@@ -2917,7 +2918,7 @@
         const SCENES = {
             nameInput: {
                 text: `<div id="name-input-panel">
-                    <h2>🏐 欢迎来到排球之星（北外内测版）</h2>
+                    <h2>🏐 排球之星（北外内测版）</h2>
                     <p style="margin-bottom: 20px; color: #666;">你即将开始一段从菜鸟到冠军的排球之旅</p>
                     <div id="name-input-container">
                         <input type="text" id="player-name-input" placeholder="请输入你的名字" maxlength="10" />
@@ -3903,6 +3904,22 @@
             init() {
                 console.log('init() called');
                 console.log('currentScene:', this.currentScene);
+                
+                // 检查是否有存档
+                if (this.hasSaveData()) {
+                    console.log('发现存档，尝试加载...');
+                    const loaded = this.loadGame();
+                    if (loaded) {
+                        console.log('存档加载成功');
+                        // 显示继续游戏的提示
+                        this.showContinueGamePrompt();
+                        return;
+                    } else {
+                        console.log('存档加载失败，开始新游戏');
+                    }
+                }
+                
+                // 没有存档或加载失败，开始新游戏
                 this.updateUI();
                 this.updateGoalDisplay();
                 this.showScene(this.currentScene);
@@ -3913,6 +3930,60 @@
                     this.rollAttributes();
                     this.updateInitialSkillsDisplay();
                 }, 100);
+            }
+            
+            // 显示继续游戏提示
+            showContinueGamePrompt() {
+                const modal = document.getElementById('event-modal');
+                const title = document.getElementById('event-modal-title');
+                const text = document.getElementById('event-modal-text');
+                const choicesDiv = document.getElementById('event-modal-choices');
+                
+                title.textContent = '💾 发现存档';
+                text.innerHTML = `
+                    <p>检测到上次的游戏记录：</p>
+                    <div style="margin: 15px 0; padding: 15px; background: rgba(0,0,0,0.2); border-radius: 8px;">
+                        <p><strong>玩家：</strong>${this.player.name}</p>
+                        <p><strong>周次：</strong>第${this.player.week}周</p>
+                        <p><strong>队伍：</strong>${this.player.team === 'none' ? '无' : this.player.team === 'college' ? '院队' : '校队'}</p>
+                        <p><strong>平均技能：</strong>${Math.round((this.player.skills.serve + this.player.skills.spike + this.player.skills.block + this.player.skills.dig + this.player.skills.set) / 5)}</p>
+                    </div>
+                    <p>是否继续上次的游戏？</p>
+                `;
+                
+                choicesDiv.innerHTML = '';
+                
+                // 继续游戏按钮
+                const continueBtn = document.createElement('button');
+                continueBtn.className = 'choice-btn';
+                continueBtn.textContent = '继续游戏';
+                continueBtn.onclick = () => {
+                    modal.classList.remove('show');
+                    // 显示角色面板和游戏头部
+                    document.getElementById('character-panel').classList.add('show');
+                    document.getElementById('game-header').classList.add('show');
+                    // 更新UI并显示当前场景
+                    this.updateUI();
+                    this.updateGoalDisplay();
+                    this.showScene(this.currentScene);
+                };
+                choicesDiv.appendChild(continueBtn);
+                
+                // 新游戏按钮
+                const newGameBtn = document.createElement('button');
+                newGameBtn.className = 'choice-btn';
+                newGameBtn.textContent = '开始新游戏';
+                newGameBtn.style.background = 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)';
+                newGameBtn.onclick = () => {
+                    modal.classList.remove('show');
+                    // 删除存档并重置游戏
+                    this.deleteSave();
+                    this.applyEffect({ reset: true });
+                };
+                choicesDiv.appendChild(newGameBtn);
+                
+                // 显示弹窗
+                modal.classList.add('show');
             }
             
             // 初始化商店物品
@@ -7050,6 +7121,9 @@
                 // 显示结果场景
                 const resultText = this.getMatchResultText(match.matchType, performance, won, setsDisplay);
                 
+                // 比赛结束后自动保存
+                this.saveGame();
+                
                 // 检查是否是校际联赛（触发结局）
                 if (match.matchType === 'universityLeague' && rewards.ending) {
                     // 校际联赛结束，触发结局
@@ -8187,7 +8261,7 @@
                 text += `<h3>🎓 学期结束</h3>`;
                 text += `<p>学期结束了，你的大一排球之旅也告一段落。</p>`;
                 text += `<br>`;
-                text += `<p>虽然没能实现"排球之星（北外内测版）"的梦想，但你并不后悔。这12周的经历让你成长了许多，也让你明白了很多道理。</p>`;
+                text += `<p>虽然没能实现"排球之星"的梦想，但你并不后悔。这12周的经历让你成长了许多，也让你明白了很多道理。</p>`;
                 text += `<br>`;
                 text += `<p>也许下学期，你会更加努力。也许你会选择其他的道路。但无论如何，这段经历都将成为你珍贵的回忆。</p>`;
                 text += `</div>`;
@@ -9217,6 +9291,9 @@
                     });
                 }
                 
+                // 自动保存游戏
+                this.saveGame();
+                
                 this.updateUI();
                 
                 console.log(`第${this.player.week}周开始，当前队伍: ${this.player.team}`);
@@ -9265,6 +9342,93 @@
                 
                 // 如果没有触发任何特殊事件，显示周主界面
                 this.showScene('weeklyHub');
+            }
+            
+            // ====================================================
+            // 本地存档系统
+            // ====================================================
+            
+            // 保存游戏到localStorage
+            saveGame() {
+                try {
+                    const saveData = {
+                        version: '2.2.0',
+                        timestamp: Date.now(),
+                        player: this.player,
+                        tournament: this.tournament,
+                        playerStats: this.playerStats,
+                        shopItems: this.shopItems,
+                        adventureEvents: this.adventureEvents,
+                        currentScene: this.currentScene,
+                        weekStartNoticeShown: this.weekStartNoticeShown,
+                        rerollsRemaining: this.rerollsRemaining
+                    };
+                    
+                    localStorage.setItem('volleyballStarSave', JSON.stringify(saveData));
+                    console.log('游戏已自动保存');
+                } catch (error) {
+                    console.error('保存游戏失败:', error);
+                }
+            }
+            
+            // 从localStorage加载游戏
+            loadGame() {
+                try {
+                    const saveDataStr = localStorage.getItem('volleyballStarSave');
+                    if (!saveDataStr) {
+                        console.log('没有找到存档');
+                        return false;
+                    }
+                    
+                    const saveData = JSON.parse(saveDataStr);
+                    
+                    // 恢复游戏状态
+                    this.player = saveData.player;
+                    this.tournament = saveData.tournament || {
+                        active: false,
+                        type: null,
+                        currentRound: null,
+                        roundsCompleted: [],
+                        matchesWon: 0,
+                        matchesLost: 0,
+                        eliminated: false,
+                        finalRank: null
+                    };
+                    this.playerStats = saveData.playerStats || {
+                        lifeActivities: {},
+                        triggeredEvents: [],
+                        permanentBuffs: {},
+                        titles: []
+                    };
+                    this.shopItems = saveData.shopItems || this.initShopItems();
+                    this.adventureEvents = saveData.adventureEvents || this.initAdventureEvents();
+                    this.currentScene = saveData.currentScene || 'weeklyHub';
+                    this.weekStartNoticeShown = saveData.weekStartNoticeShown || false;
+                    this.rerollsRemaining = saveData.rerollsRemaining || 5;
+                    
+                    console.log('游戏加载成功，当前周次:', this.player.week);
+                    return true;
+                } catch (error) {
+                    console.error('加载游戏失败:', error);
+                    return false;
+                }
+            }
+            
+            // 检查是否有存档
+            hasSaveData() {
+                return localStorage.getItem('volleyballStarSave') !== null;
+            }
+            
+            // 删除存档
+            deleteSave() {
+                try {
+                    localStorage.removeItem('volleyballStarSave');
+                    console.log('存档已删除');
+                    return true;
+                } catch (error) {
+                    console.error('删除存档失败:', error);
+                    return false;
+                }
             }
             
             // 新增：检查固定比赛
@@ -10059,10 +10223,12 @@
                     ctx.fillText(skill.name, x, y);
                 });
             }
-
             
             applyEffect(effect) {
                 if (effect.reset) {
+                    // 删除存档
+                    this.deleteSave();
+                    
                     // 重置游戏状态
                     this.player = {
                         name: generateRandomName(),  // 使用随机名字而不是固定的"新生"
@@ -10272,6 +10438,9 @@
                     if (skillCount >= 3) {
                         this.playerStats.trainingByType.composite++;
                     }
+                    
+                    // 训练后自动保存
+                    this.saveGame();
                 }
                 
                 // 应用职业训练加成
@@ -10527,8 +10696,8 @@
         // 分享功能
         function shareGame() {
             const shareData = {
-                title: '排球之星（北外内测版） - 从菜鸟到冠军',
-                text: '我在玩排球之星（北外内测版），从菜鸟到冠军的成长之路！快来一起玩吧！',
+                title: '排球之星 - 从菜鸟到冠军',
+                text: '我在玩排球之星，从菜鸟到冠军的成长之路！快来一起玩吧！',
                 url: window.location.href
             };
             
