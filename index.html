@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>排球之星 - 从菜鸟到冠军</title>
-    <!-- Version: 2.2.4 - Skill Growth Rebalance -->
+    <!-- Version: 2.2.0 - Skill Growth Rebalance -->
     
     <!-- SEO优化 -->
     <meta name="description" content="体验从大一新生到市级冠军的排球之旅！训练、比赛、成长，书写你的排球传奇！">
@@ -1709,7 +1709,7 @@
         <!-- 开发者署名和版本号 -->
         <div class="developer-credit">
             <span>开发者：小水</span>
-            <span class="version-number">v2.2.4</span>
+            <span class="version-number">v2.2.0</span>
         </div>
     </div>
     
@@ -4998,7 +4998,11 @@
                     }
                     
                     // 检查是否触发奇遇事件（排除刮刮乐，因为已经在上面处理）
-                    this.checkAdventureEvents('general');
+                    const adventureTriggered = this.checkAdventureEvents('general');
+                    if (adventureTriggered) {
+                        // 如果触发了奇遇事件，不再执行后续的showScene
+                        return;
+                    }
                 }
                 
                 if (nextScene) {
@@ -5326,7 +5330,10 @@
                 if (eligibleEvents.length > 0) {
                     const event = eligibleEvents[Math.floor(Math.random() * eligibleEvents.length)];
                     this.triggerAdventureEvent(event);
+                    return true;  // 返回true表示触发了事件
                 }
+                
+                return false;  // 返回false表示没有触发事件
             }
             
             // 检查特定类型的奇遇事件（用于刮刮乐等特殊场景）
@@ -9814,7 +9821,6 @@
             
             showScene(sceneId) {
                 console.log('showScene called with:', sceneId);
-                console.trace('调用堆栈:');  // 添加堆栈跟踪
                 
                 // 先处理特殊场景（不需要在SCENES中定义）
                 // 课余生活场景特殊渲染
