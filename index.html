@@ -4207,7 +4207,7 @@
                         type: 'tryout',  // 选拔类
                         title: '🎯 加入院队',
                         icon: '🎯',
-                        timeWindow: '第1-4周',
+                        timeWindow: '第2-4周',
                         nextEvent: '第5周院际比赛',
                         // 简化要求：只看技能，任意2项技能≥15即可
                         criteria: {
@@ -8176,15 +8176,20 @@
                 let weekStartNotice = '';
                 if (this.player.week > 1 && this.player.trainingCount === 0 && !this.weekStartNoticeShown) {
                     const allowance = this.player.weeklyAllowance || 120;
-                    weekStartNotice = `<p style="color: #2ecc71; background: rgba(46, 204, 113, 0.1); padding: 10px; border-radius: 5px; margin: 10px 0;">💰 获得本周零花钱 +${allowance}元</p>`;
+                    console.log(`周初提示 - 周数:${this.player.week}, 队伍:${this.player.team}, 零花钱:${allowance}, 院队提示已显示:${this.player.collegeAllowanceNoticeShown}`);
                     
-                    // 首次加入院队后的特殊提示（第2周，刚加入院队）
-                    if (this.player.week === 2 && this.player.team === 'college' && allowance === 150) {
-                        weekStartNotice += '<p style="color: #ffd700; background: rgba(255, 215, 0, 0.1); padding: 10px; border-radius: 5px; margin: 10px 0;">🎉 父母得知你加入院队后很高兴：<br>「太好了！以后每周多给你30元零花钱，好好训练！」<br><strong>每周零花钱：120元 → 150元</strong></p>';
+                    weekStartNotice = `<p style="color: #2ecc71; background: rgba(46, 204, 113, 0.1); padding: 10px; border-radius: 5px; margin: 10px 0;">💰 获得本周零花钱 +${allowance}元，💪 体力 +60</p>`;
+                    
+                    // 首次加入院队后的特殊提示（第2周或第3周，刚加入院队）
+                    if ((this.player.week === 2 || this.player.week === 3) && this.player.team === 'college' && allowance === 150 && !this.player.collegeAllowanceNoticeShown) {
+                        console.log('显示院队零花钱提示');
+                        weekStartNotice += '<p style="color: #ffd700; background: rgba(255, 215, 0, 0.1); padding: 10px; border-radius: 5px; margin: 10px 0;">�  父母得知你加入院队后很高兴：<br>「太好了！以后每周多给你30元零花钱，好好训练！」<br><strong>每周零花钱：120元 → 150元</strong></p>';
+                        this.player.collegeAllowanceNoticeShown = true;
                     }
                     
                     // 首次加入校队后的特殊提示
                     if (this.player.team === 'university' && allowance === 200 && !this.player.universityAllowanceNoticeShown) {
+                        console.log('显示校队零花钱提示');
                         weekStartNotice += '<p style="color: #ffd700; background: rgba(255, 215, 0, 0.1); padding: 10px; border-radius: 5px; margin: 10px 0;">🌟 父母得知你进入校队后激动不已：<br>「居然进了校队！爸妈为你骄傲！以后每周给你200元，需要什么尽管说！」<br><strong>每周零花钱：150元 → 200元</strong></p>';
                         this.player.universityAllowanceNoticeShown = true;
                     }
@@ -8255,7 +8260,12 @@
                 } else if (this.currentGoal === 'universityTryout' && this.player.week >= 8 && this.player.team === 'college') {
                     const goalInfo = this.getGoalInfo();
                     const evaluation = this.evaluateGoal(goalInfo);
-                    const canTryout = evaluation.score >= 0.7;
+                    
+                    // 校队选拔必须所有条件都达标（不是加权平均）
+                    const skillCountPassed = evaluation.breakdown.skillCount?.details?.progress >= 1.0;
+                    const skillSumPassed = evaluation.breakdown.skillSum?.details?.progress >= 1.0;
+                    const reputationPassed = evaluation.breakdown.stats?.details?.reputation?.progress >= 1.0;
+                    const canTryout = skillCountPassed && skillSumPassed && reputationPassed;
                     
                     SCENES.weeklyHub.choices.splice(SCENES.weeklyHub.choices.length - 1, 0, {
                         text: '⭐ 申请校队选拔',
@@ -8677,7 +8687,7 @@
                 this.weekStartNoticeShown = false; // 重置周初提示标志
                 
                 // 自然恢复
-                this.player.energy = Math.min(this.player.maxEnergy, this.player.energy + 30);
+                this.player.energy = Math.min(this.player.maxEnergy, this.player.energy + 60);
                 this.player.mood = Math.min(100, this.player.mood + 10);
                 this.player.stress = Math.max(0, this.player.stress - 10);
                 
