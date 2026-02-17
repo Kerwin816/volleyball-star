@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>排球之星 - 从菜鸟到冠军</title>
-    <!-- Version: 2.2.1 - Skill Growth Rebalance -->
+    <!-- Version: 2.2.3 - Skill Growth Rebalance -->
     
     <!-- SEO优化 -->
     <meta name="description" content="体验从大一新生到市级冠军的排球之旅！训练、比赛、成长，书写你的排球传奇！">
@@ -1709,7 +1709,7 @@
         <!-- 开发者署名和版本号 -->
         <div class="developer-credit">
             <span>开发者：小水</span>
-            <span class="version-number">v2.2.1</span>
+            <span class="version-number">v2.2.3</span>
         </div>
     </div>
     
@@ -3778,7 +3778,7 @@
                         name: '装备商店',
                         icon: '👟',
                         items: [
-                            { id: 'pro_shoes', name: '专业球鞋', price: 500, type: 'permanent', effect: { trainingBonus: 10 }, description: '训练效果+10%（永久）' },
+                            { id: 'pro_shoes', name: '专业球鞋', price: 500, type: 'permanent', effect: { trainingBonus: 20 }, description: '训练效果+20%（永久）' },
                             { id: 'protection', name: '护膝护腕套装', price: 250, type: 'permanent', effect: { injuryResist: 70 }, description: '减少受伤概率70%（永久）' },
                             { id: 'jersey', name: '专业球衣', price: 350, type: 'permanent', effect: { mood: 15, reputation: 10, trainingBonus: 5 }, description: '心情+15，声望+10，训练效果+5%（永久）' },
                             { id: 'training_ball', name: '专业训练球', price: 600, type: 'permanent', effect: { trainingBonus: 15 }, description: '技能训练+15%（永久）' }
@@ -3869,7 +3869,7 @@
                     {
                         id: 'movie_membership',
                         name: '电影达人',
-                        condition: { activities: { movie: 4 } },
+                        condition: { activities: { movie: 3 } },
                         probability: 0.4,
                         once: true,
                         content: {
@@ -3884,7 +3884,7 @@
                     {
                         id: 'romantic_encounter',
                         name: '浪漫邂逅',
-                        condition: { activities: { movie: 6 }, mood: 60 },
+                        condition: { activities: { movie: 5 }, mood: 60 },
                         probability: 0.35,
                         once: true,
                         content: {
@@ -3892,21 +3892,21 @@
                             text: '在电影院，你遇到了一个很有气质的人。你们聊得很投机，发现有很多共同话题。\n\n"下次一起看电影吧？"对方微笑着说。',
                             choices: [
                                 { text: '好啊，交换联系方式', effect: { mood: 30, stress: -20, special: 'startLove' } },
-                                { text: '抱歉，我要专注排球', effect: { randomSkill: 3 } }
+                                { text: '抱歉，我要专注排球', effect: { randomSkill: 5 } }
                             ]
                         }
                     },
                     {
                         id: 'movie_inspiration',
                         name: '电影灵感',
-                        condition: { activities: { movie: 8, library: 3 } },
+                        condition: { activities: { movie: 6, library: 3 } },
                         probability: 0.3,
                         once: true,
                         content: {
                             title: '💡 电影灵感',
                             text: '看完电影后，你突然想到了一个训练方法。结合电影里的动作和图书馆看到的理论...\n\n你领悟了新的技巧！',
                             choices: [
-                                { text: '太棒了！', effect: { randomSkill: 5, mood: 15, title: '学霸运动员' } }
+                                { text: '太棒了！', effect: { randomSkill: 10, mood: 15, title: '学霸运动员' } }
                             ]
                         }
                     },
@@ -3951,7 +3951,7 @@
                             title: '⭐ 队长的邀请',
                             text: '队长找到你："我看你实力不错，人缘也好。下学期我就毕业了，我想推荐你接任队长。你愿意吗？"',
                             choices: [
-                                { text: '我会努力的！', effect: { reputation: 30, title: '未来队长', buff: 'captainBonus', stress: 5 } }
+                                { text: '我会努力的！', effect: { reputation: 50, title: '未来队长', buff: 'captainBonus', stress: 5 } }
                             ]
                         }
                     },
@@ -10073,5 +10073,4 @@
     </script>
 </body>
 </html>
-
 
