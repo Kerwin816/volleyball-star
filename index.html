@@ -1372,7 +1372,7 @@
             border-radius: 10px;
             font-size: 24px;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: transform 0.3s;
             width: 50px;
             height: 50px;
             display: flex;
@@ -1382,8 +1382,11 @@
         }
         
         #random-name-btn:hover {
-            background: #dee2e6;
             transform: rotate(360deg) scale(1.05);
+        }
+        
+        #random-name-btn:active {
+            transform: rotate(360deg) scale(0.95);
         }
         
         #initial-attributes {
@@ -1442,14 +1445,17 @@
             border-radius: 5px;
             font-size: 12px;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: transform 0.2s;
             white-space: nowrap;
             flex-shrink: 0;
         }
         
         #reroll-btn:hover:not(:disabled) {
-            background: #dee2e6;
             transform: scale(1.02);
+        }
+        
+        #reroll-btn:active:not(:disabled) {
+            transform: scale(0.98);
         }
         
         #reroll-btn:disabled {
@@ -2198,7 +2204,7 @@
     <script>
         // ==================== 游戏配置 ====================
         // 版本号配置（统一管理）
-        const GAME_VERSION = '2.3.2';
+        const GAME_VERSION = '2.3.4';
         
         // 姓氏库
         const SURNAMES = [
@@ -2210,6 +2216,13 @@
             // 复姓
             '欧阳', '司马', '上官', '诸葛', '东方', '独孤', '南宫', '西门',
             '慕容', '轩辕', '令狐', '皇甫', '公孙', '澹台',
+            // 排球少年角色姓氏
+            '日向', '影山', '月岛', '山口', '田中', '西谷', '东峰', '泽村', '菅原', '缘下',
+            '及川', '岩泉', '松川', '花卷', '金田一', '国见',
+            '牛岛', '天童', '五色', '白布', '大平', '川西',
+            '黑尾', '孤爪', '夜久', '山本', '海信', '犬冈', '福永',
+            '宫', '角名', '北', '大耳', '尾白',
+            '木兔', '赤苇', '黑川', '京谷', '佐久早',
         ];
         
         // 名字库（排球/运动相关）
@@ -3395,7 +3408,7 @@
                         effect: { mood: 12, stress: -6, relationship: 5, eventType: 'life' }
                     },
                     {
-                        text: '🍿 看电影（心情+18，压力-10，花费50元）',
+                        text: '🍿 看小排球（心情+18，压力-10，花费50元）',
                         next: 'checkRandomEvent',
                         requirement: { money: 50 },
                         effect: { mood: 18, stress: -10, money: -50, eventType: 'life' }
@@ -4393,28 +4406,28 @@
                     // 2. 电影相关事件
                     {
                         id: 'movie_membership',
-                        name: '电影达人',
-                        condition: { activities: { movie: 3 } },
+                        name: '动漫达人',
+                        condition: { activities: { movie: 2 } },
                         probability: 0.4,
                         once: true,
                         content: {
-                            title: '🎬 电影达人',
-                            text: '电影院经理注意到你是常客。"同学，要不要办张会员卡？以后看电影8折，还送爆米花！"',
+                            title: '🎬 动漫达人',
+                            text: '平台会员要不要办一下？免费加更！"',
                             choices: [
-                                { text: '办理会员卡（-200元）', effect: { money: -200, buff: 'movieMembership' }, requirement: { money: 200 } },
-                                { text: '不办了，谢谢', effect: {} }
+                                { text: '办理会员卡（-30元）', effect: { money: -30, buff: 'movieMembership' }, requirement: { money: 30 } },
+                                { text: '还是算了吧', effect: {} }
                             ]
                         }
                     },
                     {
                         id: 'romantic_encounter',
-                        name: '浪漫邂逅',
-                        condition: { activities: { movie: 5 }, mood: 60 },
+                        name: '这就是羁绊啊',
+                        condition: { activities: { movie: 3 }, mood: 40 },
                         probability: 0.35,
                         once: true,
                         content: {
-                            title: '💕 浪漫邂逅',
-                            text: '在电影院，你遇到了一个很有气质的人。你们聊得很投机，发现有很多共同话题。\n\n"下次一起看电影吧？"对方微笑着说。',
+                            title: '👊 这就是羁绊啊',
+                            text: '在弹幕区，你遇到了一个很同频的人，发现有很多共同话题。\n\n"下次一起去漫展吧？"对方说。',
                             choices: [
                                 { text: '好啊，交换联系方式', effect: { mood: 30, stress: -20, special: 'startLove' } },
                                 { text: '抱歉，我要专注排球', effect: { randomSkill: 5 } }
@@ -4423,13 +4436,13 @@
                     },
                     {
                         id: 'movie_inspiration',
-                        name: '电影灵感',
-                        condition: { activities: { movie: 6, library: 3 } },
+                        name: '动漫灵感',
+                        condition: { activities: { movie: 5, library: 2 } },
                         probability: 0.3,
                         once: true,
                         content: {
-                            title: '💡 电影灵感',
-                            text: '看完电影后，你突然想到了一个训练方法。结合电影里的动作和图书馆看到的理论...\n\n你领悟了新的技巧！',
+                            title: '💡 动漫灵感',
+                            text: '看完动漫后，你突然想到了一个训练方法。结合动漫里的动作和图书馆看到的理论...\n\n你领悟了新的技巧！',
                             choices: [
                                 { text: '太棒了！', effect: { randomSkill: 10, mood: 15, title: '学霸运动员' } }
                             ]
@@ -4852,7 +4865,7 @@
                         icon: '🎯',
                         timeWindow: '第8-11周',
                         nextEvent: '第12周校际联赛',
-                        // 修改要求：任意3项技能≥50，总和≥180
+                        // 修改要求：任意3项技能≥50，总和≥180，声望≥100
                         criteria: {
                             skillCount: {
                                 minSkills: 3,
@@ -4862,15 +4875,15 @@
                                 min: 180
                             },
                             stats: {
-                                reputation: { min: 50 }
+                                reputation: { min: 100 }
                             }
                         },
                         requirements: {
                             anyThree: 50,
                             totalSum: 180,
-                            reputation: 50
+                            reputation: 100
                         },
-                        tips: '建议第11周前完成选拔，为联赛做准备。院际比赛表现好可获得大量声望',
+                        tips: '建议第11周前完成选拔，为联赛做准备。院际比赛表现好可获得大量声望，多参与社交活动提升声望',
                         nextGoal: 'universityLeague'
                     },
                     universityLeague: {
@@ -5449,7 +5462,7 @@
                             },
                             {
                                 icon: '🍿',
-                                title: '看电影',
+                                title: '看小排球',
                                 effects: '体力+12 心情+20 压力-12 💰50',
                                 next: 'checkRandomEvent',
                                 requirement: { money: 50 },
@@ -8358,7 +8371,7 @@
                     text += `<div style="margin: 15px 0; padding: 12px; background: rgba(255,255,255,0.03); border-left: 3px solid #ec4899; border-radius: 5px;">`;
                     text += `<p><strong>🌈 课余生活</strong></p>`;
                     if (stats.gamesPlayed > 0) text += `<p>• 玩游戏 ${stats.gamesPlayed} 次</p>`;
-                    if (stats.moviesWatched > 0) text += `<p>• 看电影 ${stats.moviesWatched} 次</p>`;
+                    if (stats.moviesWatched > 0) text += `<p>• 看动漫 ${stats.moviesWatched} 次</p>`;
                     if (stats.socialEvents > 0) text += `<p>• 社交活动 ${stats.socialEvents} 次</p>`;
                     if (stats.restTaken > 0) text += `<p>• 休息放松 ${stats.restTaken} 次</p>`;
                     
@@ -8366,7 +8379,7 @@
                     if (stats.gamesPlayed >= 8) {
                         text += `<p style="color: #fbbf24;">你是个游戏爱好者，经常在游戏中放松</p>`;
                     } else if (stats.moviesWatched >= 6) {
-                        text += `<p style="color: #fbbf24;">你喜欢文艺活动，电影院是常去的地方</p>`;
+                        text += `<p style="color: #fbbf24;">你喜欢文艺活动，动漫网站是常去的地方</p>`;
                     } else if (stats.socialEvents >= 8) {
                         text += `<p style="color: #fbbf24;">你很注重人际关系，经常参加社交活动</p>`;
                     } else if (stats.restTaken >= 10) {
@@ -8474,7 +8487,7 @@
                 } else if (stats.gamesPlayed >= 8) {
                     text += `<p>• <span style="color: #fbbf24;">游戏达人</span>：你在游戏中找到了放松的方式</p>`;
                 } else if (stats.moviesWatched >= 6) {
-                    text += `<p>• <span style="color: #fbbf24;">文艺青年</span>：电影院是你常去的地方，你享受光影带来的感动</p>`;
+                    text += `<p>• <span style="color: #fbbf24;">文艺青年</span>：动漫网站是你常去的地方，你享受光影带来的感动</p>`;
                 } else if (stats.socialEvents >= 8) {
                     text += `<p>• <span style="color: #fbbf24;">社交达人</span>：你很注重人际关系，朋友遍布校园</p>`;
                 }
