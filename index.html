@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>排球之星 - 从菜鸟到冠军</title>
+    <!-- Version: 2.2.0 - Skill Growth Rebalance -->
     
     <!-- SEO优化 -->
     <meta name="description" content="体验从大一新生到市级冠军的排球之旅！训练、比赛、成长，书写你的排球传奇！">
@@ -1358,6 +1359,16 @@
             opacity: 0.6;
             margin-top: 20px;
             border-top: 1px solid #eee;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .version-number {
+            color: #667eea;
+            font-weight: 500;
+            opacity: 0.8;
         }
         
         /* 分享按钮 */
@@ -1421,6 +1432,165 @@
             cursor: not-allowed;
             transform: none;
         }
+        
+        /* 刮刮乐样式 */
+        .scratch-card-result {
+            text-align: center;
+            padding: 40px 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            min-width: 350px;
+            animation: scratchCardFadeIn 0.3s ease-out;
+        }
+        
+        .scratch-card-icon {
+            font-size: 80px;
+            margin-bottom: 20px;
+            animation: iconBounce 0.6s ease-out;
+        }
+        
+        .scratch-card-title {
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 25px;
+        }
+        
+        .scratch-card-rewards {
+            font-size: 20px;
+            line-height: 1.8;
+            margin-bottom: 25px;
+        }
+        
+        .scratch-card-close {
+            padding: 12px 40px;
+            font-size: 18px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            background: #4CAF50;
+            color: white;
+            transition: all 0.3s;
+        }
+        
+        .scratch-card-close:hover {
+            background: #45a049;
+            transform: scale(1.05);
+        }
+        
+        /* 特等奖 - 金色闪耀 */
+        .scratch-grand-prize {
+            background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+            color: #8B0000;
+            animation: prizeShine 1.5s infinite;
+        }
+        
+        .scratch-grand-prize .scratch-card-title {
+            color: #8B0000;
+        }
+        
+        .scratch-grand-prize .scratch-card-rewards {
+            color: #8B0000;
+        }
+        
+        /* 一等奖 - 橙色 */
+        .scratch-first-prize {
+            background: linear-gradient(135deg, #FFA500 0%, #FF8C00 100%);
+            color: white;
+        }
+        
+        .scratch-first-prize .scratch-card-title {
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .scratch-first-prize .scratch-card-rewards {
+            color: white;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+        
+        /* 二等奖 - 银色 */
+        .scratch-second-prize {
+            background: linear-gradient(135deg, #C0C0C0 0%, #A9A9A9 100%);
+            color: #333;
+        }
+        
+        .scratch-second-prize .scratch-card-title {
+            color: #1a1a1a;
+        }
+        
+        .scratch-second-prize .scratch-card-rewards {
+            color: #1a1a1a;
+        }
+        
+        /* 三等奖 - 铜色 */
+        .scratch-third-prize {
+            background: linear-gradient(135deg, #CD7F32 0%, #B87333 100%);
+            color: white;
+        }
+        
+        .scratch-third-prize .scratch-card-title {
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        
+        .scratch-third-prize .scratch-card-rewards {
+            color: #FFF8DC;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.6);
+            font-weight: bold;
+        }
+        
+        /* 安慰奖 - 浅蓝 */
+        .scratch-consolation-prize {
+            background: #87CEEB;
+            color: #1E3A8A;
+        }
+        
+        .scratch-consolation-prize .scratch-card-title {
+            color: #1E3A8A;
+        }
+        
+        .scratch-consolation-prize .scratch-card-rewards {
+            color: #1E3A8A;
+        }
+        
+        /* 谢谢惠顾 - 灰色 */
+        .scratch-nothing-prize {
+            background: #F0F0F0;
+            color: #666;
+        }
+        
+        .scratch-nothing-prize .scratch-card-title {
+            color: #666;
+        }
+        
+        .scratch-nothing-prize .scratch-card-rewards {
+            color: #666;
+        }
+        
+        /* 图标弹跳动画 */
+        @keyframes iconBounce {
+            0% { transform: scale(0) rotate(-180deg); }
+            50% { transform: scale(1.2) rotate(10deg); }
+            100% { transform: scale(1) rotate(0deg); }
+        }
+        
+        /* 特等奖闪耀动画 */
+        @keyframes prizeShine {
+            0%, 100% { box-shadow: 0 0 20px rgba(255, 215, 0, 0.8); }
+            50% { box-shadow: 0 0 40px rgba(255, 215, 0, 1); }
+        }
+        
+        /* 弹窗淡入动画 */
+        @keyframes scratchCardFadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
     </style>
 </head>
 <body>
@@ -1463,10 +1633,6 @@
                 <div class="stat">
                     <span class="stat-label">金钱</span>
                     <span class="stat-value" id="money">100</span>
-                </div>
-                <div class="stat">
-                    <span class="stat-label">训练点</span>
-                    <span class="stat-value" id="training-points">0</span>
                 </div>
                 <div class="stat">
                     <span class="stat-label">队伍</span>
@@ -1540,8 +1706,11 @@
             <div id="choices"></div>
         </div>
         
-        <!-- 开发者署名 -->
-        <div class="developer-credit">开发者：小水</div>
+        <!-- 开发者署名和版本号 -->
+        <div class="developer-credit">
+            <span>开发者：小水</span>
+            <span class="version-number">v2.2.0</span>
+        </div>
     </div>
     
     <!-- 分享按钮 -->
@@ -2594,10 +2763,10 @@
                         effect: { mood: 18, stress: -10, money: -50, eventType: 'life' }
                     },
                     {
-                        text: '🛒 买运动装备（技能+2，心情+10，花费150元）',
+                        text: '🛒 买运动装备（技能+2，心情+10，花费250元）',
                         next: 'checkRandomEvent',
-                        requirement: { money: 150 },
-                        effect: { serve: 2, spike: 2, block: 2, dig: 1, set: 1, mood: 10, money: -150, eventType: 'life' }
+                        requirement: { money: 250 },
+                        effect: { serve: 2, spike: 2, block: 2, dig: 1, set: 1, mood: 10, money: -250, eventType: 'life' }
                     },
                     {
                         text: '💼 兼职打工（金钱+150，体力-20，压力+8）',
@@ -2663,7 +2832,7 @@
                 text: `<h2>📊 本周总结</h2>
                 <p>第 ${this.player ? this.player.week : 1} 周结束了！</p>
                 <p>本周训练了 ${this.player ? this.player.trainingCount : 0} 次</p>
-                <p>获得零花钱 +500元</p>
+                <p>获得零花钱 +120元</p>
                 <p>体力、心情自然恢复，压力减轻</p>`,
                 choices: [
                     {
@@ -2728,30 +2897,36 @@
                         separator: true,
                         separatorText: '<h3>📋 基础训练（体力-25）</h3>'
                     },
-                    // 基础训练
+                    // 基础训练（降低：6→4）
                     {
                         text: '🎯 发球训练',
                         next: 'lifeChoice',
                         requirement: { energy: 25 },
-                        effect: { serve: 12, energy: -25, trained: true, eventType: 'training' }
+                        effect: { serve: 4, energy: -25, trained: true, eventType: 'training' }
                     },
                     {
                         text: '⚡ 扣球训练',
                         next: 'lifeChoice',
                         requirement: { energy: 25 },
-                        effect: { spike: 12, energy: -25, trained: true, eventType: 'training' }
+                        effect: { spike: 4, energy: -25, trained: true, eventType: 'training' }
                     },
                     {
                         text: '🛡️ 拦网训练',
                         next: 'lifeChoice',
                         requirement: { energy: 25 },
-                        effect: { block: 12, energy: -25, trained: true, eventType: 'training' }
+                        effect: { block: 4, energy: -25, trained: true, eventType: 'training' }
                     },
                     {
-                        text: '🏃 防守训练',
+                        text: '🤸 垫球训练',
                         next: 'lifeChoice',
                         requirement: { energy: 25 },
-                        effect: { dig: 6, set: 6, energy: -25, trained: true, eventType: 'training' }
+                        effect: { dig: 4, energy: -25, trained: true, eventType: 'training' }
+                    },
+                    {
+                        text: '🙌 托球训练',
+                        next: 'lifeChoice',
+                        requirement: { energy: 25 },
+                        effect: { set: 4, energy: -25, trained: true, eventType: 'training' }
                     },
                     // 组合训练分类标题
                     {
@@ -2764,13 +2939,13 @@
                         text: '� 进攻组合',
                         next: 'lifeChoice',
                         requirement: { energy: 25 },
-                        effect: { spike: 7, serve: 5, energy: -25, trained: true, eventType: 'training' }
+                        effect: { spike: 4, serve: 3, energy: -25, trained: true, eventType: 'training' }
                     },
                     {
                         text: '🛡️ 防守组合',
                         next: 'lifeChoice',
                         requirement: { energy: 25 },
-                        effect: { block: 7, dig: 5, energy: -25, trained: true, eventType: 'training' }
+                        effect: { block: 4, dig: 3, energy: -25, trained: true, eventType: 'training' }
                     },
                     // 其他选项分隔
                     {
@@ -2858,30 +3033,36 @@
                         separator: true,
                         separatorText: '<h3>📋 基础训练（体力-25）</h3>'
                     },
-                    // 基础训练
+                    // 基础训练 - 保持5个独立技能（降低：8→5）
                     {
                         text: '🎯 发球训练',
                         next: 'lifeChoice',
                         requirement: { energy: 25 },
-                        effect: { serve: 15, energy: -25, trained: true, eventType: 'training' }
+                        effect: { serve: 5, energy: -25, trained: true, eventType: 'training' }
                     },
                     {
                         text: '⚡ 扣球训练',
                         next: 'lifeChoice',
                         requirement: { energy: 25 },
-                        effect: { spike: 15, energy: -25, trained: true, eventType: 'training' }
+                        effect: { spike: 5, energy: -25, trained: true, eventType: 'training' }
                     },
                     {
                         text: '🛡️ 拦网训练',
                         next: 'lifeChoice',
                         requirement: { energy: 25 },
-                        effect: { block: 15, energy: -25, trained: true, eventType: 'training' }
+                        effect: { block: 5, energy: -25, trained: true, eventType: 'training' }
                     },
                     {
-                        text: '🏃 防守训练',
+                        text: '🤸 垫球训练',
                         next: 'lifeChoice',
                         requirement: { energy: 25 },
-                        effect: { dig: 8, set: 7, energy: -25, trained: true, eventType: 'training' }
+                        effect: { dig: 5, energy: -25, trained: true, eventType: 'training' }
+                    },
+                    {
+                        text: '🙌 托球训练',
+                        next: 'lifeChoice',
+                        requirement: { energy: 25 },
+                        effect: { set: 5, energy: -25, trained: true, eventType: 'training' }
                     },
                     // 组合训练分类标题
                     {
@@ -2894,13 +3075,13 @@
                         text: '� 进攻组合',
                         next: 'lifeChoice',
                         requirement: { energy: 25 },
-                        effect: { spike: 9, serve: 6, energy: -25, trained: true, eventType: 'training' }
+                        effect: { spike: 4, serve: 3, energy: -25, trained: true, eventType: 'training' }
                     },
                     {
                         text: '🛡️ 防守组合',
                         next: 'lifeChoice',
                         requirement: { energy: 25 },
-                        effect: { block: 9, dig: 6, energy: -25, trained: true, eventType: 'training' }
+                        effect: { block: 4, dig: 3, energy: -25, trained: true, eventType: 'training' }
                     },
                     // 高级训练分类标题
                     {
@@ -2913,13 +3094,13 @@
                         text: '🎯 组织组合',
                         next: 'lifeChoice',
                         requirement: { energy: 30 },
-                        effect: { set: 7, dig: 5, energy: -30, trained: true, eventType: 'training' }
+                        effect: { set: 4, dig: 3, energy: -30, trained: true, eventType: 'training' }
                     },
                     {
                         text: '⭐ 全面发展',
                         next: 'lifeChoice',
                         requirement: { energy: 30 },
-                        effect: { serve: 3, spike: 3, block: 3, dig: 3, set: 3, energy: -30, trained: true, eventType: 'training' }
+                        effect: { serve: 2, spike: 2, block: 2, dig: 2, set: 2, energy: -30, trained: true, eventType: 'training' }
                     },
                     {
                         text: '� 体能强化',
@@ -3035,6 +3216,34 @@
                         effect: { reset: true }
                     }
                 ]
+            },
+            
+            // 隐藏结局1：旁观者
+            bystander: {
+                text: function() {
+                    return game.generateBystanderEndingText();
+                },
+                choices: [
+                    {
+                        text: '🔄 重新开始',
+                        next: 'nameInput',
+                        effect: { reset: true }
+                    }
+                ]
+            },
+            
+            // 隐藏结局2：独行者
+            loner: {
+                text: function() {
+                    return game.generateLonerEndingText();
+                },
+                choices: [
+                    {
+                        text: '🔄 重新开始',
+                        next: 'nameInput',
+                        effect: { reset: true }
+                    }
+                ]
             }
         };
 
@@ -3067,7 +3276,7 @@
                     mood: TEST_MODE ? TEST_CONFIG.initialMood : 80,
                     stress: TEST_MODE ? TEST_CONFIG.initialStress : 20,
                     reputation: TEST_MODE ? TEST_CONFIG.initialReputation : 10,
-                    money: TEST_MODE ? TEST_CONFIG.initialMoney : 500,
+                    money: TEST_MODE ? TEST_CONFIG.initialMoney : 800,
                     team: 'none',
                     position: 'none',  // 职业位置
                     positionLevel: 0,  // 职业等级
@@ -3099,7 +3308,6 @@
                     },
                     achievements: [],  // 成就列表
                     // 新增：进度追踪
-                    trainingPoints: 0,  // 训练点数
                     performanceHistory: [],  // 比赛表现历史
                     averagePerformance: 0,  // 平均表现
                     matchesPlayed: 0,  // 比赛场次
@@ -3142,6 +3350,40 @@
                     socialEvents: 0,
                     restTaken: 0,
                     
+                    // 课余活动追踪（用于奇遇事件）
+                    lifeActivities: {
+                        scratchCard: 0,      // 买刮刮乐次数
+                        movie: 0,            // 看电影次数
+                        game: 0,             // 打游戏次数
+                        social: 0,           // 社交活动次数（聊天）
+                        gift: 0,             // 买礼物次数
+                        rest: 0,             // 休息次数（早点休息+按摩）
+                        massage: 0,          // 按摩次数
+                        library: 0,          // 去图书馆次数
+                        casualMatch: 0,      // 打野球次数
+                        work: 0,             // 打工次数
+                        food: 0              // 吃美食次数（夜宵+大餐）
+                    },
+                    
+                    // 奇遇事件追踪
+                    triggeredEvents: [],     // 已触发的一次性事件ID
+                    scratchCardJackpots: 0,  // 中特等奖次数
+                    hasLoveInterest: false,  // 是否开启恋爱线
+                    weeklyDateCount: 0,      // 本周约会次数
+                    permanentBuffs: {        // 永久buff
+                        scratchCardDiscount: false,  // 刮刮乐打折
+                        movieMembership: false,      // 电影会员
+                        foodDiscount: false,         // 美食打折
+                        workBonus: false,            // 打工加成
+                        trainingBonus: 0,            // 训练效果加成%
+                        stressReduction: 0,          // 压力上限降低
+                        energyRecovery: 0,           // 每周体力恢复加成
+                        moodRecovery: 0,             // 每周心情恢复加成
+                        reputationGrowth: 0,         // 每周声望增长
+                        injuryReduction: 0           // 受伤概率降低%
+                    },
+                    titles: [],              // 获得的称号列表
+                    
                     // 特殊行为
                     positionChanges: 0,
                     perfectWeeks: 0,
@@ -3165,16 +3407,16 @@
                         id: 'outsideHitter',
                         name: '主攻手',
                         icon: '🔥',
-                        description: '得分主力，承担大量进攻任务',
-                        coreSkills: ['spike', 'serve'],
-                        secondarySkills: ['dig'],
-                        baseRequirements: { spike: 15, serve: 12 },  // 降低：spike 25→15, serve 20→12
-                        trainingBonus: { core: 0.5, secondary: 0.25, other: -0.25 },
-                        matchWeights: { spike: 40, serve: 20, dig: 20, block: 10, set: 10 },
+                        description: '得分主力，承担大量进攻和防守任务',
+                        coreSkills: ['spike', 'dig'],
+                        secondarySkills: ['serve'],
+                        baseRequirements: { spike: 15, dig: 12 },  // 修改：spike 15, dig 12
+                        trainingBonus: { core: 0.4, secondary: 0.2, other: -0.25 },
+                        matchWeights: { spike: 40, dig: 25, serve: 15, block: 10, set: 10 },
                         specialDescriptions: {
                             spike: ['强力跳发直接得分！', '后排进攻，大力扣杀得分！', '关键球，主攻手挺身而出！'],
-                            serve: ['跳发球直接得分！', '发球破坏对方一传！', '连续发球施压！'],
-                            dig: ['主攻手后排防守成功！', '及时补位，救起关键球！']
+                            dig: ['主攻手后排防守成功！', '及时补位，救起关键球！', '精准垫球，组织反击！'],
+                            serve: ['跳发球直接得分！', '发球破坏对方一传！', '连续发球施压！']
                         }
                     },
                     middleBlocker: {
@@ -3185,7 +3427,7 @@
                         coreSkills: ['block', 'spike'],
                         secondarySkills: ['set'],
                         baseRequirements: { block: 15, spike: 12 },  // 降低：block 25→15, spike 20→12
-                        trainingBonus: { core: 0.5, secondary: 0.25, other: -0.25 },
+                        trainingBonus: { core: 0.4, secondary: 0.2, other: -0.25 },
                         matchWeights: { block: 40, spike: 30, set: 10, serve: 10, dig: 10 },
                         specialDescriptions: {
                             block: ['单人拦网直接得分！', '双人拦网，严密防守！', '拦网判断精准！'],
@@ -3201,7 +3443,7 @@
                         coreSkills: ['set', 'serve'],
                         secondarySkills: ['dig'],
                         baseRequirements: { set: 18, serve: 12 },  // 降低：set 30→18, serve 20→12
-                        trainingBonus: { core: 0.5, secondary: 0.25, other: -0.25 },
+                        trainingBonus: { core: 0.4, secondary: 0.2, other: -0.25 },
                         matchWeights: { set: 50, serve: 20, dig: 15, spike: 10, block: 5 },
                         specialDescriptions: {
                             set: ['精准二传，助攻队友得分！', '背传出其不意，队友轻松得分！', '跳传调整，化解困境！'],
@@ -3217,7 +3459,7 @@
                         coreSkills: ['spike', 'set'],
                         secondarySkills: ['serve'],
                         baseRequirements: { spike: 15, set: 15 },  // 降低：spike 22→15, set 22→15
-                        trainingBonus: { core: 0.5, secondary: 0.25, other: -0.25 },
+                        trainingBonus: { core: 0.4, secondary: 0.2, other: -0.25 },
                         matchWeights: { spike: 35, set: 25, serve: 20, block: 10, dig: 10 },
                         specialDescriptions: {
                             spike: ['后排强攻，突破对方防线！', '调整球二次进攻得分！', '关键时刻接应站出来！'],
@@ -3233,7 +3475,7 @@
                         coreSkills: ['dig', 'set'],
                         secondarySkills: [],
                         baseRequirements: { dig: 18, set: 15 },  // 降低：dig 30→18, set 25→15
-                        trainingBonus: { core: 0.5, secondary: 0.25, other: -0.25 },
+                        trainingBonus: { core: 0.4, secondary: 0.2, other: -0.25 },
                         matchWeights: { dig: 60, set: 30, spike: 0, block: 0, serve: 0 },
                         specialDescriptions: {
                             dig: ['鱼跃救球，精彩防守！', '完美一传，组织反击！', '连续防守，化解对方攻势！'],
@@ -3272,7 +3514,7 @@
                         emoji: '🏐',
                         nextRound: 'round8',
                         eliminationRank: 'top16',
-                        opponentStrength: 60
+                        opponentStrength: 55
                     },
                     round8: {
                         id: 'round8',
@@ -3281,7 +3523,7 @@
                         emoji: '⚡',
                         nextRound: 'round4',
                         eliminationRank: 'top8',
-                        opponentStrength: 70
+                        opponentStrength: 65
                     },
                     round4: {
                         id: 'round4',
@@ -3290,7 +3532,7 @@
                         emoji: '🔥',
                         nextRound: 'final',
                         eliminationRank: 'top4',
-                        opponentStrength: 80
+                        opponentStrength: 75
                     },
                     final: {
                         id: 'final',
@@ -3299,7 +3541,7 @@
                         emoji: '🏆',
                         nextRound: null,
                         eliminationRank: 'runner_up',
-                        opponentStrength: 90
+                        opponentStrength: 85
                     }
                 };
                 
@@ -3314,6 +3556,10 @@
                     books: []  // 书籍
                 };
                 this.player.activeBuffs = [];  // 激活的buff
+                this.player.purchaseCount = {};  // 物品购买次数追踪
+                
+                // 奇遇事件系统数据
+                this.adventureEvents = this.initAdventureEvents();
                 
                 this.init();
             }
@@ -3340,20 +3586,20 @@
                         name: '训练服务',
                         icon: '🎓',
                         items: [
-                            { id: 'coach_serve', name: '发球私教', price: 300, effect: { serve: 8 }, description: '发球+8' },
-                            { id: 'coach_spike', name: '扣球私教', price: 300, effect: { spike: 8 }, description: '扣球+8' },
-                            { id: 'coach_block', name: '拦网私教', price: 300, effect: { block: 8 }, description: '拦网+8' },
-                            { id: 'coach_dig', name: '垫球私教', price: 300, effect: { dig: 8 }, description: '垫球+8' },
-                            { id: 'coach_set', name: '托球私教', price: 300, effect: { set: 8 }, description: '托球+8' },
-                            { id: 'weekend_camp', name: '周末训练营', price: 500, effect: { serve: 5, spike: 5, block: 5, dig: 5, set: 5, energy: -15 }, description: '全技能+5，体力-15' }
+                            { id: 'coach_serve', name: '发球私教', price: 300, effect: { serve: 5 }, description: '发球+5', maxPurchases: 3 },
+                            { id: 'coach_spike', name: '扣球私教', price: 300, effect: { spike: 5 }, description: '扣球+5', maxPurchases: 3 },
+                            { id: 'coach_block', name: '拦网私教', price: 300, effect: { block: 5 }, description: '拦网+5', maxPurchases: 3 },
+                            { id: 'coach_dig', name: '垫球私教', price: 300, effect: { dig: 5 }, description: '垫球+5', maxPurchases: 3 },
+                            { id: 'coach_set', name: '托球私教', price: 300, effect: { set: 5 }, description: '托球+5', maxPurchases: 3 },
+                            { id: 'weekend_camp', name: '周末训练营', price: 600, effect: { serve: 3, spike: 3, block: 3, dig: 3, set: 3, energy: -20 }, description: '全技能+3，体力-20', maxPurchases: 3 }
                         ]
                     },
                     equipment: {
                         name: '装备商店',
                         icon: '👟',
                         items: [
-                            { id: 'pro_shoes', name: '专业球鞋', price: 400, type: 'permanent', effect: { trainingBonus: 10 }, description: '训练效果+10%（永久）' },
-                            { id: 'protection', name: '护膝护腕套装', price: 250, type: 'permanent', effect: { injuryResist: 50 }, description: '减少受伤概率50%（永久）' },
+                            { id: 'pro_shoes', name: '专业球鞋', price: 500, type: 'permanent', effect: { trainingBonus: 10 }, description: '训练效果+10%（永久）' },
+                            { id: 'protection', name: '护膝护腕套装', price: 250, type: 'permanent', effect: { injuryResist: 70 }, description: '减少受伤概率70%（永久）' },
                             { id: 'jersey', name: '专业球衣', price: 350, type: 'permanent', effect: { mood: 15, reputation: 10, trainingBonus: 5 }, description: '心情+15，声望+10，训练效果+5%（永久）' },
                             { id: 'training_ball', name: '专业训练球', price: 600, type: 'permanent', effect: { trainingBonus: 15 }, description: '技能训练+15%（永久）' }
                         ]
@@ -3362,9 +3608,9 @@
                         name: '恢复中心',
                         icon: '💊',
                         items: [
-                            { id: 'energy_drink', name: '运动饮料', price: 50, effect: { energy: 20 }, description: '体力+20' },
+                            { id: 'energy_drink', name: '运动饮料', price: 50, effect: { energy: 10 }, description: '体力+10' },
                             { id: 'massage', name: '运动按摩', price: 150, effect: { energy: 40, mood: 15, stress: -10 }, description: '体力+40，心情+15，压力-10' },
-                            { id: 'therapy', name: '深度理疗', price: 300, effect: { energy: 60, mood: 25, stress: -20 }, description: '体力+60，心情+25，压力-20' },
+                            { id: 'therapy', name: '深度理疗', price: 250, effect: { energy: 60, mood: 25, stress: -20 }, description: '体力+60，心情+25，压力-20' },
                             { id: 'nutrition_plan', name: '营养餐计划', price: 400, type: 'buff', effect: { maxEnergyBonus: 15 }, duration: 4, description: '体力上限+15（持续4周）' }
                         ]
                     },
@@ -3384,11 +3630,394 @@
                         items: [
                             { id: 'sports_watch', name: '运动手环', price: 400, type: 'permanent', effect: { mood: 15, weeklyStressReduction: 5 }, description: '心情+15，每周自动恢复压力-5（永久）' },
                             { id: 'new_phone', name: '新手机', price: 1200, type: 'permanent', effect: { mood: 30, stress: -20, reputation: 15, weeklyMoodBonus: 3 }, description: '心情+30，压力-20，声望+15，每周心情+3（永久）' },
-                            { id: 'volleyball_book', name: '排球教学书', price: 200, effect: { randomSkill: 5 }, description: '随机技能+5' },
+                            { id: 'volleyball_book', name: '排球教学书', price: 200, effect: { randomSkill: 4 }, description: '随机技能+4', maxPurchases: 5 },
                             { id: 'game_console', name: '游戏机', price: 800, type: 'permanent', effect: { mood: 25, stress: -15, weeklyRelax: true }, description: '心情+25，压力-15，每周可玩游戏（永久）' }
                         ]
                     }
                 };
+            }
+            
+            // 初始化奇遇事件系统
+            initAdventureEvents() {
+                return [
+                    // 1. 刮刮乐相关事件
+                    {
+                        id: 'lucky_customer',
+                        name: '幸运常客',
+                        condition: { activities: { scratchCard: 5 } },
+                        probability: 0.4,
+                        once: true,
+                        content: {
+                            title: '🎫 幸运常客',
+                            text: '店老板认出了你："小伙子，你是我们的常客啊！这样吧，以后你来买刮刮乐，我给你打9折！"\n\n你获得了"VIP顾客"身份！',
+                            choices: [
+                                { text: '太好了，谢谢老板！', effect: { reputation: 5, buff: 'scratchCardDiscount' } },
+                                { text: '不用了，我只是偶尔玩玩', effect: { mood: 10 } }
+                            ]
+                        }
+                    },
+                    {
+                        id: 'mysterious_elder',
+                        name: '神秘老人',
+                        condition: { activities: { scratchCard: 10 } },
+                        probability: 0.3,
+                        once: true,
+                        content: {
+                            title: '🧙 神秘老人',
+                            text: '一位白发老人在你旁边买刮刮乐。他看了你一眼："年轻人，我看你运气不错。这张刮刮乐，我送给你。"\n\n他递给你一张刮刮乐就离开了...',
+                            choices: [
+                                { text: '谢谢老人家！', effect: { special: 'freeScratchCard' } }
+                            ]
+                        }
+                    },
+                    {
+                        id: 'jackpot_celebrity',
+                        name: '中奖锦鲤',
+                        condition: { scratchCardJackpots: 1 },
+                        probability: 1.0,
+                        once: true,
+                        content: {
+                            title: '📰 校园新闻',
+                            text: '你中特等奖的消息在校园里传开了！同学们都叫你"锦鲤"，纷纷来找你沾沾喜气。\n\n你的人气暴涨！',
+                            choices: [
+                                { text: '哈哈，只是运气好', effect: { reputation: 20, relationship: 15, mood: 25, title: '幸运锦鲤' } }
+                            ]
+                        }
+                    },
+                    
+                    // 2. 电影相关事件
+                    {
+                        id: 'movie_membership',
+                        name: '电影达人',
+                        condition: { activities: { movie: 4 } },
+                        probability: 0.4,
+                        once: true,
+                        content: {
+                            title: '🎬 电影达人',
+                            text: '电影院经理注意到你是常客。"同学，要不要办张会员卡？以后看电影8折，还送爆米花！"',
+                            choices: [
+                                { text: '办理会员卡（-200元）', effect: { money: -200, buff: 'movieMembership' }, requirement: { money: 200 } },
+                                { text: '不办了，谢谢', effect: {} }
+                            ]
+                        }
+                    },
+                    {
+                        id: 'romantic_encounter',
+                        name: '浪漫邂逅',
+                        condition: { activities: { movie: 6 }, mood: 60 },
+                        probability: 0.35,
+                        once: true,
+                        content: {
+                            title: '💕 浪漫邂逅',
+                            text: '在电影院，你遇到了一个很有气质的人。你们聊得很投机，发现有很多共同话题。\n\n"下次一起看电影吧？"对方微笑着说。',
+                            choices: [
+                                { text: '好啊，交换联系方式', effect: { mood: 30, stress: -20, special: 'startLove' } },
+                                { text: '抱歉，我要专注排球', effect: { randomSkill: 3 } }
+                            ]
+                        }
+                    },
+                    {
+                        id: 'movie_inspiration',
+                        name: '电影灵感',
+                        condition: { activities: { movie: 8, library: 3 } },
+                        probability: 0.3,
+                        once: true,
+                        content: {
+                            title: '💡 电影灵感',
+                            text: '看完电影后，你突然想到了一个训练方法。结合电影里的动作和图书馆看到的理论...\n\n你领悟了新的技巧！',
+                            choices: [
+                                { text: '太棒了！', effect: { randomSkill: 5, mood: 15, title: '学霸运动员' } }
+                            ]
+                        }
+                    },
+                    
+                    // 3. 社交相关事件
+                    {
+                        id: 'teammates_trust',
+                        name: '队友的信任',
+                        condition: { activities: { social: 3, gift: 2 } },
+                        probability: 0.5,
+                        once: true,
+                        content: {
+                            title: '🤝 队友的信任',
+                            text: '队友们把你拉到一边："兄弟，我们商量了一下，想推荐你当副队长！你平时对大家这么好，大家都很信任你。"',
+                            choices: [
+                                { text: '谢谢大家的信任！', effect: { reputation: 25, relationship: 20, title: '副队长', buff: 'teamBonus' } },
+                                { text: '我还需要提升自己', effect: { randomSkill: 5 } }
+                            ]
+                        }
+                    },
+                    {
+                        id: 'birthday_surprise',
+                        name: '生日惊喜',
+                        condition: { activities: { social: 5, gift: 3 }, relationship: 70 },
+                        probability: 0.4,
+                        once: true,
+                        content: {
+                            title: '🎂 生日惊喜',
+                            text: '队友们为你准备了一个惊喜生日派对！"虽然不是你真正的生日，但我们想感谢你一直以来对大家的照顾！"\n\n蛋糕、礼物、欢笑...这一刻真美好。',
+                            choices: [
+                                { text: '太感动了！', effect: { mood: 40, stress: -25, relationship: 15, special: 'mysteryGift' } }
+                            ]
+                        }
+                    },
+                    {
+                        id: 'captain_invitation',
+                        name: '队长的邀请',
+                        condition: { activities: { social: 6 }, relationship: 80, totalSkills: 200 },
+                        probability: 0.35,
+                        once: true,
+                        content: {
+                            title: '⭐ 队长的邀请',
+                            text: '队长找到你："我看你实力不错，人缘也好。下学期我就毕业了，我想推荐你接任队长。你愿意吗？"',
+                            choices: [
+                                { text: '我会努力的！', effect: { reputation: 30, title: '未来队长', buff: 'captainBonus', stress: 5 } }
+                            ]
+                        }
+                    },
+                    
+                    // 4. 游戏相关事件
+                    {
+                        id: 'game_master',
+                        name: '游戏高手',
+                        condition: { activities: { game: 8 } },
+                        probability: 0.4,
+                        once: true,
+                        content: {
+                            title: '🎮 游戏高手',
+                            text: '你在游戏里遇到了一个高手。对方："你反应速度不错啊，打排球的？我是职业电竞选手，要不要切磋一下？"\n\n你们成为了游戏好友。',
+                            choices: [
+                                { text: '好啊！', effect: { mood: 15, special: 'gameFriend' } }
+                            ]
+                        }
+                    },
+                    {
+                        id: 'esports_tournament',
+                        name: '电竞比赛',
+                        condition: { activities: { game: 12 } },
+                        probability: 0.25,
+                        once: true,
+                        content: {
+                            title: '🏆 电竞比赛',
+                            text: '游戏好友邀请你参加校园电竞比赛。"奖金1000元，而且不耽误多少时间。你反应这么快，肯定能拿名次！"',
+                            choices: [
+                                { text: '参加比赛', effect: { special: 'esportsTournament' } },
+                                { text: '算了，我要专注排球', effect: {} }
+                            ]
+                        }
+                    },
+                    
+                    // 5. 图书馆相关事件
+                    {
+                        id: 'psychology_book',
+                        name: '学霸的秘籍',
+                        condition: { activities: { library: 5 } },
+                        probability: 0.4,
+                        once: true,
+                        content: {
+                            title: '📖 学霸的秘籍',
+                            text: '在图书馆，你发现了一本《运动心理学》。里面有很多关于如何保持最佳状态的方法。\n\n你认真学习了这本书。',
+                            choices: [
+                                { text: '受益匪浅！', effect: { mood: 15, buff: 'stressReduction', title: '心理大师' } }
+                            ]
+                        }
+                    },
+                    {
+                        id: 'senior_guidance',
+                        name: '学姐的指导',
+                        condition: { activities: { library: 8 }, reputation: 50 },
+                        probability: 0.35,
+                        once: true,
+                        content: {
+                            title: '👩‍🎓 学姐的指导',
+                            text: '一位体育系的学姐注意到你在看排球书籍。"你是排球社的吧？我以前也打排球。这些资料给你，希望对你有帮助。"\n\n她给了你一些珍贵的训练资料。',
+                            choices: [
+                                { text: '太感谢了！', effect: { serve: 3, spike: 3, block: 3, dig: 3, set: 3, relationship: 10, special: 'seniorNotes' } }
+                            ]
+                        }
+                    },
+                    
+                    // 6. 美食相关事件
+                    {
+                        id: 'food_regular',
+                        name: '美食家',
+                        condition: { activities: { food: 6 } },
+                        probability: 0.4,
+                        once: true,
+                        content: {
+                            title: '🍜 美食家',
+                            text: '餐厅老板认出了你："小伙子，你是我们的常客！看你是学生，以后来吃饭给你打9折。而且我看你是运动员，给你加量不加价！"',
+                            choices: [
+                                { text: '太好了，谢谢老板！', effect: { mood: 15, buff: 'foodDiscount', title: '美食家' } }
+                            ]
+                        }
+                    },
+                    {
+                        id: 'nutritionist_advice',
+                        name: '营养师的建议',
+                        condition: { activities: { food: 8 }, maxEnergy: 95 },
+                        probability: 0.3,
+                        once: true,
+                        content: {
+                            title: '🥗 营养师的建议',
+                            text: '一位营养师注意到你的饮食习惯。"同学，你是运动员吧？我可以给你制定一份专业的营养计划，免费的！"\n\n你获得了科学的营养指导。',
+                            choices: [
+                                { text: '太感谢了！', effect: { maxEnergy: 10, buff: 'nutritionPlan', title: '科学饮食' } }
+                            ]
+                        }
+                    },
+                    
+                    // 7. 打工相关事件
+                    {
+                        id: 'boss_appreciation',
+                        name: '老板的赏识',
+                        condition: { activities: { work: 8 } },
+                        probability: 0.4,
+                        once: true,
+                        content: {
+                            title: '💼 老板的赏识',
+                            text: '老板把你叫到一边："小伙子，你工作很认真。以后你来打工，工资给你涨20%！而且如果你需要，随时可以来。"',
+                            choices: [
+                                { text: '谢谢老板！', effect: { mood: 15, buff: 'workBonus' } }
+                            ]
+                        }
+                    },
+                    {
+                        id: 'sports_store_job',
+                        name: '工作机会',
+                        condition: { activities: { work: 12 }, reputation: 60 },
+                        probability: 0.3,
+                        once: true,
+                        content: {
+                            title: '💰 工作机会',
+                            text: '老板介绍你去一家体育用品店做兼职。"他们需要懂排球的人，工资更高，而且你还能学到很多专业知识。"',
+                            choices: [
+                                { text: '太好了！', effect: { mood: 20, reputation: 10, special: 'sportsStoreJob' } }
+                            ]
+                        }
+                    },
+                    
+                    // 8. 按摩/休息相关事件
+                    {
+                        id: 'therapist_recognition',
+                        name: '理疗师的认可',
+                        condition: { activities: { massage: 6 } },
+                        probability: 0.4,
+                        once: true,
+                        content: {
+                            title: '💆 理疗师的认可',
+                            text: '理疗师："你很注重身体恢复，这很好。我教你一些自我按摩的方法，以后你自己也能做简单的放松。"',
+                            choices: [
+                                { text: '太感谢了！', effect: { buff: 'selfTherapy', title: '自我理疗' } }
+                            ]
+                        }
+                    },
+                    {
+                        id: 'perfect_routine',
+                        name: '完美作息',
+                        condition: { activities: { rest: 10 }, avgEnergy: 80 },
+                        probability: 0.35,
+                        once: true,
+                        content: {
+                            title: '😴 完美作息',
+                            text: '你养成了良好的作息习惯。身体状态越来越好，训练效果也提升了。\n\n教练都夸你是"自律典范"！',
+                            choices: [
+                                { text: '继续保持！', effect: { maxEnergy: 10, buff: 'perfectRoutine', title: '自律典范' } }
+                            ]
+                        }
+                    },
+                    
+                    // 9. 复合事件
+                    {
+                        id: 'well_rounded',
+                        name: '全面发展',
+                        condition: { diverseActivities: 5 },
+                        probability: 0.3,
+                        once: true,
+                        content: {
+                            title: '🌟 全面发展',
+                            text: '辅导员找到你："我注意到你不仅训练刻苦，生活也很丰富。学习、社交、娱乐都很平衡。学校想推荐你参加\'优秀大学生\'评选。"',
+                            choices: [
+                                { text: '太荣幸了！', effect: { reputation: 30, money: 500, mood: 20, title: '优秀大学生' } }
+                            ]
+                        }
+                    },
+                    {
+                        id: 'campus_celebrity',
+                        name: '校园名人',
+                        condition: { reputation: 80, diverseActivities: 6 },
+                        probability: 0.25,
+                        once: true,
+                        content: {
+                            title: '📸 校园名人',
+                            text: '校园记者想采访你："你在排球队表现出色，生活也很精彩，能分享一下你的经验吗？"\n\n采访发布后，你成了校园名人！',
+                            choices: [
+                                { text: '很高兴分享', effect: { reputation: 40, relationship: 20, title: '校园明星', buff: 'campusStar' } }
+                            ]
+                        }
+                    },
+                    {
+                        id: 'life_mentor',
+                        name: '生活导师',
+                        condition: { activities: { gift: 4, social: 6 }, diverseActivities: 4 },
+                        probability: 0.3,
+                        once: true,
+                        content: {
+                            title: '🎓 生活导师',
+                            text: '学弟学妹们经常来找你请教。不仅是排球技术，还有如何平衡学习、训练和生活。\n\n你成了大家的"生活导师"！',
+                            choices: [
+                                { text: '很乐意帮助大家', effect: { reputation: 25, relationship: 15, title: '生活导师', buff: 'mentor' } }
+                            ]
+                        }
+                    },
+                    
+                    // 10. 特殊连锁事件
+                    {
+                        id: 'lucky_day',
+                        name: '幸运日',
+                        condition: { scratchCardJackpots: 1, mood: 80 },
+                        probability: 0.2,
+                        once: false,
+                        content: {
+                            title: '🍀 幸运日',
+                            text: '今天似乎特别幸运！走在路上捡到了钱，食堂阿姨多打了菜，训练时状态特别好...\n\n这是你的幸运日！',
+                            choices: [
+                                { text: '太棒了！', effect: { money: 100, mood: 15, special: 'luckyWeek' } }
+                            ]
+                        }
+                    },
+                    {
+                        id: 'burnout_warning',
+                        name: '疲惫期',
+                        condition: { activities: { work: 10 }, maxRest: 2 },
+                        probability: 0.4,
+                        once: false,
+                        content: {
+                            title: '😰 疲惫期',
+                            text: '你最近太累了...队友担心地说："你是不是打工太多了？身体要紧啊，别把自己累坏了。"',
+                            choices: [
+                                { text: '你说得对，我要多休息', effect: { energy: -20, mood: -15, stress: 15, special: 'restBuff' } },
+                                { text: '没事，我能坚持', effect: { energy: -20, mood: -15, stress: 15, special: 'burnoutPenalty' } }
+                            ]
+                        }
+                    },
+                    {
+                        id: 'love_trouble',
+                        name: '恋爱的烦恼',
+                        condition: { hasLoveInterest: true, weeklyTraining: 3, weeklyDate: 0 },
+                        probability: 0.3,
+                        once: false,
+                        content: {
+                            title: '💔 恋爱的烦恼',
+                            text: '对象发来消息："你最近都在训练，都没时间陪我...你是不是不在乎我了？"\n\n你需要平衡恋爱和训练。',
+                            choices: [
+                                { text: '抱歉，这周末陪你', effect: { mood: -10, stress: 10, special: 'planDate' } },
+                                { text: '对不起，比赛快到了', effect: { relationship: -10, buff: 'focusBonus' } },
+                                { text: '我们还是分手吧', effect: { mood: -20, special: 'breakup', buff: 'dedicationBonus' } }
+                            ]
+                        }
+                    }
+                ];
             }
             
             getGoalInfo() {
@@ -3439,13 +4068,16 @@
                         type: 'tryout',  // 选拔类
                         title: '🎯 加入校队',
                         icon: '🎯',
-                        timeWindow: '第6-11周',
+                        timeWindow: '第8-11周',
                         nextEvent: '第12周校际联赛',
-                        // 简化要求：任意3项技能≥40，声望≥50
+                        // 修改要求：任意3项技能≥40，总和≥160
                         criteria: {
                             skillCount: {
                                 minSkills: 3,
                                 threshold: 40
+                            },
+                            skillSum: {
+                                min: 160
                             },
                             stats: {
                                 reputation: { min: 50 }
@@ -3453,6 +4085,7 @@
                         },
                         requirements: {
                             anyThree: 40,
+                            totalSum: 160,
                             reputation: 50
                         },
                         tips: '建议第11周前完成选拔，为联赛做准备。院际比赛表现好可获得大量声望',
@@ -3489,7 +4122,7 @@
                 return [
                     'collegeTryout',      // 阶段一：加入院队（第1-4周选拔）
                     'collegeMatch',       // 阶段二：院际比赛（第5周自动）
-                    'universityTryout',   // 阶段三：加入校队（第6-11周选拔）
+                    'universityTryout',   // 阶段三：加入校队（第8-11周选拔）
                     'universityLeague'    // 阶段四：校际联赛（第12周自动，决定结局）
                 ];
             }
@@ -3520,6 +4153,7 @@
                 let maxScore = 0;
                 let breakdown = {
                     skillCount: { score: 0, max: 0, details: {} },
+                    skillSum: { score: 0, max: 0, details: {} },
                     stats: { score: 0, max: 0, details: {} },
                     performance: { score: 0, max: 0, details: {} }
                 };
@@ -3555,6 +4189,32 @@
                         required: sc.minSkills,
                         threshold: sc.threshold,
                         qualifiedSkills: qualifiedSkills,
+                        progress: progress,
+                        score: score,
+                        weight: weight
+                    };
+                }
+                
+                // 评估技能总和标准（新增）
+                if (goal.criteria.skillSum) {
+                    const ss = goal.criteria.skillSum;
+                    const weight = ss.weight || 1.0;
+                    maxScore += weight;
+                    breakdown.skillSum.max += weight;
+                    
+                    // 计算当前技能总和
+                    const currentSum = this.player.skills.serve + this.player.skills.spike + 
+                                     this.player.skills.block + this.player.skills.dig + this.player.skills.set;
+                    
+                    // 计算得分：当前总和 / 要求总和
+                    const progress = Math.min(currentSum / ss.min, 1.0);
+                    const score = progress * weight;
+                    
+                    totalScore += score;
+                    breakdown.skillSum.score += score;
+                    breakdown.skillSum.details = {
+                        current: currentSum,
+                        required: ss.min,
                         progress: progress,
                         score: score,
                         weight: weight
@@ -3656,12 +4316,10 @@
                     }
                     
                     // 目标达成 - 使用场景系统显示
-                    // 奖励训练点数
-                    this.player.trainingPoints += 50;
                     
                     // 创建目标达成场景
                     SCENES.goalAchieved = {
-                        text: `<h2>🎉 目标达成！</h2><p>恭喜你完成了${goal.title}！</p><pre>${detailsText}</pre><p>奖励：训练点数 +50</p>`,
+                        text: `<h2>🎉 目标达成！</h2><p>恭喜你完成了${goal.title}！</p><pre>${detailsText}</pre>`,
                         choices: [{
                             text: '继续',
                             next: goal.nextGoal ? 'weeklyHub' : 'ending',
@@ -3711,7 +4369,7 @@
                     // 选拔类目标：显示要求和达标情况
                     const evaluation = this.evaluateGoal(goalInfo);
                     
-                    html += `<span style="font-size: 12px; color: #aaa;">⏰ ${goalInfo.timeWindow}可选拔</span><br><br>`;
+                    html += `<span style="font-size: 12px; color: #374151; font-weight: 600;">⏰ ${goalInfo.timeWindow}可选拔</span><br><br>`;
                     
                     // 显示技能数量要求
                     if (goalInfo.criteria && goalInfo.criteria.skillCount) {
@@ -3732,14 +4390,25 @@
                         
                         html += `<span class="${statusClass}">${statusIcon} ${reqText}（已达标${details.qualified}项）</span><br>`;
                         
+                        // 显示总和要求（如果有）
+                        if (goalInfo.requirements.totalSum) {
+                            const currentSum = this.player.skills.serve + this.player.skills.spike + 
+                                             this.player.skills.block + this.player.skills.dig + this.player.skills.set;
+                            const requiredSum = goalInfo.requirements.totalSum;
+                            const sumMet = currentSum >= requiredSum;
+                            const sumStatusClass = sumMet ? 'goal-met' : 'goal-not-met';
+                            const sumStatusIcon = sumMet ? '✓' : '○';
+                            html += `<span class="${sumStatusClass}">${sumStatusIcon} 总和≥${requiredSum}（当前${currentSum}）</span><br>`;
+                        }
+                        
                         // 显示当前技能值
-                        html += `<div style="font-size: 12px; margin-top: 5px; color: #aaa;">`;
+                        html += `<div style="font-size: 12px; margin-top: 5px; color: #374151;">`;
                         const skills = ['serve', 'spike', 'block', 'dig', 'set'];
                         const skillNames = {serve:'发球',spike:'扣球',block:'拦网',dig:'垫球',set:'托球'};
                         skills.forEach(skill => {
                             const value = this.player.skills[skill];
                             const qualified = value >= sc.threshold;
-                            const color = qualified ? '#2ecc71' : '#999';
+                            const color = qualified ? '#059669' : '#6b7280';
                             html += `<span style="color: ${color};">${skillNames[skill]}${value}</span> `;
                         });
                         html += `</div>`;
@@ -3756,26 +4425,26 @@
                         html += `<span class="${statusClass}">${statusIcon} 声望: ${current}/${required}</span><br>`;
                     }
                     
-                    html += `<br><span style="font-size: 11px; color: #f39c12;">⏰ ${goalInfo.nextEvent}</span><br>`;
-                    html += `<span style="font-size: 11px; color: #ddd;">💡 ${goalInfo.tips}</span>`;
+                    html += `<br><span style="font-size: 11px; color: #374151; font-weight: 600;">⏰ ${goalInfo.nextEvent}</span><br>`;
+                    html += `<span style="font-size: 11px; color: #6b7280;">💡 ${goalInfo.tips}</span>`;
                     
                 } else if (goalInfo.type === 'match') {
                     // 比赛类目标：显示比赛信息和准备建议
                     const weeksUntil = goalInfo.triggerWeek - this.player.week;
                     
                     if (weeksUntil > 0) {
-                        html += `<span style="font-size: 12px; color: #aaa;">📅 第${goalInfo.triggerWeek}周自动开始（还有${weeksUntil}周）</span><br><br>`;
+                        html += `<span style="font-size: 12px; color: #6b7280;">📅 第${goalInfo.triggerWeek}周自动开始（还有${weeksUntil}周）</span><br><br>`;
                     } else if (weeksUntil === 0) {
                         html += `<span style="font-size: 12px; color: #f39c12;">� 本周将进行比赛！</span><br><br>`;
                     } else {
-                        html += `<span style="font-size: 12px; color: #22c55e;">📅 比赛已完成</span><br><br>`;
+                        html += `<span style="font-size: 12px; color: #059669;">📅 比赛已完成</span><br><br>`;
                     }
                     
                     html += `<span style="font-size: 13px;">🎯 比赛目标：</span><br>`;
-                    html += `<span style="font-size: 12px; color: #ddd;">${goalInfo.description}</span><br><br>`;
+                    html += `<span style="font-size: 12px; color: #6b7280;">${goalInfo.description}</span><br><br>`;
                     
                     html += `<span style="font-size: 13px;">💪 准备建议：</span><br>`;
-                    html += `<div style="font-size: 11px; color: #aaa; line-height: 1.6;">`;
+                    html += `<div style="font-size: 11px; color: #6b7280; line-height: 1.6;">`;
                     goalInfo.preparation.forEach(tip => {
                         html += `• ${tip}<br>`;
                     });
@@ -3784,7 +4453,7 @@
                     // 如果是校际联赛，显示可能的结局
                     if (goalInfo.endings) {
                         html += `<br><span style="font-size: 13px;">🏅 可能的结局：</span><br>`;
-                        html += `<div style="font-size: 11px; color: #aaa; line-height: 1.6;">`;
+                        html += `<div style="font-size: 11px; color: #6b7280; line-height: 1.6;">`;
                         goalInfo.endings.forEach(ending => {
                             html += `${ending}<br>`;
                         });
@@ -3792,7 +4461,7 @@
                     } else if (goalInfo.performanceLevels) {
                         // 其他比赛显示表现评级
                         html += `<br><span style="font-size: 13px;">📊 表现评级：</span><br>`;
-                        html += `<div style="font-size: 11px; color: #aaa; line-height: 1.6;">`;
+                        html += `<div style="font-size: 11px; color: #6b7280; line-height: 1.6;">`;
                         goalInfo.performanceLevels.forEach(level => {
                             html += `${level}<br>`;
                         });
@@ -3933,12 +4602,12 @@
                                 effects: '25分制比赛 体力-20',
                                 next: 'casualMatch',
                                 requirement: { energy: 20 },
-                                effect: { matchType: 'casual', energy: -20 }
+                                effect: { matchType: 'casual', energy: -20, lifeActivity: 'casualMatch' }
                             }
                         ]
                     },
                     rest: {
-                        title: '😴 休息恢复',
+                        title: '🎮 休闲娱乐',
                         color: '#4ecdc4',
                         choices: [
                             {
@@ -3954,7 +4623,7 @@
                                 effects: '体力+40 心情+18 压力-15 💰120',
                                 next: 'checkRandomEvent',
                                 requirement: { money: 120 },
-                                effect: { energy: 40, mood: 18, stress: -15, money: -120, eventType: 'life', lifeActivity: 'rest' }
+                                effect: { energy: 40, mood: 18, stress: -15, money: -120, eventType: 'life', lifeActivity: 'massage' }
                             },
                             {
                                 icon: '🎮',
@@ -3964,11 +4633,27 @@
                                 effect: { energy: 8, mood: 12, stress: -10, eventType: 'life', lifeActivity: 'game' }
                             },
                             {
+                                icon: '🎫',
+                                title: '买刮刮乐',
+                                effects: '💰30 试试手气！',
+                                next: 'scratchCard',
+                                requirement: { money: 30 },
+                                effect: { special: 'scratchCard', lifeActivity: 'scratchCard' }
+                            },
+                            {
+                                icon: '🍿',
+                                title: '看电影',
+                                effects: '体力+12 心情+20 压力-12 💰50',
+                                next: 'checkRandomEvent',
+                                requirement: { money: 50 },
+                                effect: { energy: 12, mood: 20, stress: -12, money: -50, eventType: 'life', lifeActivity: 'movie' }
+                            },
+                            {
                                 icon: '📚',
                                 title: '去图书馆',
                                 effects: '体力+5 心情+8 压力-3 声望+3',
                                 next: 'checkRandomEvent',
-                                effect: { energy: 5, mood: 8, stress: -3, reputation: 3, eventType: 'life' }
+                                effect: { energy: 5, mood: 8, stress: -3, reputation: 3, eventType: 'life', lifeActivity: 'library' }
                             }
                         ]
                     },
@@ -3984,15 +4669,7 @@
                                 effect: { energy: 10, mood: 15, stress: -8, relationship: 5, eventType: 'life', lifeActivity: 'social' }
                             },
                             {
-                                icon: '🍿',
-                                title: '看电影',
-                                effects: '体力+12 心情+20 压力-12 💰50',
-                                next: 'checkRandomEvent',
-                                requirement: { money: 50 },
-                                effect: { energy: 12, mood: 20, stress: -12, money: -50, eventType: 'life', lifeActivity: 'movie' }
-                            },
-                            {
-                                icon: '🎁',
+                                icon: '�',
                                 title: '给队友买礼物',
                                 effects: '心情+10 关系+15 声望+5 💰80',
                                 next: 'checkRandomEvent',
@@ -4011,7 +4688,7 @@
                                 effects: '体力+8 心情+15 压力-5 💰20',
                                 next: 'checkRandomEvent',
                                 requirement: { money: 20 },
-                                effect: { energy: 8, mood: 15, stress: -5, money: -20, eventType: 'life' }
+                                effect: { energy: 8, mood: 15, stress: -5, money: -20, eventType: 'life', lifeActivity: 'food' }
                             },
                             {
                                 icon: '🍔',
@@ -4019,7 +4696,7 @@
                                 effects: '体力+15 心情+25 压力-10 💰100',
                                 next: 'checkRandomEvent',
                                 requirement: { money: 100 },
-                                effect: { energy: 15, mood: 25, stress: -10, money: -100, eventType: 'life' }
+                                effect: { energy: 15, mood: 25, stress: -10, money: -100, eventType: 'life', lifeActivity: 'food' }
                             }
                         ]
                     },
@@ -4028,12 +4705,20 @@
                         color: '#6c5ce7',
                         choices: [
                             {
-                                icon: '💼',
-                                title: '兼职打工',
-                                effects: '💰+120 体力-20 压力+8',
+                                icon: '📦',
+                                title: '轻松兼职',
+                                effects: '💰+100 体力-10 压力+3',
                                 next: 'checkRandomEvent',
-                                requirement: { energy: 20 },
-                                effect: { money: 120, energy: -20, stress: 8, mood: -3, eventType: 'life' }
+                                requirement: { energy: 10 },
+                                effect: { money: 120, energy: -10, stress: 3, mood: -1, eventType: 'life', lifeActivity: 'work' }
+                            },
+                            {
+                                icon: '💼',
+                                title: '高强度打工',
+                                effects: '💰+250 体力-25 压力+12',
+                                next: 'checkRandomEvent',
+                                requirement: { energy: 25 },
+                                effect: { money: 250, energy: -25, stress: 12, mood: -5, eventType: 'life', lifeActivity: 'work' }
                             }
                         ]
                     }
@@ -4074,7 +4759,27 @@
             
             handleLifeChoice(nextScene, effect) {
                 if (effect && Object.keys(effect).length > 0) {
+                    // 特殊处理：刮刮乐
+                    if (effect.special === 'scratchCard') {
+                        // 检查金钱是否足够
+                        if (this.player.money < 30) {
+                            alert('金钱不足！需要30元购买刮刮乐。');
+                            return;
+                        }
+                        // 扣除金钱
+                        this.player.money -= 30;
+                        this.updateUI();
+                        // 执行刮刮乐抽奖
+                        this.buyScratchCard();
+                        return;
+                    }
+                    
                     this.applyEffect(effect);
+                    
+                    // 追踪课余活动（用于奇遇事件）
+                    if (effect.lifeActivity) {
+                        this.trackLifeActivity(effect.lifeActivity);
+                    }
                     
                     // 检查是否需要触发随机事件
                     if (effect.eventType) {
@@ -4084,6 +4789,9 @@
                             return;
                         }
                     }
+                    
+                    // 检查是否触发奇遇事件
+                    this.checkAdventureEvents();
                 }
                 
                 if (nextScene) {
@@ -4113,14 +4821,25 @@
                     category.items.forEach(item => {
                         const canAfford = this.player.money >= item.price;
                         const owned = this.checkItemOwned(item);
-                        const disabledClass = (!canAfford || owned) ? 'disabled' : '';
+                        
+                        // 检查购买次数限制
+                        let reachedLimit = false;
+                        let purchaseInfo = '';
+                        if (item.maxPurchases) {
+                            const currentCount = this.player.purchaseCount[item.id] || 0;
+                            reachedLimit = currentCount >= item.maxPurchases;
+                            purchaseInfo = `(${currentCount}/${item.maxPurchases})`;
+                        }
+                        
+                        const disabledClass = (!canAfford || owned || reachedLimit) ? 'disabled' : '';
                         
                         html += `<div class="shop-item-compact ${disabledClass}" onclick="game.buyItem('${catKey}', '${item.id}')">
                             <div class="item-compact-name">${item.name}</div>
-                            <div class="item-compact-desc">${item.description}</div>
+                            <div class="item-compact-desc">${item.description} ${purchaseInfo}</div>
                             <div class="item-compact-price">💰${item.price}</div>
                             ${owned ? '<div class="item-compact-badge owned">✓</div>' : ''}
-                            ${!canAfford && !owned ? '<div class="item-compact-badge locked">🔒</div>' : ''}
+                            ${reachedLimit ? '<div class="item-compact-badge locked">🚫</div>' : ''}
+                            ${!canAfford && !owned && !reachedLimit ? '<div class="item-compact-badge locked">🔒</div>' : ''}
                         </div>`;
                     });
                     
@@ -4137,6 +4856,10 @@
                 const choicesDiv = document.getElementById('choices');
                 const category = this.shopItems[categoryKey];
                 
+                console.log('=== renderShopCategory Debug ===');
+                console.log('categoryKey:', categoryKey);
+                console.log('purchaseCount:', this.player.purchaseCount);
+                
                 if (!category) {
                     alert('商品分类不存在');
                     this.showScene('shopMain');
@@ -4151,15 +4874,28 @@
                 category.items.forEach(item => {
                     const canAfford = this.player.money >= item.price;
                     const owned = this.checkItemOwned(item);
-                    const disabledClass = (!canAfford || owned) ? 'disabled' : '';
+                    
+                    // 检查购买次数限制
+                    let reachedLimit = false;
+                    let purchaseInfo = '';
+                    if (item.maxPurchases) {
+                        const currentCount = this.player.purchaseCount[item.id] || 0;
+                        reachedLimit = currentCount >= item.maxPurchases;
+                        purchaseInfo = `<div class="item-purchase-count" style="font-size: 12px; color: ${reachedLimit ? '#e74c3c' : '#3b82f6'}; margin: 8px 0;">已购买：${currentCount}/${item.maxPurchases}</div>`;
+                        console.log(`Item ${item.id}: currentCount=${currentCount}, maxPurchases=${item.maxPurchases}, reachedLimit=${reachedLimit}`);
+                    }
+                    
+                    const disabledClass = (!canAfford || owned || reachedLimit) ? 'disabled' : '';
                     
                     html += `<div class="shop-item-card ${disabledClass}">
                         <div class="item-name">${item.name}</div>
                         <div class="item-description">${item.description}</div>
+                        ${purchaseInfo}
                         <div class="item-price">💰 ${item.price}元</div>
                         ${owned ? '<div class="item-owned">✓ 已拥有</div>' : ''}
-                        ${!canAfford && !owned ? '<div class="item-locked">💰 金钱不足</div>' : ''}
-                        <button onclick="game.buyItem('${categoryKey}', '${item.id}')" ${!canAfford || owned ? 'disabled' : ''}>
+                        ${reachedLimit ? '<div class="item-locked">🚫 已达购买上限</div>' : ''}
+                        ${!canAfford && !owned && !reachedLimit ? '<div class="item-locked">💰 金钱不足</div>' : ''}
+                        <button onclick="game.buyItem('${categoryKey}', '${item.id}')" ${!canAfford || owned || reachedLimit ? 'disabled' : ''}>
                             购买
                         </button>
                     </div>`;
@@ -4193,6 +4929,12 @@
                 const category = this.shopItems[categoryKey];
                 const item = category.items.find(i => i.id === itemId);
                 
+                console.log('=== buyItem Debug ===');
+                console.log('categoryKey:', categoryKey);
+                console.log('itemId:', itemId);
+                console.log('item:', item);
+                console.log('Before purchase - purchaseCount:', this.player.purchaseCount);
+                
                 if (!item) {
                     alert('商品不存在');
                     return;
@@ -4208,26 +4950,48 @@
                     return;
                 }
                 
+                // 检查购买次数限制
+                if (item.maxPurchases) {
+                    const currentCount = this.player.purchaseCount[item.id] || 0;
+                    console.log(`Purchase limit check: currentCount=${currentCount}, maxPurchases=${item.maxPurchases}`);
+                    if (currentCount >= item.maxPurchases) {
+                        alert(`${item.name}已达到购买上限（${item.maxPurchases}次）！`);
+                        return;
+                    }
+                }
+                
                 // 扣除金钱
                 this.player.money -= item.price;
+                
+                // 更新购买次数
+                if (item.maxPurchases) {
+                    if (!this.player.purchaseCount) this.player.purchaseCount = {};
+                    this.player.purchaseCount[item.id] = (this.player.purchaseCount[item.id] || 0) + 1;
+                    console.log(`After purchase - purchaseCount[${item.id}]:`, this.player.purchaseCount[item.id]);
+                }
                 
                 // 统计消费
                 this.playerStats.totalMoneySpent += item.price;
                 
                 // 根据类别统计
-                if (category === 'training') {
+                if (categoryKey === 'training') {
                     this.playerStats.coachingPurchased++;
-                } else if (category === 'equipment') {
+                } else if (categoryKey === 'equipment') {
                     this.playerStats.equipmentPurchased++;
-                } else if (category === 'entertainment') {
+                } else if (categoryKey === 'daily') {
                     this.playerStats.entertainmentSpent += item.price;
                 }
                 
                 // 处理特殊效果
                 let resultMessage = `购买成功！\n\n${item.name}\n\n`;
                 
+                // 护膝护腕特殊提示
+                if (item.id === 'protection') {
+                    resultMessage = `购买成功！\n\n你装备上了专业的护膝护腕套装。\n柔软的护垫紧贴关节，提供了可靠的保护。\n现在你可以更放心地进行高强度训练了！\n\n✓ 受伤概率降低70%`;
+                }
+                
                 // 处理随机技能书
-                if (item.effect && item.effect.randomSkill) {
+                else if (item.effect && item.effect.randomSkill) {
                     const skills = ['serve', 'spike', 'block', 'dig', 'set'];
                     const randomSkill = skills[Math.floor(Math.random() * skills.length)];
                     this.player.skills[randomSkill] = Math.min(100, this.player.skills[randomSkill] + item.effect.randomSkill);
@@ -4253,11 +5017,11 @@
                 // 处理永久物品
                 if (item.type === 'permanent') {
                     if (!this.player.ownedItems) {
-                        this.player.ownedItems = { shoes: 'none', protection: false, jersey: false, trainingEquipment: [], electronics: [] };
+                        this.player.ownedItems = { shoes: 'none', protection: null, jersey: false, trainingEquipment: [], electronics: [] };
                     }
                     
                     if (item.id === 'pro_shoes') this.player.ownedItems.shoes = 'pro';
-                    if (item.id === 'protection') this.player.ownedItems.protection = true;
+                    if (item.id === 'protection') this.player.ownedItems.protection = item.effect;
                     if (item.id === 'jersey') this.player.ownedItems.jersey = true;
                     if (item.id === 'training_ball') {
                         if (!this.player.ownedItems.trainingEquipment) this.player.ownedItems.trainingEquipment = [];
@@ -4295,13 +5059,386 @@
                 
                 alert(resultMessage);
                 this.updateUI();
-                // 刷新商店主界面
+                // 刷新商店主界面，显示更新后的购买次数
                 this.showScene('shopMain');
             }
             
             getSkillName(skill) {
                 const names = { serve: '发球', spike: '扣球', block: '拦网', dig: '垫球', set: '托球' };
                 return names[skill] || skill;
+            }
+            
+            // ====================================================
+            // 奇遇事件系统方法
+            // ====================================================
+            
+            // 追踪课余活动
+            trackLifeActivity(activityType) {
+                if (!this.playerStats.lifeActivities) {
+                    this.playerStats.lifeActivities = {};
+                }
+                
+                // 更新活动计数
+                this.playerStats.lifeActivities[activityType] = 
+                    (this.playerStats.lifeActivities[activityType] || 0) + 1;
+                
+                // 更新旧的统计（保持兼容性）
+                if (activityType === 'game') this.playerStats.gamesPlayed++;
+                if (activityType === 'movie') this.playerStats.moviesWatched++;
+                if (activityType === 'social') this.playerStats.socialEvents++;
+                if (activityType === 'rest') this.playerStats.restTaken++;
+            }
+            
+            // 检查是否触发奇遇事件
+            checkAdventureEvents() {
+                const eligibleEvents = this.adventureEvents.filter(event => {
+                    // 检查是否已触发过（一次性事件）
+                    if (event.once && this.playerStats.triggeredEvents.includes(event.id)) {
+                        return false;
+                    }
+                    
+                    // 检查触发条件
+                    if (!this.checkEventCondition(event.condition)) {
+                        return false;
+                    }
+                    
+                    // 检查概率
+                    if (Math.random() > event.probability) {
+                        return false;
+                    }
+                    
+                    return true;
+                });
+                
+                // 如果有符合条件的事件，随机选择一个触发
+                if (eligibleEvents.length > 0) {
+                    const event = eligibleEvents[Math.floor(Math.random() * eligibleEvents.length)];
+                    this.triggerAdventureEvent(event);
+                }
+            }
+            
+            // 检查事件触发条件
+            checkEventCondition(condition) {
+                // 检查活动次数
+                if (condition.activities) {
+                    for (let activity in condition.activities) {
+                        const required = condition.activities[activity];
+                        const current = this.playerStats.lifeActivities[activity] || 0;
+                        if (current < required) {
+                            return false;
+                        }
+                    }
+                }
+                
+                // 检查属性
+                if (condition.mood && this.player.mood < condition.mood) return false;
+                if (condition.reputation && this.player.reputation < condition.reputation) return false;
+                if (condition.relationship && this.player.relationships.teammates < condition.relationship) return false;
+                if (condition.maxEnergy && this.player.maxEnergy < condition.maxEnergy) return false;
+                
+                // 检查技能总和
+                if (condition.totalSkills) {
+                    const total = Object.values(this.player.skills).reduce((a, b) => a + b, 0);
+                    if (total < condition.totalSkills) return false;
+                }
+                
+                // 检查刮刮乐中奖次数
+                if (condition.scratchCardJackpots && 
+                    this.playerStats.scratchCardJackpots < condition.scratchCardJackpots) {
+                    return false;
+                }
+                
+                // 检查恋爱状态
+                if (condition.hasLoveInterest && !this.playerStats.hasLoveInterest) {
+                    return false;
+                }
+                
+                // 检查多样化活动（至少N种活动各做过3次）
+                if (condition.diverseActivities) {
+                    const diverseCount = Object.values(this.playerStats.lifeActivities)
+                        .filter(count => count >= 3).length;
+                    if (diverseCount < condition.diverseActivities) {
+                        return false;
+                    }
+                }
+                
+                // 检查最大休息次数（用于疲惫期事件）
+                if (condition.maxRest) {
+                    const restCount = this.playerStats.lifeActivities.rest || 0;
+                    if (restCount > condition.maxRest) {
+                        return false;
+                    }
+                }
+                
+                // 检查本周训练次数
+                if (condition.weeklyTraining && this.player.trainingCount < condition.weeklyTraining) {
+                    return false;
+                }
+                
+                // 检查本周约会次数
+                if (condition.weeklyDate !== undefined && 
+                    this.playerStats.weeklyDateCount !== condition.weeklyDate) {
+                    return false;
+                }
+                
+                // 检查平均体力
+                if (condition.avgEnergy) {
+                    // 简化：直接用当前体力作为平均值
+                    if (this.player.energy < condition.avgEnergy) {
+                        return false;
+                    }
+                }
+                
+                return true;
+            }
+            
+            // 触发奇遇事件
+            triggerAdventureEvent(event) {
+                // 标记为已触发（一次性事件）
+                if (event.once) {
+                    this.playerStats.triggeredEvents.push(event.id);
+                }
+                
+                // 显示事件内容
+                this.showAdventureEvent(event);
+            }
+            
+            // 显示奇遇事件
+            showAdventureEvent(event) {
+                const modal = document.getElementById('event-modal');
+                const modalContent = document.getElementById('event-modal-content');
+                
+                if (!modal || !modalContent) {
+                    console.error('Event modal not found');
+                    return;
+                }
+                
+                const content = event.content;
+                
+                let html = `
+                    <div class="event-header">
+                        <h2>${content.title}</h2>
+                    </div>
+                    <div class="event-body">
+                        <p style="white-space: pre-line; line-height: 1.6;">${content.text}</p>
+                    </div>
+                    <div class="event-choices">
+                `;
+                
+                content.choices.forEach((choice, index) => {
+                    const meetsRequirement = choice.requirement ? 
+                        this.checkRequirement(choice.requirement) : true;
+                    const disabledClass = meetsRequirement ? '' : 'disabled';
+                    const disabledAttr = meetsRequirement ? '' : 'disabled';
+                    
+                    html += `
+                        <button class="choice-btn ${disabledClass}" ${disabledAttr}
+                            onclick="game.handleAdventureChoice(${index}, '${event.id}')">
+                            ${choice.text}
+                            ${!meetsRequirement ? '<br><span style="font-size: 12px; color: #ffeb3b;">条件不足</span>' : ''}
+                        </button>
+                    `;
+                });
+                
+                html += `</div>`;
+                
+                modalContent.innerHTML = html;
+                modal.style.display = 'flex';
+            }
+            
+            // 处理奇遇事件选择
+            handleAdventureChoice(choiceIndex, eventId) {
+                const event = this.adventureEvents.find(e => e.id === eventId);
+                if (!event) return;
+                
+                const choice = event.content.choices[choiceIndex];
+                const effect = choice.effect;
+                
+                // 关闭模态框
+                const modal = document.getElementById('event-modal');
+                if (modal) modal.style.display = 'none';
+                
+                // 应用效果
+                this.applyAdventureEffect(effect);
+                
+                // 更新UI
+                this.updateUI();
+                
+                // 继续游戏流程
+                if (this.currentScene === 'lifeChoice') {
+                    this.showScene('weeklyHub');
+                }
+            }
+            
+            // 应用奇遇事件效果
+            applyAdventureEffect(effect) {
+                // 基础属性变化
+                if (effect.money) this.player.money += effect.money;
+                if (effect.mood) this.player.mood += effect.mood;
+                if (effect.stress) this.player.stress += effect.stress;
+                if (effect.energy) this.player.energy += effect.energy;
+                if (effect.reputation) this.player.reputation += effect.reputation;
+                if (effect.relationship) this.player.relationships.teammates += effect.relationship;
+                if (effect.maxEnergy) this.player.maxEnergy += effect.maxEnergy;
+                
+                // 技能变化
+                const skills = ['serve', 'spike', 'block', 'dig', 'set'];
+                skills.forEach(skill => {
+                    if (effect[skill]) {
+                        this.player.skills[skill] += effect[skill];
+                    }
+                });
+                
+                // 随机技能提升
+                if (effect.randomSkill) {
+                    const randomSkill = skills[Math.floor(Math.random() * skills.length)];
+                    this.player.skills[randomSkill] += effect.randomSkill;
+                }
+                
+                // 永久buff
+                if (effect.buff) {
+                    this.applyPermanentBuff(effect.buff);
+                }
+                
+                // 称号
+                if (effect.title) {
+                    if (!this.playerStats.titles.includes(effect.title)) {
+                        this.playerStats.titles.push(effect.title);
+                    }
+                }
+                
+                // 特殊效果
+                if (effect.special) {
+                    this.handleSpecialAdventureEffect(effect.special);
+                }
+            }
+            
+            // 应用永久buff
+            applyPermanentBuff(buffType) {
+                switch (buffType) {
+                    case 'scratchCardDiscount':
+                        this.playerStats.permanentBuffs.scratchCardDiscount = true;
+                        break;
+                    case 'movieMembership':
+                        this.playerStats.permanentBuffs.movieMembership = true;
+                        break;
+                    case 'foodDiscount':
+                        this.playerStats.permanentBuffs.foodDiscount = true;
+                        break;
+                    case 'workBonus':
+                        this.playerStats.permanentBuffs.workBonus = true;
+                        break;
+                    case 'teamBonus':
+                        this.playerStats.permanentBuffs.trainingBonus += 5;
+                        break;
+                    case 'captainBonus':
+                        this.playerStats.permanentBuffs.trainingBonus += 10;
+                        break;
+                    case 'stressReduction':
+                        this.playerStats.permanentBuffs.stressReduction += 10;
+                        break;
+                    case 'selfTherapy':
+                        this.playerStats.permanentBuffs.energyRecovery += 5;
+                        this.playerStats.permanentBuffs.injuryReduction += 20;
+                        break;
+                    case 'perfectRoutine':
+                        this.playerStats.permanentBuffs.energyRecovery += 10;
+                        this.playerStats.permanentBuffs.trainingBonus += 5;
+                        break;
+                    case 'nutritionPlan':
+                        this.playerStats.permanentBuffs.energyRecovery += 5;
+                        break;
+                    case 'campusStar':
+                        this.playerStats.permanentBuffs.reputationGrowth += 3;
+                        break;
+                    case 'mentor':
+                        this.playerStats.permanentBuffs.moodRecovery += 5;
+                        break;
+                    case 'focusBonus':
+                        this.playerStats.permanentBuffs.trainingBonus += 10;
+                        break;
+                    case 'dedicationBonus':
+                        this.playerStats.permanentBuffs.trainingBonus += 15;
+                        break;
+                }
+            }
+            
+            // 处理特殊奇遇效果
+            handleSpecialAdventureEffect(specialType) {
+                switch (specialType) {
+                    case 'freeScratchCard':
+                        // 免费刮刮乐，提高中奖概率
+                        this.scratchCardDraw(true);
+                        break;
+                    case 'startLove':
+                        this.playerStats.hasLoveInterest = true;
+                        break;
+                    case 'mysteryGift':
+                        // 随机获得装备或金钱
+                        if (Math.random() < 0.5) {
+                            this.player.money += 200;
+                        } else {
+                            // 随机技能+3
+                            const skills = ['serve', 'spike', 'block', 'dig', 'set'];
+                            const randomSkill = skills[Math.floor(Math.random() * skills.length)];
+                            this.player.skills[randomSkill] += 3;
+                        }
+                        break;
+                    case 'gameFriend':
+                        // 解锁游戏好友，每次打游戏额外心情+5
+                        this.playerStats.permanentBuffs.gameFriend = true;
+                        break;
+                    case 'esportsTournament':
+                        // 参加电竞比赛
+                        this.player.energy -= 15;
+                        const totalSkills = Object.values(this.player.skills).reduce((a, b) => a + b, 0);
+                        const rand = Math.random();
+                        if (rand < 0.3) {
+                            // 冠军
+                            this.player.money += 1000;
+                            this.player.reputation += 15;
+                            alert('🏆 恭喜！你获得了电竞比赛冠军！\n💰 金钱+1000\n⭐ 声望+15');
+                        } else if (rand < 0.7) {
+                            // 亚军
+                            this.player.money += 500;
+                            this.player.reputation += 8;
+                            alert('🥈 你获得了电竞比赛亚军！\n💰 金钱+500\n⭐ 声望+8');
+                        } else {
+                            // 季军
+                            this.player.money += 200;
+                            this.player.reputation += 3;
+                            alert('🥉 你获得了电竞比赛季军！\n💰 金钱+200\n⭐ 声望+3');
+                        }
+                        break;
+                    case 'seniorNotes':
+                        // 获得学姐笔记，可重复使用3次
+                        this.playerStats.seniorNotesUses = 3;
+                        break;
+                    case 'sportsStoreJob':
+                        // 解锁体育店兼职
+                        this.playerStats.permanentBuffs.sportsStoreJob = true;
+                        break;
+                    case 'luckyWeek':
+                        // 本周训练效果+20%
+                        this.playerStats.luckyWeekBonus = 0.2;
+                        break;
+                    case 'restBuff':
+                        // 获得休息buff
+                        this.playerStats.restBuffWeeks = 2;
+                        break;
+                    case 'burnoutPenalty':
+                        // 下周体力上限-10
+                        this.playerStats.burnoutPenalty = true;
+                        break;
+                    case 'planDate':
+                        // 计划约会
+                        this.playerStats.plannedDate = true;
+                        break;
+                    case 'breakup':
+                        // 分手
+                        this.playerStats.hasLoveInterest = false;
+                        break;
+                }
             }
             
             // 职业系统方法
@@ -4686,6 +5823,11 @@
             
             // 比赛系统
             startMatch(matchType) {
+                // 追踪打野球活动
+                if (matchType === 'casual') {
+                    this.trackLifeActivity('casualMatch');
+                }
+                
                 // 初始化比赛数据
                 this.currentMatch = {
                     type: matchType, // 'casual' 野球, 'formal' 正式比赛
@@ -4846,7 +5988,17 @@
                 const opponentSkill = this.calculateOpponentStrength(match.type);
                 
                 // 模拟每一分
-                while (match.myScore < match.targetScore && match.opponentScore < match.targetScore) {
+                // 排球规则：先到25分且领先2分获胜，如果24:24则继续比赛直到领先2分
+                while (true) {
+                    // 检查是否有一方获胜
+                    const myWin = match.myScore >= match.targetScore && match.myScore - match.opponentScore >= 2;
+                    const opponentWin = match.opponentScore >= match.targetScore && match.opponentScore - match.myScore >= 2;
+                    
+                    if (myWin || opponentWin) {
+                        break;
+                    }
+                    
+                    // 模拟一分
                     const point = this.simulatePoint(mySkills, opponentSkill);
                     
                     if (point.scorer === 'my') {
@@ -5649,10 +6801,9 @@
                         ${rewards.block ? `🛡️ 拦网 +${rewards.block}<br>` : ''}
                         ${rewards.dig ? `🤸 垫球 +${rewards.dig}<br>` : ''}
                         ${rewards.set ? `🙌 托球 +${rewards.set}<br>` : ''}
-                        ${rewards.trainingPoints ? `🎯 训练点数 +${rewards.trainingPoints}<br>` : ''}
                         ${rewards.energy ? `💪 体力 ${rewards.energy}<br>` : ''}
-                        ${rewards.mood ? `😊 心情 ${rewards.mood > 0 ? '+' : ''}${rewards.mood}<br>` : ''}
-                        ${rewards.stress ? `😰 压力 ${rewards.stress > 0 ? '+' : ''}${rewards.stress}<br>` : ''}
+                        ${rewards.mood ? `� 心情 ${rewards.mood > 0 ? '+' : ''}${rewards.mood}<br>` : ''}
+                        ${rewards.stress ? `� 压力 ${rewards.stress > 0 ? '+' : ''}${rewards.stress}<br>` : ''}
                         ${rewards.reputation ? `⭐ 声望 +${rewards.reputation}<br>` : ''}
                     </div>
                 `;
@@ -5711,46 +6862,34 @@
                 const match = this.currentMatch;
                 const isCasual = match.type === 'casual';
                 
-                // 根据表现评分计算训练点数奖励
-                let trainingPoints = 0;
-                if (performanceRating >= 85) {
-                    trainingPoints = won ? 30 : 15;
-                } else if (performanceRating >= 70) {
-                    trainingPoints = won ? 15 : 8;
-                } else if (performanceRating >= 55) {
-                    trainingPoints = won ? 5 : 0;
-                }
-                
                 if (won) {
                     return {
                         message: isCasual ? 
                             '通过实战，你的技能得到了提升！' :
                             '赢得比赛让你信心大增，技能和声望都有提升！',
-                        serve: isCasual ? 2 : 4,
-                        spike: isCasual ? 2 : 4,
-                        block: isCasual ? 2 : 3,
-                        dig: isCasual ? 2 : 4,
-                        set: isCasual ? 2 : 3,
-                        trainingPoints: trainingPoints,
+                        serve: isCasual ? 1 : 4,
+                        spike: isCasual ? 1 : 4,
+                        block: isCasual ? 1 : 3,
+                        dig: isCasual ? 1 : 4,
+                        set: isCasual ? 1 : 3,
                         energy: isCasual ? 0 : -15,  // 野球不额外消耗体力，正式比赛消耗
-                        mood: isCasual ? 12 : 20,
-                        stress: isCasual ? -8 : -12,
-                        reputation: isCasual ? 2 : 6
+                        mood: isCasual ? 10 : 20,
+                        stress: isCasual ? -5 : -12,
+                        reputation: isCasual ? 1 : 6
                     };
                 } else {
                     return {
                         message: isCasual ?
                             '虽然输了，但你从比赛中学到了很多。' :
                             '失败是成功之母，你从这场比赛中吸取了经验。',
-                        serve: isCasual ? 1 : 2,
-                        spike: isCasual ? 1 : 2,
-                        block: isCasual ? 1 : 1,
-                        dig: isCasual ? 1 : 2,
-                        set: isCasual ? 1 : 1,
-                        trainingPoints: trainingPoints,
+                        serve: isCasual ? 0 : 2,
+                        spike: isCasual ? 0 : 2,
+                        block: isCasual ? 0 : 1,
+                        dig: isCasual ? 0 : 2,
+                        set: isCasual ? 0 : 1,
                         energy: isCasual ? 0 : -12,  // 野球不额外消耗体力，正式比赛消耗
-                        mood: isCasual ? -5 : -10,
-                        stress: isCasual ? 5 : 8,
+                        mood: isCasual ? -3 : -10,
+                        stress: isCasual ? 3 : 8,
                         reputation: isCasual ? 0 : -2
                     };
                 }
@@ -5971,22 +7110,22 @@
                 text += `<p><strong>💫 比赛收获：</strong></p>`;
                 text += `<div style="text-align: left; font-size: 14px;">`;
                 
-                // 只显示非零的奖励
-                if (rewards.serve > 0) text += `🎯 发球 +${rewards.serve}<br>`;
-                if (rewards.spike > 0) text += `⚡ 扣球 +${rewards.spike}<br>`;
-                if (rewards.block > 0) text += `🛡️ 拦网 +${rewards.block}<br>`;
-                if (rewards.dig > 0) text += `🤸 垫球 +${rewards.dig}<br>`;
-                if (rewards.set > 0) text += `🙌 托球 +${rewards.set}<br>`;
+                // 只显示非零的技能奖励
+                const hasSkillRewards = rewards.serve > 0 || rewards.spike > 0 || rewards.block > 0 || 
+                                       rewards.dig > 0 || rewards.set > 0;
+                
+                if (hasSkillRewards) {
+                    if (rewards.serve > 0) text += `🎯 发球 +${rewards.serve}<br>`;
+                    if (rewards.spike > 0) text += `⚡ 扣球 +${rewards.spike}<br>`;
+                    if (rewards.block > 0) text += `🛡️ 拦网 +${rewards.block}<br>`;
+                    if (rewards.dig > 0) text += `🤸 垫球 +${rewards.dig}<br>`;
+                    if (rewards.set > 0) text += `� 托球 +${rewards.set}<br>`;
+                }
                 
                 // 声望、心情、压力始终显示（可能为负）
                 if (rewards.reputation !== 0) text += `⭐ 声望 ${rewards.reputation > 0 ? '+' : ''}${rewards.reputation}<br>`;
                 if (rewards.mood !== 0) text += `😊 心情 ${rewards.mood > 0 ? '+' : ''}${rewards.mood}<br>`;
                 if (rewards.stress !== 0) text += `😰 压力 ${rewards.stress > 0 ? '+' : ''}${rewards.stress}<br>`;
-                
-                // 如果是决赛，添加说明
-                if (roundInfo.id === 'final') {
-                    text += `<br><p style="color: #fbbf24; font-size: 12px;">💡 决赛阶段不再提升技能，专注于荣誉！</p>`;
-                }
                 
                 text += `</div></div>`;
                 
@@ -6073,13 +7212,14 @@
                 
                 if (won) {
                     if (!isFinalStage) {
-                        // 非决赛：根据轮次递增技能奖励
-                        const baseReward = roundInfo.id === 'round16' ? 5 :
-                                          roundInfo.id === 'round8' ? 7 :
-                                          roundInfo.id === 'round4' ? 10 : 0;
+                        // 非决赛：根据轮次递增技能奖励（降低：5/7/10 → 3/4/5）
+                        const baseReward = roundInfo.id === 'round16' ? 3 :
+                                          roundInfo.id === 'round8' ? 4 :
+                                          roundInfo.id === 'round4' ? 5 : 0;
                         
                         rewards.serve = rewards.spike = rewards.block = rewards.dig = rewards.set = baseReward;
                     }
+                    // 决赛不给技能奖励（游戏即将结束，技能提升已无意义）
                     
                     // 所有轮次都给声望和心情奖励
                     const reputationBonus = isFinalStage ? 100 : // 决赛冠军：巨额声望
@@ -6326,7 +7466,206 @@
             }
             
             // ====================================================
-            // 结束结局文本生成系统
+            // 隐藏结局文本生成系统
+            // ====================================================
+            
+            // 隐藏结局1：旁观者
+            generateBystanderEndingText() {
+                const stats = this.playerStats;
+                const player = this.player;
+                
+                let text = `<h2>🎭 隐藏结局：旁观者</h2>`;
+                text += `<div style="margin: 20px 0; padding: 20px; background: rgba(0,0,0,0.3); border-radius: 10px;">`;
+                
+                text += `<h3 style="color: #fbbf24;">【第5周 - 院际比赛日】</h3>`;
+                text += `<p>体育馆里人声鼎沸，院际排球联赛正在进行。你站在观众席上，看着场上挥洒汗水的队员们，心中五味杂陈。</p>`;
+                text += `<p>"如果当初我加入了院队..."你想起了开学时的那些机会。</p>`;
+                text += `<br>`;
+                
+                text += `<p>第1周，学长学姐热情地邀请你参加选拔，你说"再看看"。</p>`;
+                text += `<p>第2周，你在训练和其他事情之间犹豫不决。</p>`;
+                text += `<p>第3周，你想着"还有时间"。</p>`;
+                text += `<p>第4周，选拔窗口关闭了。</p>`;
+                text += `<br>`;
+                
+                text += `<p>现在，比赛开始了，而你只能在场边观看。</p>`;
+                text += `<p>场上的队员们配合默契，每一次扣球、每一次拦网都让观众欢呼。你意识到，排球不仅仅是个人技术，更是团队的运动。</p>`;
+                text += `<br>`;
+                
+                text += `<p style="color: #fbbf24; font-weight: bold;">"下次，我一定不会再错过机会。"你暗暗发誓。</p>`;
+                text += `</div>`;
+                
+                // 数据回顾
+                text += `<div style="margin: 20px 0; padding: 15px; background: rgba(255,255,255,0.05); border-radius: 10px;">`;
+                text += `<h3>📊 你的5周排球生活</h3>`;
+                text += `<p>虽然没能参加比赛，但你也有自己的收获：</p>`;
+                text += `<ul style="text-align: left; margin-left: 20px; line-height: 1.8;">`;
+                text += `<li>训练了 ${stats.totalTrainings} 次，技能有所提升</li>`;
+                if (stats.casualMatchesPlayed > 0) {
+                    text += `<li>打了 ${stats.casualMatchesPlayed} 场野球，积累了实战经验</li>`;
+                }
+                text += `<li>结识了一些排球爱好者</li>`;
+                text += `</ul>`;
+                text += `<br>`;
+                text += `<p>但你错过了最重要的东西：</p>`;
+                text += `<ul style="text-align: left; margin-left: 20px; line-height: 1.8; color: #e74c3c;">`;
+                text += `<li>❌ 没有加入正式队伍</li>`;
+                text += `<li>❌ 没有参加院际比赛</li>`;
+                text += `<li>❌ 没有体验团队的力量</li>`;
+                text += `</ul>`;
+                text += `</div>`;
+                
+                // 教练的话
+                text += `<div style="margin: 20px 0; padding: 15px; background: rgba(255,215,0,0.1); border-radius: 10px;">`;
+                text += `<h3>💡 教练的话</h3>`;
+                text += `<p>"排球是一项需要把握机会的运动。场上的机会稍纵即逝，人生的机会也是如此。"</p>`;
+                text += `<br>`;
+                text += `<p>"不过，失败不是终点，而是新的起点。下次，记得抓住机会。"</p>`;
+                text += `</div>`;
+                
+                // 结局标识
+                text += `<div style="margin: 20px 0; padding: 20px; background: rgba(231,76,60,0.2); border: 2px solid #e74c3c; border-radius: 10px; text-align: center;">`;
+                text += `<h3 style="color: #e74c3c;">🔄 隐藏结局：旁观者</h3>`;
+                text += `<p style="color: #fbbf24;">成就解锁：【错过的机会】</p>`;
+                text += `<br>`;
+                text += `<p>这不是你想要的结局，对吗？</p>`;
+                text += `<p><strong>重新开始，这次不要犹豫！</strong></p>`;
+                text += `</div>`;
+                
+                return text;
+            }
+            
+            // 隐藏结局2：独行者
+            generateLonerEndingText() {
+                const stats = this.playerStats;
+                const player = this.player;
+                
+                // 计算技能数据
+                const skills = player.skills;
+                const skillValues = [skills.serve, skills.spike, skills.block, skills.dig, skills.set];
+                const avgSkill = Math.round(skillValues.reduce((a, b) => a + b, 0) / 5);
+                const maxSkill = Math.max(...skillValues);
+                const maxSkillName = ['发球', '扣球', '拦网', '垫球', '托球'][skillValues.indexOf(maxSkill)];
+                
+                let text = `<h2>🚶 隐藏结局：独行者</h2>`;
+                text += `<div style="margin: 20px 0; padding: 20px; background: rgba(0,0,0,0.3); border-radius: 10px;">`;
+                
+                text += `<h3 style="color: #fbbf24;">【第12周 - 校际联赛开幕】</h3>`;
+                text += `<p>全校最盛大的体育赛事——校际排球联赛拉开帷幕。校队队员们身穿统一的队服，在开幕式上接受全校师生的欢呼。</p>`;
+                text += `<br>`;
+                text += `<p>你站在人群中，看着那些熟悉的身影。他们中有些人的技术不如你，但他们站在了那个舞台上。</p>`;
+                text += `</div>`;
+                
+                // 根据玩家情况生成不同文案
+                text += `<div style="margin: 20px 0; padding: 15px; background: rgba(255,255,255,0.05); border-radius: 10px;">`;
+                text += `<h3>📖 回顾这12周</h3>`;
+                text += `<p>你选择了一条不同的道路：</p>`;
+                text += `<br>`;
+                
+                // 根据队伍状态
+                if (player.team === 'college') {
+                    text += `<p style="color: #3b82f6;">你加入了院队，参加了院际比赛，但最终没能进入校队。</p>`;
+                    text += `<p>也许是技术还不够，也许是表现不够出色，也许只是运气不好。但你已经比很多人走得更远了。</p>`;
+                } else {
+                    text += `<p style="color: #3b82f6;">你选择了独自训练，在野球场上磨练技术。</p>`;
+                    text += `<p>你享受了自由，但也错过了团队的温暖和正式比赛的舞台。排球是团队运动，下次试试加入队伍吧。</p>`;
+                }
+                text += `<br>`;
+                
+                // 根据技能水平
+                if (avgSkill >= 70) {
+                    text += `<p style="color: #10b981;">你的技术其实已经很不错了（平均技能：${avgSkill}），但排球不只是技术，还需要团队、机会和时机。</p>`;
+                    text += `<p>也许是错过了关键的比赛，也许是没有把握住机会。下次，记得在正确的时间做正确的事。</p>`;
+                } else if (avgSkill >= 50) {
+                    text += `<p style="color: #f59e0b;">你的技术还算不错（平均技能：${avgSkill}），但还有提升的空间。</p>`;
+                    text += `<p>继续努力训练，同时也要注重团队合作和比赛经验的积累。</p>`;
+                } else {
+                    text += `<p style="color: #ef4444;">你的技术还有很大的提升空间（平均技能：${avgSkill}）。</p>`;
+                    text += `<p>也许是训练不够刻苦，也许是方法不够正确。下次，试着更加专注和努力。</p>`;
+                }
+                text += `<br>`;
+                
+                // 根据训练次数
+                if (stats.totalTrainings >= 30) {
+                    text += `<p style="color: #8b5cf6;">你非常刻苦，训练了${stats.totalTrainings}次，几乎每周都在球场上挥汗如雨。</p>`;
+                    text += `<p>但排球不只是训练，还需要实战、团队和比赛经验。下次，试着多参加比赛，在实战中成长。</p>`;
+                } else if (stats.totalTrainings < 10) {
+                    text += `<p style="color: #ec4899;">你的训练次数较少（${stats.totalTrainings}次），也许是时间分配的问题，也许是其他原因。</p>`;
+                    text += `<p>要想在排球上有所成就，刻苦训练是必不可少的。</p>`;
+                }
+                text += `</div>`;
+                
+                // 感悟
+                text += `<div style="margin: 20px 0; padding: 15px; background: rgba(255,255,255,0.05); border-radius: 10px;">`;
+                text += `<h3>💭 你的感悟</h3>`;
+                text += `<p>站在人群中，你想起了这12周的点点滴滴：</p>`;
+                text += `<ul style="text-align: left; margin-left: 20px; line-height: 1.8;">`;
+                text += `<li>第一次接触排球时的青涩</li>`;
+                text += `<li>每一次训练后的汗水</li>`;
+                if (stats.casualMatchesPlayed > 0) {
+                    text += `<li>野球场上的欢笑和挫折</li>`;
+                }
+                if (player.team === 'college') {
+                    text += `<li>那场院际比赛的激动</li>`;
+                }
+                text += `<li>以及，那些错过的机会...</li>`;
+                text += `</ul>`;
+                text += `<br>`;
+                text += `<p>你没有站上校际联赛的舞台，但你收获了：</p>`;
+                text += `<ul style="text-align: left; margin-left: 20px; line-height: 1.8; color: #2ecc71;">`;
+                text += `<li>✓ 对排球的热爱</li>`;
+                text += `<li>✓ 技能的提升（从 ${stats.initialSkills.serve} 到 ${avgSkill}）</li>`;
+                text += `<li>✓ 对自己的认识</li>`;
+                text += `<li>✓ 对团队运动的理解</li>`;
+                text += `</ul>`;
+                text += `</div>`;
+                
+                // 学期结束
+                text += `<div style="margin: 20px 0; padding: 15px; background: rgba(255,255,255,0.05); border-radius: 10px;">`;
+                text += `<h3>🎓 学期结束</h3>`;
+                text += `<p>学期结束了，你的大一排球之旅也告一段落。</p>`;
+                text += `<br>`;
+                text += `<p>虽然没能实现"排球之星"的梦想，但你并不后悔。这12周的经历让你成长了许多，也让你明白了很多道理。</p>`;
+                text += `<br>`;
+                text += `<p>也许下学期，你会更加努力。也许你会选择其他的道路。但无论如何，这段经历都将成为你珍贵的回忆。</p>`;
+                text += `</div>`;
+                
+                // 最终数据
+                text += `<div style="margin: 20px 0; padding: 15px; background: rgba(255,255,255,0.05); border-radius: 10px;">`;
+                text += `<h3>📊 最终数据</h3>`;
+                text += `<ul style="text-align: left; margin-left: 20px; line-height: 1.8;">`;
+                text += `<li>训练次数：${stats.totalTrainings}</li>`;
+                text += `<li>比赛场次：${stats.casualMatchesPlayed}（野球）+ ${stats.formalMatchesPlayed}（正式）</li>`;
+                text += `<li>最高技能：${maxSkillName}(${maxSkill})</li>`;
+                text += `<li>总消费：${stats.totalMoneySpent}元</li>`;
+                text += `<li>声望：${player.reputation}</li>`;
+                text += `</ul>`;
+                text += `</div>`;
+                
+                // 教练的寄语
+                text += `<div style="margin: 20px 0; padding: 15px; background: rgba(255,215,0,0.1); border-radius: 10px;">`;
+                text += `<h3>🌟 教练的寄语</h3>`;
+                text += `<p>"每个人都有自己的节奏和道路。你没能进入校队，但这不代表你失败了。"</p>`;
+                text += `<br>`;
+                text += `<p>"排球教会我们的，不只是如何赢得比赛，更是如何面对挫折，如何坚持梦想。"</p>`;
+                text += `<br>`;
+                text += `<p>"记住这12周的经历，它们会让你变得更强。下次，你一定能做得更好。"</p>`;
+                text += `</div>`;
+                
+                // 结局标识
+                text += `<div style="margin: 20px 0; padding: 20px; background: rgba(100,116,139,0.2); border: 2px solid #64748b; border-radius: 10px; text-align: center;">`;
+                text += `<h3 style="color: #94a3b8;">🔄 隐藏结局：独行者</h3>`;
+                text += `<p style="color: #fbbf24;">成就解锁：【另一条路】</p>`;
+                text += `<br>`;
+                text += `<p>这是一段不完美但真实的旅程。</p>`;
+                text += `<p><strong>想要不同的结局吗？重新开始吧！</strong></p>`;
+                text += `</div>`;
+                
+                return text;
+            }
+            
+            // ====================================================
+            // 结束隐藏结局文本生成系统
             // ====================================================
             
             randomName() {
@@ -6393,7 +7732,8 @@
                 }
                 
                 this.player.name = name;
-                this.rollAttributes();
+                // 不要再次调用 rollAttributes()，因为属性已经在 init() 时生成
+                // 只需要更新 UI 即可
                 
                 // 测试模式下隐藏重新随机按钮
                 if (TEST_MODE) {
@@ -6413,6 +7753,9 @@
                     set: this.player.skills.set,
                     maxEnergy: this.player.maxEnergy
                 };
+                
+                // 更新 UI（使用当前已有的属性）
+                this.updateUI();
                 
                 // 显示能力面板和游戏头部
                 document.getElementById('character-panel').classList.add('show');
@@ -6475,6 +7818,13 @@
                 if (this.player.mood < 40) statusText += '<p style="color: #e67e22;">⚠️ 心情低落，建议放松一下</p>';
                 if (this.player.stress > 70) statusText += '<p style="color: #e74c3c;">⚠️ 压力过大，小心影响表现！</p>';
                 
+                // 周初提示（第2周开始显示）
+                let weekStartNotice = '';
+                if (this.player.week > 1 && this.player.trainingCount === 0 && !this.weekStartNoticeShown) {
+                    weekStartNotice = '<p style="color: #2ecc71; background: rgba(46, 204, 113, 0.1); padding: 10px; border-radius: 5px; margin: 10px 0;">💰 获得本周零花钱 +120元</p>';
+                    this.weekStartNoticeShown = true;
+                }
+                
                 // 检查是否到达目标周
                 const goalInfo = this.getGoalInfo();
                 let goalNotice = '';
@@ -6484,6 +7834,7 @@
                 }
                 
                 SCENES.weeklyHub.text = `<h2>📅 第 ${this.player.week} 周</h2>
+                ${weekStartNotice}
                 <p>${trainingText}</p>
                 ${statusText}
                 ${goalNotice}
@@ -6608,6 +7959,14 @@
                             // 条件不满足但有条件限制的事件，降低权重
                             weight = 0.3;
                         }
+                    }
+                    
+                    // 护膝护腕降低受伤事件权重
+                    const injuryEvents = ['injury_risk', 'serious_injury'];
+                    if (injuryEvents.includes(event.id) && this.player.ownedItems?.protection) {
+                        const resistPercent = this.player.ownedItems.protection.injuryResist || 0;
+                        weight = weight * (1 - resistPercent / 100);
+                        console.log(`护膝护腕降低受伤事件权重: ${event.id}, 调整后权重: ${weight.toFixed(2)}`);
                     }
                     
                     // 将事件按权重添加到列表中
@@ -6747,6 +8106,167 @@
                 return html;
             }
             
+            // 刮刮乐系统
+            buyScratchCard() {
+                // 追踪刮刮乐活动
+                this.trackLifeActivity('scratchCard');
+                
+                // 执行抽奖
+                const result = this.scratchCardDraw();
+                
+                // 显示结果弹窗
+                this.showScratchCardResult(result);
+            }
+            
+            scratchCardDraw(boostedLuck = false) {
+                let random = Math.random() * 100;
+                
+                // 如果是神秘老人赠送的刮刮乐，提高中奖概率
+                if (boostedLuck) {
+                    // 谢谢惠顾概率降到10%
+                    if (random >= 70) {
+                        random = random * 0.625; // 将70-100映射到0-18.75
+                    }
+                }
+                
+                let result;
+                if (random < 2) {
+                    // 特等奖 2%
+                    result = {
+                        level: 'grand',
+                        name: '特等奖',
+                        icon: '🏆',
+                        rewards: { money: 800, mood: 40, reputation: 20 },
+                        message: '恭喜中特等奖！大奖！'
+                    };
+                    // 追踪特等奖次数
+                    this.playerStats.scratchCardJackpots = (this.playerStats.scratchCardJackpots || 0) + 1;
+                } else if (random < 10) {
+                    // 一等奖 8%
+                    result = {
+                        level: 'first',
+                        name: '一等奖',
+                        icon: '🥇',
+                        rewards: { money: 300, mood: 25, reputation: 12 },
+                        message: '恭喜中一等奖！'
+                    };
+                } else if (random < 25) {
+                    // 二等奖 15%
+                    result = {
+                        level: 'second',
+                        name: '二等奖',
+                        icon: '🥈',
+                        rewards: { money: 150, mood: 18, reputation: 5 },
+                        message: '恭喜中二等奖！'
+                    };
+                } else if (random < 50) {
+                    // 三等奖 25%
+                    result = {
+                        level: 'third',
+                        name: '三等奖',
+                        icon: '🥉',
+                        rewards: { money: 80, mood: 12 },
+                        message: '恭喜中三等奖！'
+                    };
+                } else if (random < 70) {
+                    // 安慰奖 20%
+                    result = {
+                        level: 'consolation',
+                        name: '安慰奖',
+                        icon: '🎁',
+                        rewards: { money: 40, mood: 8 },
+                        message: '获得安慰奖'
+                    };
+                } else {
+                    // 谢谢惠顾 30%
+                    result = {
+                        level: 'nothing',
+                        name: '谢谢惠顾',
+                        icon: '😅',
+                        rewards: { mood: 3 },
+                        message: '谢谢惠顾'
+                    };
+                }
+                
+                return result;
+            }
+            
+            showScratchCardResult(result) {
+                // 应用奖励
+                if (result.rewards.money) {
+                    this.player.money += result.rewards.money;
+                }
+                if (result.rewards.mood) {
+                    this.player.mood = Math.min(100, this.player.mood + result.rewards.mood);
+                }
+                if (result.rewards.reputation) {
+                    this.player.reputation += result.rewards.reputation;
+                }
+                
+                // 更新统计
+                if (!this.playerStats.scratchCards) {
+                    this.playerStats.scratchCards = {
+                        total: 0,
+                        grand: 0,
+                        first: 0,
+                        second: 0,
+                        third: 0,
+                        consolation: 0,
+                        nothing: 0,
+                        totalSpent: 0,
+                        totalEarned: 0
+                    };
+                }
+                this.playerStats.scratchCards.total++;
+                this.playerStats.scratchCards[result.level]++;
+                this.playerStats.scratchCards.totalSpent += 30;
+                this.playerStats.scratchCards.totalEarned += (result.rewards.money || 0);
+                
+                // 构建奖励文本
+                let rewardsText = '';
+                if (result.rewards.money) rewardsText += `💰 金钱 +${result.rewards.money}<br>`;
+                if (result.rewards.mood) rewardsText += `😊 心情 +${result.rewards.mood}<br>`;
+                if (result.rewards.reputation) rewardsText += `⭐ 声望 +${result.rewards.reputation}<br>`;
+                
+                if (rewardsText === '') {
+                    rewardsText = '再接再厉！<br>下次一定能中奖！';
+                }
+                
+                // 显示弹窗
+                const modal = document.getElementById('event-modal');
+                const title = document.getElementById('event-modal-title');
+                const text = document.getElementById('event-modal-text');
+                const choicesDiv = document.getElementById('event-modal-choices');
+                
+                // 设置样式类
+                const modalContent = document.getElementById('event-modal-content');
+                modalContent.className = `scratch-card-result scratch-${result.level}-prize`;
+                
+                // 设置内容
+                title.innerHTML = `<div class="scratch-card-icon">${result.icon}</div>`;
+                text.innerHTML = `<h2 class="scratch-card-title">${result.message}</h2>
+                    <div class="scratch-card-rewards">${rewardsText}</div>`;
+                
+                choicesDiv.innerHTML = '';
+                const continueBtn = document.createElement('button');
+                continueBtn.className = 'choice-btn scratch-card-close';
+                continueBtn.textContent = '确定';
+                continueBtn.onclick = () => {
+                    modal.classList.remove('show');
+                    modalContent.className = ''; // 重置样式
+                    // 返回周选择
+                    this.currentScene = 'weeklyHub';
+                    this.showScene('weeklyHub');
+                };
+                choicesDiv.appendChild(continueBtn);
+                
+                // 更新UI
+                this.updateUI();
+                
+                // 显示弹窗
+                modal.classList.add('show');
+            }
+            
             nextWeek() {
                 // 保存本周开始时的数据快照
                 this.player.weekStartStats = {
@@ -6760,7 +8280,8 @@
                 
                 this.player.week++;
                 this.player.trainingCount = 0;
-                this.player.money += 500; // 每周零花钱（从350改为500）
+                this.player.money += 120; // 每周零花钱
+                this.weekStartNoticeShown = false; // 重置周初提示标志
                 
                 // 自然恢复
                 this.player.energy = Math.min(this.player.maxEnergy, this.player.energy + 30);
@@ -6794,11 +8315,6 @@
                     });
                 }
                 
-                // 每周奖励少量训练点数（保持良好状态）
-                if (this.player.energy >= 50 && this.player.mood >= 60) {
-                    this.player.trainingPoints += 5;
-                }
-                
                 this.updateUI();
                 
                 console.log(`第${this.player.week}周开始，当前队伍: ${this.player.team}`);
@@ -6815,11 +8331,21 @@
                     } else if (matchEvent.type === 'tournament') {
                         console.log('触发锦标赛:', matchEvent.tournamentType);
                         this.startTournament(matchEvent.tournamentType);
+                    } else if (matchEvent.type === 'hiddenEnding') {
+                        console.log('触发隐藏结局:', matchEvent.endingId);
+                        this.showScene(matchEvent.endingId);
                     } else if (matchEvent.type === 'spectator') {
                         this.showScene(matchEvent.sceneId);
                     } else if (matchEvent.type === 'missed') {
                         this.showScene(matchEvent.sceneId);
                     }
+                    return;
+                }
+                
+                // 新增：触发周初事件
+                const weeklyEvent = this.generateWeeklyEvent();
+                if (weeklyEvent) {
+                    this.showWeeklyEvent(weeklyEvent);
                     return;
                 }
                 
@@ -6854,9 +8380,12 @@
                             matchName: '院际比赛'
                         };
                     } else {
-                        console.log('✗ 未加入院队，跳过比赛');
-                        // 未加入院队，跳过比赛（阶段4将添加观战场景）
-                        return null;
+                        console.log('✗ 未加入院队，触发隐藏结局：旁观者');
+                        // 未加入院队，触发隐藏结局
+                        return {
+                            type: 'hiddenEnding',
+                            endingId: 'bystander'
+                        };
                     }
                 }
                 
@@ -6870,13 +8399,196 @@
                             tournamentType: 'universityLeague'
                         };
                     } else {
-                        console.log('✗ 未加入校队，跳过比赛');
-                        // 未加入校队，跳过比赛（阶段4将添加观战场景）
-                        return null;
+                        console.log('✗ 未加入校队，触发隐藏结局：独行者');
+                        // 未加入校队，触发隐藏结局
+                        return {
+                            type: 'hiddenEnding',
+                            endingId: 'loner'
+                        };
                     }
                 }
                 
                 return null;
+            }
+            
+            // ====================================================
+            // 周初事件系统
+            // ====================================================
+            
+            // 生成周初事件
+            generateWeeklyEvent() {
+                // 第1周不触发事件
+                if (this.player.week === 1) {
+                    return null;
+                }
+                
+                const events = this.getWeeklyEventPool();
+                const eligibleEvents = events.filter(event => {
+                    // 检查事件的触发条件
+                    if (event.condition) {
+                        return event.condition(this.player);
+                    }
+                    return true;
+                });
+                
+                if (eligibleEvents.length === 0) {
+                    return null;
+                }
+                
+                // 根据玩家状态计算权重
+                const mood = this.player.mood;
+                const stress = this.player.stress;
+                
+                // 计算正面/负面事件概率
+                let positiveWeight = 1;
+                let negativeWeight = 1;
+                
+                if (mood >= 70 && stress <= 30) {
+                    positiveWeight = 7;
+                    negativeWeight = 1;
+                } else if (mood >= 50 && stress <= 50) {
+                    positiveWeight = 4;
+                    negativeWeight = 2;
+                } else {
+                    positiveWeight = 2;
+                    negativeWeight = 5;
+                }
+                
+                // 根据权重筛选事件
+                const weightedEvents = eligibleEvents.map(event => {
+                    let weight = 1;
+                    if (event.mood === 'positive') {
+                        weight = positiveWeight;
+                    } else if (event.mood === 'negative') {
+                        weight = negativeWeight;
+                    }
+                    return { event, weight };
+                });
+                
+                // 加权随机选择
+                const totalWeight = weightedEvents.reduce((sum, item) => sum + item.weight, 0);
+                let random = Math.random() * totalWeight;
+                
+                for (let item of weightedEvents) {
+                    random -= item.weight;
+                    if (random <= 0) {
+                        return item.event;
+                    }
+                }
+                
+                return weightedEvents[0].event;
+            }
+            
+            // 显示周初事件
+            showWeeklyEvent(event) {
+                // 创建事件场景
+                const effectText = this.formatEventEffects(event.effects);
+                
+                SCENES.weeklyEvent = {
+                    text: `<h2>📰 ${event.title}</h2>
+                        <p>${event.text}</p>
+                        <div style="margin-top: 15px; padding: 10px; background: #f0f9ff; border-radius: 8px;">
+                            <strong>影响：</strong><br>
+                            ${effectText}
+                        </div>`,
+                    choices: [{
+                        text: '继续',
+                        next: 'weeklyHub',
+                        effect: event.effects
+                    }]
+                };
+                
+                this.showScene('weeklyEvent');
+            }
+            
+            // 格式化事件效果显示
+            formatEventEffects(effects) {
+                let text = '';
+                const skillNames = { serve: '发球', spike: '扣球', block: '拦网', dig: '垫球', set: '托球' };
+                
+                if (effects.serve) text += `🎯 ${skillNames.serve} ${effects.serve > 0 ? '+' : ''}${effects.serve}<br>`;
+                if (effects.spike) text += `⚡ ${skillNames.spike} ${effects.spike > 0 ? '+' : ''}${effects.spike}<br>`;
+                if (effects.block) text += `🛡️ ${skillNames.block} ${effects.block > 0 ? '+' : ''}${effects.block}<br>`;
+                if (effects.dig) text += `🤸 ${skillNames.dig} ${effects.dig > 0 ? '+' : ''}${effects.dig}<br>`;
+                if (effects.set) text += `🙌 ${skillNames.set} ${effects.set > 0 ? '+' : ''}${effects.set}<br>`;
+                if (effects.energy) text += `💪 体力 ${effects.energy > 0 ? '+' : ''}${effects.energy}<br>`;
+                if (effects.mood) text += `😊 心情 ${effects.mood > 0 ? '+' : ''}${effects.mood}<br>`;
+                if (effects.stress) text += `😰 压力 ${effects.stress > 0 ? '+' : ''}${effects.stress}<br>`;
+                if (effects.reputation) text += `⭐ 声望 ${effects.reputation > 0 ? '+' : ''}${effects.reputation}<br>`;
+                if (effects.money) text += `💰 金钱 ${effects.money > 0 ? '+' : ''}${effects.money}<br>`;
+                if (effects.relationship) text += `🤝 关系 ${effects.relationship > 0 ? '+' : ''}${effects.relationship}<br>`;
+                
+                return text || '无影响';
+            }
+            
+            // 获取周初事件池
+            getWeeklyEventPool() {
+                return [
+                    // 技能相关正面事件
+                    { id: 'serve_master', title: '发球达人', text: '你的跳发球视频在校园论坛火了！有学弟学妹向你请教，你耐心指导后感觉自己理解更深了。', mood: 'positive', condition: (p) => p.skills.serve >= 30 && p.mood >= 60 && p.stress <= 40, effects: { serve: 3, reputation: 5, mood: 10 } },
+                    { id: 'spike_show', title: '扣球表演', text: '体育课上老师让你示范扣球动作，你完美的演示赢得了全班掌声，连隔壁班都来围观了。', mood: 'positive', condition: (p) => p.skills.spike >= 30 && p.mood >= 60 && p.stress <= 40, effects: { spike: 2, reputation: 8, mood: 12 } },
+                    { id: 'block_teaching', title: '拦网教学', text: '队友请你分享拦网技巧，你在讲解时突然顿悟了一个新的判断方法。教学相长！', mood: 'positive', condition: (p) => p.skills.block >= 30 && p.mood >= 60 && p.stress <= 40, effects: { block: 3, relationship: 5, mood: 8 } },
+                    { id: 'dig_hero', title: '救球英雄', text: '训练时你一个鱼跃救球成功，教练当场表扬："这就是永不放弃的精神！"全队士气大振。', mood: 'positive', condition: (p) => p.skills.dig >= 30 && p.mood >= 60 && p.stress <= 40, effects: { dig: 2, reputation: 6, mood: 10, stress: -5 } },
+                    { id: 'set_master', title: '二传大师', text: '你精准的传球让队友连续扣球得分，大家都说和你配合特别舒服。默契度UP！', mood: 'positive', condition: (p) => p.skills.set >= 30 && p.mood >= 60 && p.stress <= 40, effects: { set: 3, relationship: 8, mood: 10 } },
+                    // 技能相关负面事件
+                    { id: 'demo_fail', title: '演示失误', text: '有人请教发球技巧，你演示跳发时因为太累脚下一滑，扭到了脚踝...丢人又疼。', mood: 'negative', condition: (p) => p.skills.serve >= 25 && (p.mood <= 40 || p.stress >= 60), effects: { serve: -5, mood: -10, stress: 5 } },
+                    { id: 'over_training', title: '过度训练', text: '你想突破扣球瓶颈，结果练得太猛手臂酸痛，教练批评你不懂劳逸结合。', mood: 'negative', condition: (p) => p.skills.spike >= 25 && (p.mood <= 40 || p.stress >= 60), effects: { spike: -3, energy: -15, stress: 8 } },
+                    { id: 'skill_regress', title: '技术退步', text: '状态不好导致训练时频频失误，队友关心地问你是不是有什么心事。', mood: 'negative', condition: (p) => p.mood <= 40, effects: { serve: -2, spike: -2, mood: -5, relationship: 3 } },
+                    // 社交相关事件
+                    { id: 'birthday_surprise', title: '生日惊喜', text: '队友们偷偷给你准备了生日蛋糕（虽然不是你生日），说是庆祝你加入球队。感动哭了！', mood: 'positive', condition: (p) => p.relationships.teammates >= 60, effects: { mood: 20, stress: -10, relationship: 10 } },
+                    { id: 'late_night_food', title: '深夜食堂', text: '队长请大家吃夜宵，聊天时你们发现彼此都是动漫迷，瞬间成了好兄弟。', mood: 'positive', condition: (p) => p.relationships.teammates >= 60, effects: { mood: 15, stress: -8, relationship: 8, money: -30 } },
+                    { id: 'game_night', title: '游戏之夜', text: '室友组织游戏联机，你们一起通宵打游戏，虽然第二天很困但超开心！', mood: 'positive', condition: (p) => p.mood >= 50, effects: { mood: 18, stress: -12, energy: -20 } },
+                    { id: 'isolated', title: '被孤立', text: '食堂吃饭时发现队友们都坐在一起，但没人叫你...是不是自己太不合群了？', mood: 'negative', condition: (p) => p.relationships.teammates <= 30, effects: { mood: -15, stress: 10 } },
+                    { id: 'gossip', title: '流言蜚语', text: '听说有人在背后说你"只会训练不会做人"，虽然不想在意但还是很难受。', mood: 'negative', condition: (p) => p.relationships.teammates <= 30, effects: { mood: -12, stress: 8, relationship: -5 } },
+                    // 金钱相关事件
+                    { id: 'treat_dinner', title: '请客吃饭', text: '你请队友吃了顿好的，大家都说你够意思！队内氛围更融洽了。', mood: 'positive', condition: (p) => p.money >= 300, effects: { money: -150, relationship: 12, reputation: 5, mood: 10 } },
+                    { id: 'new_shoes', title: '装备升级', text: '你买了双新球鞋，穿着感觉自己像职业选手，训练时信心满满！', mood: 'positive', condition: (p) => p.money >= 300, effects: { money: -200, mood: 15 } },
+                    { id: 'broke', title: '囊中羞涩', text: '队友约你出去玩，你只能说"下次吧"...钱包空空的感觉真难受。', mood: 'negative', condition: (p) => p.money <= 50, effects: { mood: -10, stress: 5 } },
+                    { id: 'instant_noodles', title: '泡面度日', text: '这周只能吃泡面了，营养跟不上导致训练效果下降，还被室友嘲笑"排球王子变泡面王子"。', mood: 'negative', condition: (p) => p.money <= 50, effects: { mood: -8, energy: -10 } },
+                    // 压力/心情相关事件
+                    { id: 'stress_burst', title: '压力爆发', text: '训练时你突然情绪失控对队友发火，事后非常后悔...大家都很担心你的状态。', mood: 'negative', condition: (p) => p.stress >= 70, effects: { stress: -20, mood: -15, relationship: -10 } },
+                    { id: 'insomnia', title: '失眠之夜', text: '压力太大导致失眠，第二天上课差点睡着，训练时也无精打采。', mood: 'negative', condition: (p) => p.stress >= 70, effects: { stress: -10, energy: -25, mood: -10 } },
+                    { id: 'lucky_day', title: '好运连连', text: '心情好运气也好！路上捡到100块，食堂阿姨多打了份肉，训练时状态爆棚！', mood: 'positive', condition: (p) => p.mood >= 80, effects: { money: 100, energy: 10, mood: 5, serve: 1, spike: 1 } },
+                    { id: 'inspiration', title: '灵感迸发', text: '心情愉悦时你突然领悟了一个新的技术要领，感觉自己开窍了！', mood: 'positive', condition: (p) => p.mood >= 80, effects: { block: 3, dig: 2, mood: 5 } },
+                    // 队伍相关事件
+                    { id: 'college_honor', title: '院队荣誉', text: '院队在友谊赛中获胜，教练请大家吃饭庆祝，你感受到了集体的温暖。', mood: 'positive', condition: (p) => p.team === 'college', effects: { mood: 15, stress: -10, relationship: 8 } },
+                    { id: 'college_pressure', title: '院队压力', text: '院队训练强度突然加大，教练说要为下次比赛做准备，你感觉有点吃不消。', mood: 'neutral', condition: (p) => p.team === 'college', effects: { energy: -20, stress: 10, serve: 2, spike: 1 } },
+                    { id: 'university_star', title: '校队明星', text: '校报采访了你，标题是"新星崛起"，走在路上都有人认出你了！', mood: 'positive', condition: (p) => p.team === 'university', effects: { reputation: 15, mood: 20, stress: 5 } },
+                    { id: 'university_competition', title: '校队竞争', text: '校队内部竞争激烈，你担心自己会被替补...必须更加努力才行。', mood: 'negative', condition: (p) => p.team === 'university', effects: { stress: 15, mood: -10 } },
+                    // 纯随机日常事件（无条件或条件宽松）
+                    { id: 'library_encounter', title: '图书馆奇遇', text: '在图书馆自习时，隔壁桌的学霸主动教你高数题，你感动得差点哭出来。虽然还是没听懂。', mood: 'positive', effects: { mood: 8, stress: -5 } },
+                    { id: 'bike_stolen', title: '自行车被偷', text: '你的自行车不见了！报案后发现是被隔壁宿舍的人"借"走了，他说以为是共享单车...', mood: 'negative', effects: { mood: -12, stress: 8, money: -50 } },
+                    { id: 'midterm_exam', title: '期中考试', text: '期中考试周到了，你在排球训练和复习之间疯狂切换，感觉脑子要炸了。', mood: 'negative', effects: { stress: 15, energy: -15, mood: -8 } },
+                    { id: 'confession_scene', title: '校园表白', text: '有人在操场上表白，围观群众里有人起哄让你也表白，你尴尬得想找个地缝钻进去。', mood: 'neutral', effects: { mood: -5, stress: 5 } },
+                    { id: 'movie_night', title: '电影之夜', text: '室友拉你去看午夜场电影，看完已经凌晨2点，第二天训练时困得不行。', mood: 'positive', effects: { mood: 15, energy: -20, stress: -10 } },
+                    { id: 'data_overcharge', title: '流量超标', text: '月底发现流量超了，被扣了100块，原来是室友用你手机开热点下游戏...', mood: 'negative', effects: { mood: -10, money: -100, stress: 5 } },
+                    { id: 'new_dish', title: '食堂新菜', text: '食堂推出新菜品"排球套餐"，虽然不知道为什么叫这个名字，但味道还不错！', mood: 'positive', effects: { mood: 10, energy: 10 } },
+                    { id: 'ktv_party', title: '被拉去唱歌', text: '班级聚会被拉去KTV，你唱了首《倔强》，大家说你唱出了排球人的精神！', mood: 'positive', effects: { mood: 12, stress: -8, money: -60, relationship: 5 } },
+                    { id: 'power_outage', title: '宿舍断电', text: '宿舍突然断电，你的手机也没电了，只能早早睡觉。意外地睡了个好觉！', mood: 'positive', effects: { energy: 20, mood: 5 } },
+                    { id: 'game_all_night', title: '游戏通宵', text: '室友新买了游戏机，你们通宵打《马里奥派对》，笑到肚子疼。第二天后悔了。', mood: 'positive', effects: { mood: 20, energy: -30, stress: -15 } },
+                    { id: 'dorm_inspection', title: '宿舍检查', text: '突击卫生检查！你们疯狂打扫了2小时，累得半死但通过了检查。', mood: 'neutral', effects: { energy: -15, stress: 10, mood: -5 } },
+                    { id: 'midnight_snack', title: '深夜外卖', text: '凌晨1点你们点了炸鸡和可乐，边吃边聊人生理想，感觉青春就该这样！', mood: 'positive', effects: { mood: 15, energy: 10, money: -80, stress: -10 } },
+                    { id: 'cockroach', title: '宿舍有虫', text: '宿舍出现了一只大蟑螂，你们四个大男生吓得跳上床，最后还是宿管阿姨帮忙解决的。', mood: 'neutral', effects: { mood: -8, stress: 5, relationship: 3 } },
+                    { id: 'water_splash', title: '被水泼', text: '路过宿舍楼下时被楼上泼水盆的水淋了一身，抬头一看是你认识的学妹，她吓得连连道歉。', mood: 'neutral', effects: { mood: -5, relationship: 2 } },
+                    { id: 'lottery_win', title: '中奖了', text: '学校抽奖活动你中了三等奖——一个保温杯，虽然不是什么大奖但还挺实用的！', mood: 'positive', effects: { mood: 10, money: 50 } },
+                    { id: 'heater_broken', title: '热水器坏了', text: '洗澡洗到一半热水器坏了，你顶着满头泡沫冲了个冷水澡，差点感冒。', mood: 'negative', effects: { energy: -10, mood: -12, stress: 5 } },
+                    { id: 'package_lost', title: '快递丢失', text: '你买的新球鞋快递显示已签收，但你根本没收到！客服说要调查，你只能等待。', mood: 'negative', effects: { mood: -15, stress: 10 } },
+                    { id: 'sudden_rain', title: '突然下雨', text: '训练完回宿舍路上突然下大雨，你和队友在屋檐下躲雨，聊了很多平时不会聊的话题。', mood: 'positive', effects: { mood: 8, relationship: 8, energy: -5 } },
+                    { id: 'confession_received', title: '被人告白', text: '有学妹给你递情书，你不知道怎么回应，整天都心神不宁，训练时频频失误。', mood: 'neutral', effects: { mood: 5, stress: 12 } },
+                    { id: 'roommate_birthday', title: '室友生日', text: '室友过生日，你们一起庆祝到深夜，虽然第二天很困但友情更深了。', mood: 'positive', effects: { mood: 15, energy: -15, money: -100, relationship: 10 } },
+                    { id: 'photo_leaked', title: '被偷拍', text: '发现校园论坛上有你训练时的照片，标题是"排球场上的阳光男孩"，评论区都在夸你帅。', mood: 'positive', effects: { mood: 18, reputation: 10, stress: 5 } },
+                    { id: 'senior_advice', title: '学长指导', text: '一位毕业的学长回校，看到你训练后主动分享了一些经验，让你受益匪浅。', mood: 'positive', effects: { serve: 2, spike: 1, mood: 10, reputation: 5 } },
+                    { id: 'banana_peel', title: '踩到香蕉皮', text: '真的有人会踩到香蕉皮！你在食堂门口华丽地滑倒了，周围的人都笑疯了。', mood: 'negative', effects: { mood: -10, reputation: -5, energy: -5 } },
+                    { id: 'wrong_person', title: '认错人', text: '你在路上热情地跟"队友"打招呼，结果发现认错人了，对方一脸懵逼地看着你。', mood: 'neutral', effects: { mood: -8, stress: 5 } },
+                    { id: 'food_poisoning', title: '吃坏肚子', text: '路边摊的烤串太诱人，你没忍住...结果半夜跑了三次厕所，第二天虚弱无力。', mood: 'negative', effects: { energy: -25, mood: -10 } },
+                    { id: 'performance_show', title: '被拉去表演', text: '学校文艺晚会缺人，你被拉去表演"排球操"，虽然很尴尬但意外地受欢迎。', mood: 'positive', effects: { mood: 10, reputation: 8, stress: 10 } },
+                    { id: 'chased_by_dog', title: '被狗追', text: '晨跑时被流浪狗追了两条街，你跑出了百米冲刺的速度，队友说你该去练田径。', mood: 'neutral', effects: { energy: -15, mood: -5 } },
+                    { id: 'phone_broken', title: '手机摔碎', text: '接球时手机从口袋里飞出去，屏幕摔得粉碎。你的钱包也碎了。', mood: 'negative', effects: { mood: -20, money: -300 } },
+                    { id: 'found_money', title: '捡到钱', text: '在操场上捡到200块，等了半小时没人来认领，你决定拿去请队友吃饭。', mood: 'positive', effects: { money: 50, mood: 10, relationship: 8 } },
+                    { id: 'free_lunch', title: '免费午餐', text: '食堂阿姨说你是第1000位顾客，免费送你一份豪华套餐！今天运气真好！', mood: 'positive', effects: { mood: 15, energy: 15 } },
+                    { id: 'exam_leak', title: '考试重点', text: '学长"不小心"透露了考试重点，你突击复习后考得还不错，压力减轻了不少。', mood: 'positive', effects: { stress: -15, mood: 12 } },
+                    { id: 'concert_ticket', title: '演唱会门票', text: '抽奖抽到了演唱会门票！虽然不认识歌手，但免费的快乐就是这么简单。', mood: 'positive', effects: { mood: 20, stress: -10 } }
+                ];
             }
             
             // 新增：显示比赛预告
@@ -7294,7 +9006,6 @@
                 document.getElementById('stress').textContent = this.player.stress;
                 document.getElementById('reputation').textContent = this.player.reputation;
                 document.getElementById('money').textContent = this.player.money;
-                document.getElementById('training-points').textContent = this.player.trainingPoints || 0;
                 
                 const teamNames = {
                     'none': '无',
@@ -7628,7 +9339,6 @@
                 if (effect.reputation) this.player.reputation += effect.reputation;
                 if (effect.money) this.player.money += effect.money;
                 if (effect.team) this.player.team = effect.team;
-                if (effect.trainingPoints) this.player.trainingPoints += effect.trainingPoints;  // 新增：训练点数
                 if (effect.relationship) {
                     this.player.relationships.teammates = Math.min(100, this.player.relationships.teammates + effect.relationship);
                 }
