@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>排球之星 v2.2.1</title>
-    <!-- Version: 2.2.1 - Skill Growth Rebalance -->
+    <title>排球之星 - 从菜鸟到冠军</title>
+    <!-- Version: 2.2.0 - Skill Growth Rebalance -->
     
     <!-- SEO优化 -->
     <meta name="description" content="体验从大一新生到市级冠军的排球之旅！训练、比赛、成长，书写你的排球传奇！">
@@ -7062,15 +7062,16 @@
                     <p style="font-size: 14px; color: #f39c12;">📊 本场表现评分：${performanceRating}/100</p>
                     <div style="text-align: left; font-size: 14px; margin-top: 15px;">
                         <strong>💫 比赛收获：</strong><br>
-                        ${rewards.serve ? `🎯 发球 +${rewards.serve}<br>` : ''}
-                        ${rewards.spike ? `⚡ 扣球 +${rewards.spike}<br>` : ''}
-                        ${rewards.block ? `🛡️ 拦网 +${rewards.block}<br>` : ''}
-                        ${rewards.dig ? `🤸 垫球 +${rewards.dig}<br>` : ''}
-                        ${rewards.set ? `🙌 托球 +${rewards.set}<br>` : ''}
-                        ${rewards.energy ? `💪 体力 ${rewards.energy}<br>` : ''}
-                        ${rewards.mood ? `� 心情 ${rewards.mood > 0 ? '+' : ''}${rewards.mood}<br>` : ''}
-                        ${rewards.stress ? `� 压力 ${rewards.stress > 0 ? '+' : ''}${rewards.stress}<br>` : ''}
-                        ${rewards.reputation ? `⭐ 声望 +${rewards.reputation}<br>` : ''}
+                        ${rewards.serve > 0 ? `🎯 发球 +${rewards.serve}<br>` : ''}
+                        ${rewards.spike > 0 ? `⚡ 扣球 +${rewards.spike}<br>` : ''}
+                        ${rewards.block > 0 ? `🛡️ 拦网 +${rewards.block}<br>` : ''}
+                        ${rewards.dig > 0 ? `🤸 垫球 +${rewards.dig}<br>` : ''}
+                        ${rewards.set > 0 ? `🙌 托球 +${rewards.set}<br>` : ''}
+                        ${rewards.energy !== 0 ? `💪 体力 ${rewards.energy > 0 ? '+' : ''}${rewards.energy}<br>` : ''}
+                        ${rewards.mood !== 0 ? `😊 心情 ${rewards.mood > 0 ? '+' : ''}${rewards.mood}<br>` : ''}
+                        ${rewards.stress !== 0 ? `😰 压力 ${rewards.stress > 0 ? '+' : ''}${rewards.stress}<br>` : ''}
+                        ${rewards.reputation > 0 ? `⭐ 声望 +${rewards.reputation}<br>` : ''}
+                        ${rewards.reputation < 0 ? `⭐ 声望 ${rewards.reputation}<br>` : ''}
                     </div>
                 `;
                 choicesDiv.appendChild(resultDiv);
@@ -7144,7 +7145,7 @@
                         reputation: isCasual ? 1 : 6
                     };
                 } else {
-                    return {
+                    const rewards = {
                         message: isCasual ?
                             '虽然输了，但你从比赛中学到了很多。' :
                             '失败是成功之母，你从这场比赛中吸取了经验。',
@@ -7156,10 +7157,23 @@
                         energy: isCasual ? 0 : -12,  // 野球不额外消耗体力，正式比赛消耗
                         mood: isCasual ? -3 : -10,
                         stress: isCasual ? 3 : 8,
-                        reputation: isCasual ? 0 : -2,
-                        // 野球失败也有收获：随机2个技能+1
-                        randomSkills: isCasual ? 2 : 0
+                        reputation: isCasual ? 0 : -2
                     };
+                    
+                    // 野球失败也有收获：随机2个技能+1
+                    if (isCasual) {
+                        const skills = ['serve', 'spike', 'block', 'dig', 'set'];
+                        const shuffled = skills.sort(() => Math.random() - 0.5);
+                        const selectedSkills = shuffled.slice(0, 2);
+                        
+                        selectedSkills.forEach(skill => {
+                            rewards[skill] = (rewards[skill] || 0) + 1;
+                        });
+                        
+                        console.log('野球失败奖励 - 随机技能:', selectedSkills, '完整奖励:', rewards);
+                    }
+                    
+                    return rewards;
                 }
             }
             
@@ -9738,19 +9752,6 @@
                         }
                     }
                 });
-                
-                // 处理随机技能提升（用于野球失败等场景）
-                if (effect.randomSkills && effect.randomSkills > 0) {
-                    const skills = ['serve', 'spike', 'block', 'dig', 'set'];
-                    const shuffled = skills.sort(() => Math.random() - 0.5);
-                    const selectedSkills = shuffled.slice(0, effect.randomSkills);
-                    
-                    selectedSkills.forEach(skill => {
-                        this.player.skills[skill] = Math.min(100, this.player.skills[skill] + 1);
-                    });
-                    
-                    console.log(`随机提升技能: ${selectedSkills.join(', ')}`);
-                }
                 
                 if (effect.energy) this.player.energy = Math.max(0, Math.min(this.player.maxEnergy, this.player.energy + effect.energy));
                 if (effect.maxEnergyBonus) this.player.maxEnergy = Math.min(150, this.player.maxEnergy + effect.maxEnergyBonus);
