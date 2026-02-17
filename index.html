@@ -2198,7 +2198,7 @@
     <script>
         // ==================== 游戏配置 ====================
         // 版本号配置（统一管理）
-        const GAME_VERSION = '2.2.9';
+        const GAME_VERSION = '2.3.0';
         
         // 姓氏库
         const SURNAMES = [
@@ -3884,7 +3884,7 @@
         // ==================== 测试模式配置 ====================
         // 设置 TEST_MODE = true 来启用测试模式
         // 测试模式会给予高初始属性，方便快速测试游戏功能
-        const TEST_MODE = false;  // 改为 true 启用测试模式
+        const TEST_MODE = true;  // 改为 true 启用测试模式
         
         const TEST_CONFIG = {
             initialSkills: 50,      // 初始技能值（正常是0）
@@ -4149,7 +4149,7 @@
                         emoji: '🏐',
                         nextRound: 'round8',
                         eliminationRank: 'top16',
-                        opponentStrength: 62  // 提高难度：58→62
+                        opponentStrength: 60  // 技能50(实力60)→胜率60% | 技能70(实力84)→胜率85%
                     },
                     round8: {
                         id: 'round8',
@@ -4158,7 +4158,7 @@
                         emoji: '⚡',
                         nextRound: 'round4',
                         eliminationRank: 'top8',
-                        opponentStrength: 66  // 提高难度：60→66
+                        opponentStrength: 68  // 技能50(实力60)→胜率55% | 技能70(实力84)→胜率82%
                     },
                     round4: {
                         id: 'round4',
@@ -4167,7 +4167,7 @@
                         emoji: '🔥',
                         nextRound: 'final',
                         eliminationRank: 'top4',
-                        opponentStrength: 70  // 提高难度：62→70
+                        opponentStrength: 74  // 技能50(实力60)→胜率45% | 技能70(实力84)→胜率78%
                     },
                     final: {
                         id: 'final',
@@ -4176,7 +4176,7 @@
                         emoji: '🏆',
                         nextRound: null,
                         eliminationRank: 'runner_up',
-                        opponentStrength: 74  // 提高难度：65→74
+                        opponentStrength: 80  // 技能50(实力60)→胜率25% | 技能70(实力84)→胜率70%
                     }
                 };
                 
@@ -11349,5 +11349,4 @@
     </script>
 </body>
 </html>
-
 
