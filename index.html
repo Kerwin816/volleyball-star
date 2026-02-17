@@ -3,24 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>排球之星 - 从菜鸟到冠军</title>
+    <title>排球之星（北外内测版） - 从菜鸟到冠军</title>
     <!-- Version: 2.2.0 - Skill Growth Rebalance -->
     
     <!-- SEO优化 -->
     <meta name="description" content="体验从大一新生到市级冠军的排球之旅！训练、比赛、成长，书写你的排球传奇！">
-    <meta name="keywords" content="排球游戏,文字冒险,体育游戏,成长游戏,排球之星">
+    <meta name="keywords" content="排球游戏,文字冒险,体育游戏,成长游戏,排球之星（北外内测版）">
     <meta name="author" content="小水">
     
     <!-- 微信分享优化 -->
-    <meta property="og:title" content="排球之星 - 从菜鸟到冠军的成长之路" />
+    <meta property="og:title" content="排球之星（北外内测版） - 从菜鸟到冠军的成长之路" />
     <meta property="og:description" content="体验从大一新生到市级冠军的排球之旅！训练、比赛、成长，书写你的排球传奇！" />
     <meta property="og:type" content="website" />
-    <meta property="og:image" content="https://via.placeholder.com/1200x630/667eea/ffffff?text=排球之星" />
+    <meta property="og:image" content="https://via.placeholder.com/1200x630/667eea/ffffff?text=排球之星（北外内测版）" />
     
     <!-- 移动端优化 -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="排球之星">
+    <meta name="apple-mobile-web-app-title" content="排球之星（北外内测版）">
     <meta name="theme-color" content="#667eea">
     
     <style>
@@ -1591,13 +1591,153 @@
                 transform: scale(1);
             }
         }
+        
+        /* 排球点击小游戏样式 */
+        .volleyball-game-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #ffffff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+        }
+        
+        .volleyball-game-header {
+            display: flex;
+            justify-content: space-around;
+            width: 90%;
+            max-width: 500px;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.05);
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .volleyball-game-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: repeat(4, 1fr);
+            gap: 10px;
+            width: 90vw;
+            height: 90vw;
+            max-width: 500px;
+            max-height: 500px;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.03);
+            border-radius: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .volleyball-game-cell {
+            background: rgba(0, 0, 0, 0.05);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 50px;
+            cursor: pointer;
+            transition: all 0.2s;
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .volleyball-game-cell:active {
+            transform: scale(0.95);
+        }
+        
+        .volleyball-game-item {
+            animation: itemAppear 0.3s ease-out;
+        }
+        
+        @keyframes itemAppear {
+            from {
+                transform: scale(0);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+        
+        .volleyball-game-hint {
+            text-align: center;
+            font-size: 16px;
+            color: #ff6b6b;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        
+        .volleyball-game-combo {
+            color: #ff6b6b;
+            font-size: 24px;
+            font-weight: bold;
+            animation: comboFlash 0.5s ease-in-out;
+        }
+        
+        @keyframes comboFlash {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+        
+        .volleyball-game-feedback {
+            position: absolute;
+            font-size: 24px;
+            font-weight: bold;
+            pointer-events: none;
+            animation: feedbackFloat 1s ease-out forwards;
+        }
+        
+        @keyframes feedbackFloat {
+            from {
+                transform: translateY(0);
+                opacity: 1;
+            }
+            to {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+        }
+        
+        .feedback-positive {
+            color: #4CAF50;
+        }
+        
+        .feedback-negative {
+            color: #ff6b6b;
+        }
+        
+        /* 移动端优化 */
+        @media (max-width: 768px) {
+            .volleyball-game-header {
+                font-size: 14px;
+                padding: 10px;
+            }
+            
+            .volleyball-game-cell {
+                font-size: 40px;
+            }
+            
+            .volleyball-game-hint {
+                font-size: 14px;
+            }
+        }
     </style>
 </head>
 <body>
     <div id="game-container">
         <div id="game-header">
             <div style="display: flex; justify-content: space-between; align-items: center;">
-                <h1>🏐 排球之星</h1>
+                <h1>🏐 排球之星（北外内测版）</h1>
                 <button id="goals-tab-btn" class="tab-btn" onclick="game.toggleGoalsPanel()">🎯 目标</button>
             </div>
             <div id="current-goal">
@@ -1766,7 +1906,10 @@
             '彭', '曾', '肖', '田', '董', '袁', '潘', '于', '蒋', '蔡',
             // 复姓
             '欧阳', '司马', '上官', '诸葛', '东方', '独孤', '南宫', '西门',
-            '慕容', '轩辕', '令狐', '皇甫', '公孙', '澹台'
+            '慕容', '轩辕', '令狐', '皇甫', '公孙', '澹台',
+            // 搞笑姓氏
+            '排', '球', '网', '场', '扣', '拦', '垫', '托', '发', '跳',
+            '二传', '主攻', '副攻', '接应', '自由人', '教练', '裁判', '队长'
         ];
         
         // 名字库（排球/运动相关）
@@ -1774,27 +1917,46 @@
             // 排球技术相关
             '发球', '扣杀', '拦网', '防守', '传球', '垫球', '飘球', '跳发',
             '暴扣', '轻吊', '快攻', '强攻', '后攻', '跳飘', '救球', '一传',
+            '二传', '三米线', '标志杆', '中线', '边线', '底线', '发球区',
+            '进攻线', '自由区', '换人区', '暂停', '轮转', '换位', '掩护',
+            
+            // 排球术语搞笑化
+            '25分', '局点', '赛点', '触网', '过网击球', '连击', '持球',
+            '四次击球', '位置错误', '发球违例', '界内', '界外', '擦网',
+            '探头球', '打手出界', '标志杆', '双人拦网', '单人拦网',
             
             // 运动特质相关
             '如风', '似电', '破空', '凌云', '冲天', '惊雷', '闪电', '疾风',
             '翱翔', '腾跃', '飞扬', '奔雷', '追风', '逐日', '破浪', '凌空',
+            '弹跳', '滞空', '起跳', '落地', '助跑', '摆臂', '转体', '扣腕',
             
             // 励志相关
             '必胜', '争先', '超越', '拼搏', '奋进', '向前', '冲锋', '突破',
             '登峰', '夺冠', '称霸', '无敌', '制霸', '王者', '霸主', '至尊',
+            '冠军', '金牌', '银牌', '铜牌', '第一', '第二', '第三', '第四',
             
             // 品质相关
             '坚韧', '刚毅', '勇猛', '果敢', '无畏', '英勇', '威武', '神勇',
             '灵动', '敏捷', '迅捷', '矫健', '强健', '雄壮', '威猛', '刚强',
+            '精准', '稳定', '爆发', '持久', '协调', '平衡', '节奏', '时机',
             
             // 谐音梗（更像名字）
             '球胜', '网罗', '排云', '跃进', '高飞', '远志', '凌峰', '震天',
             '惊鸿', '绝尘', '无双', '独秀', '出众', '超群', '卓越', '非凡',
+            '得分', '失分', '零封', '逆转', '绝杀', '制胜', '关键', '决胜',
+            
+            // 搞笑排球梗
+            '吃发球', '被拦死', '下网', '出界', '失误', '送分', '漏人',
+            '站位', '补位', '跟进', '保护', '串联', '组织', '调整',
+            '高点', '低点', '平拉开', '背飞', '背快', '短平快', '时间差',
+            '空中接力', '鱼跃救球', '滚翻救球', '倒地救球', '单手救球',
             
             // 单字名
             '跃', '飞', '翔', '腾', '冲', '闯', '拼', '搏',
             '强', '刚', '勇', '威', '猛', '锐', '峰', '杰',
-            '灵', '敏', '捷', '快', '迅', '疾', '速', '风'
+            '灵', '敏', '捷', '快', '迅', '疾', '速', '风',
+            '扣', '拦', '垫', '托', '传', '发', '攻', '守',
+            '网', '球', '场', '赛', '冠', '王', '霸', '尊'
         ];
         
         // 生成随机名字
@@ -2755,7 +2917,7 @@
         const SCENES = {
             nameInput: {
                 text: `<div id="name-input-panel">
-                    <h2>🏐 欢迎来到排球之星</h2>
+                    <h2>🏐 欢迎来到排球之星（北外内测版）</h2>
                     <p style="margin-bottom: 20px; color: #666;">你即将开始一段从菜鸟到冠军的排球之旅</p>
                     <div id="name-input-container">
                         <input type="text" id="player-name-input" placeholder="请输入你的名字" maxlength="10" />
@@ -2915,8 +3077,8 @@
                     },
                     {
                         text: '🎮 打游戏（心情+10，压力-8，体力-3）',
-                        next: 'checkRandomEvent',
-                        effect: { mood: 10, stress: -8, energy: -3, eventType: 'life' }
+                        next: 'volleyballClickGame',
+                        requirement: { energy: 3 }
                     },
                     {
                         text: '� 去图书馆（心情+5，压力+3，声望+2）',
@@ -3280,12 +3442,6 @@
                         requirement: { energy: 50 },
                         effect: { serve: 2, spike: 2, block: 2, dig: 2, set: 2, energy: -50, trained: true, eventType: 'training' }
                     },
-                    {
-                        text: '� 体能强化',
-                        next: 'lifeChoice',
-                        requirement: { energy: 50 },
-                        effect: { serve: 2, spike: 2, block: 2, dig: 2, set: 2, maxEnergyBonus: 2, energy: -50, trained: true, eventType: 'training' }
-                    },
                     // 其他选项分隔
                     {
                         text: '',
@@ -3432,7 +3588,7 @@
         const TEST_MODE = false;  // 改为 true 启用测试模式
         
         const TEST_CONFIG = {
-            initialSkills: 80,      // 初始技能值（正常是0）
+            initialSkills: 50,      // 初始技能值（正常是0）
             initialMoney: 10000,    // 初始金钱（正常是500）
             initialEnergy: 100,     // 初始体力（正常是100）
             initialMood: 100,       // 初始心情（正常是80）
@@ -3694,7 +3850,7 @@
                         emoji: '🏐',
                         nextRound: 'round8',
                         eliminationRank: 'top16',
-                        opponentStrength: 70  // 提高难度：55→70
+                        opponentStrength: 62  // 提高难度：58→62
                     },
                     round8: {
                         id: 'round8',
@@ -3703,7 +3859,7 @@
                         emoji: '⚡',
                         nextRound: 'round4',
                         eliminationRank: 'top8',
-                        opponentStrength: 85  // 提高难度：65→85
+                        opponentStrength: 66  // 提高难度：60→66
                     },
                     round4: {
                         id: 'round4',
@@ -3712,7 +3868,7 @@
                         emoji: '🔥',
                         nextRound: 'final',
                         eliminationRank: 'top4',
-                        opponentStrength: 100  // 提高难度：75→100
+                        opponentStrength: 70  // 提高难度：62→70
                     },
                     final: {
                         id: 'final',
@@ -3721,7 +3877,7 @@
                         emoji: '🏆',
                         nextRound: null,
                         eliminationRank: 'runner_up',
-                        opponentStrength: 120  // 提高难度：85→120
+                        opponentStrength: 74  // 提高难度：65→74
                     }
                 };
                 
@@ -4822,9 +4978,10 @@
                             {
                                 icon: '🎮',
                                 title: '打游戏',
-                                effects: '体力+8 心情+12 压力-10',
-                                next: 'checkRandomEvent',
-                                effect: { energy: 8, mood: 12, stress: -10, eventType: 'life', lifeActivity: 'game' }
+                                effects: '体力-3 心情+10 压力-8',
+                                next: 'volleyballClickGame',
+                                requirement: { energy: 3 },
+                                effect: { lifeActivity: 'game' }
                             },
                             {
                                 icon: '🎫',
@@ -4863,7 +5020,7 @@
                                 effect: { energy: 10, mood: 15, stress: -8, relationship: 5, eventType: 'life', lifeActivity: 'social' }
                             },
                             {
-                                icon: '�',
+                                icon: '🎁',
                                 title: '给队友买礼物',
                                 effects: '心情+10 关系+15 声望+5 💰80',
                                 next: 'checkRandomEvent',
@@ -4978,6 +5135,25 @@
                         // 执行刮刮乐抽奖（传入参数表示需要检查奇遇事件）
                         this.buyScratchCard(true);
                         
+                        return;
+                    }
+                    
+                    // 特殊处理：排球点击小游戏（不在这里应用effect，在游戏结束后应用）
+                    if (nextScene === 'volleyballClickGame') {
+                        // 检查体力是否足够
+                        if (this.player.energy < 3) {
+                            alert('体力不足！需要至少3点体力。');
+                            return;
+                        }
+                        
+                        // 追踪课余活动
+                        if (effect.lifeActivity) {
+                            this.trackLifeActivity(effect.lifeActivity);
+                        }
+                        
+                        // 直接进入小游戏，不应用effect
+                        this.currentScene = nextScene;
+                        this.showScene(nextScene);
                         return;
                     }
                     
@@ -6080,16 +6256,25 @@
             
             // 新增：计算单分胜率
             calculatePointWinRate(myStrength, opponentStrength) {
-                // 基础胜率公式
-                let winRate = myStrength / (myStrength + opponentStrength);
+                // 改进的胜率公式：使用指数函数放大实力差距的影响
+                // 但要避免过于极端的比分，保持比赛的观赏性
+                
+                // 计算实力差距
+                const diff = myStrength - opponentStrength;
+                
+                // 使用sigmoid函数（逻辑函数）计算胜率
+                // 参数调整：diff/50 控制曲线陡峭度（更平缓，让比分更接近）
+                // 这样即使实力差距较大，比分也不会太悬殊
+                let winRate = 1 / (1 + Math.pow(10, -diff / 50));
                 
                 // 添加主场优势（正式比赛）
                 if (this.currentMatch && this.currentMatch.type === 'formal') {
                     winRate += 0.05;  // +5% 主场优势
                 }
                 
-                // 确保胜率在 10% ~ 90% 之间（避免极端情况）
-                winRate = Math.max(0.1, Math.min(0.9, winRate));
+                // 确保胜率在 25% ~ 75% 之间（保证比分不会太悬殊）
+                // 这样即使实力差距很大，比分也会在 25-19 到 25-8 之间
+                winRate = Math.max(0.25, Math.min(0.75, winRate));
                 
                 return winRate;
             }
@@ -7237,8 +7422,8 @@
             // 获取轮次开始文本
             getRoundStartText(roundInfo) {
                 const progress = this.renderTournamentProgress();
-                const opponentStars = '★'.repeat(Math.floor(roundInfo.opponentStrength / 20)) + 
-                                     '☆'.repeat(5 - Math.floor(roundInfo.opponentStrength / 20));
+                const starCount = Math.floor(roundInfo.opponentStrength / 20);
+                const opponentStars = '★'.repeat(starCount) + '☆'.repeat(5 - starCount);
                 
                 let coachTip = '';
                 if (roundInfo.id === 'round16') {
@@ -7501,10 +7686,10 @@
                 
                 if (won) {
                     if (!isFinalStage) {
-                        // 非决赛：根据轮次递增技能奖励（降低：5/7/10 → 3/4/5）
-                        const baseReward = roundInfo.id === 'round16' ? 3 :
-                                          roundInfo.id === 'round8' ? 4 :
-                                          roundInfo.id === 'round4' ? 5 : 0;
+                        // 非决赛：根据轮次递增技能奖励（进一步降低：3/4/5 → 2/2/3）
+                        const baseReward = roundInfo.id === 'round16' ? 2 :
+                                          roundInfo.id === 'round8' ? 2 :
+                                          roundInfo.id === 'round4' ? 3 : 0;
                         
                         rewards.serve = rewards.spike = rewards.block = rewards.dig = rewards.set = baseReward;
                     }
@@ -8002,7 +8187,7 @@
                 text += `<h3>🎓 学期结束</h3>`;
                 text += `<p>学期结束了，你的大一排球之旅也告一段落。</p>`;
                 text += `<br>`;
-                text += `<p>虽然没能实现"排球之星"的梦想，但你并不后悔。这12周的经历让你成长了许多，也让你明白了很多道理。</p>`;
+                text += `<p>虽然没能实现"排球之星（北外内测版）"的梦想，但你并不后悔。这12周的经历让你成长了许多，也让你明白了很多道理。</p>`;
                 text += `<br>`;
                 text += `<p>也许下学期，你会更加努力。也许你会选择其他的道路。但无论如何，这段经历都将成为你珍贵的回忆。</p>`;
                 text += `</div>`;
@@ -8690,6 +8875,293 @@
                 this.updateUI();
                 
                 // 显示弹窗
+                modal.classList.add('show');
+            }
+            
+            // 排球点击小游戏
+            startVolleyballClickGame() {
+                // 创建游戏容器
+                const gameContainer = document.createElement('div');
+                gameContainer.className = 'volleyball-game-container';
+                gameContainer.innerHTML = `
+                    <div class="volleyball-game-hint">只点击排球 🏐 其他都是陷阱！</div>
+                    <div class="volleyball-game-header">
+                        <div>⏱️ <span id="vb-timer">30</span>秒</div>
+                        <div>💰 <span id="vb-money">0</span>元</div>
+                        <div id="vb-combo-display">连击 <span id="vb-combo">0</span></div>
+                    </div>
+                    <div class="volleyball-game-grid" id="vb-grid">
+                        ${Array(16).fill('<div class="volleyball-game-cell"></div>').join('')}
+                    </div>
+                `;
+                document.body.appendChild(gameContainer);
+                
+                // 游戏状态
+                const gameState = {
+                    timeLeft: 20,
+                    money: 0,
+                    combo: 0,
+                    maxCombo: 0,
+                    hits: 0,
+                    misses: 0,
+                    totalClicks: 0,
+                    isRunning: true,
+                    activeItems: new Set()
+                };
+                
+                // 物品类型定义
+                const items = {
+                    volleyball: { emoji: '🏐', reward: () => 2 + Math.floor(Math.random() * 2), weight: 100 },
+                    plate: { emoji: '⚪', penalty: -2, weight: 30 },
+                    basketball: { emoji: '🏀', penalty: -4, weight: 25 },
+                    football: { emoji: '⚽', penalty: -2, weight: 20 },
+                    baseball: { emoji: '⚾', penalty: -3, weight: 15 },
+                    moon: { emoji: '🌕', penalty: -2, weight: 10 }
+                };
+                
+                // 获取元素
+                const cells = gameContainer.querySelectorAll('.volleyball-game-cell');
+                const timerEl = document.getElementById('vb-timer');
+                const moneyEl = document.getElementById('vb-money');
+                const comboEl = document.getElementById('vb-combo');
+                const comboDisplay = document.getElementById('vb-combo-display');
+                
+                // 更新连击显示
+                const updateComboDisplay = () => {
+                    comboEl.textContent = gameState.combo;
+                    if (gameState.combo >= 5) {
+                        comboDisplay.classList.add('volleyball-game-combo');
+                    } else {
+                        comboDisplay.classList.remove('volleyball-game-combo');
+                    }
+                };
+                
+                // 显示反馈动画
+                const showFeedback = (cell, text, isPositive) => {
+                    const feedback = document.createElement('div');
+                    feedback.className = `volleyball-game-feedback ${isPositive ? 'feedback-positive' : 'feedback-negative'}`;
+                    feedback.textContent = text;
+                    feedback.style.left = '50%';
+                    feedback.style.top = '50%';
+                    feedback.style.transform = 'translate(-50%, -50%)';
+                    cell.appendChild(feedback);
+                    setTimeout(() => feedback.remove(), 1000);
+                };
+                
+                // 生成随机物品
+                const spawnItem = () => {
+                    if (!gameState.isRunning) return;
+                    
+                    // 找到空闲的格子
+                    const availableCells = Array.from(cells).filter((_, index) => !gameState.activeItems.has(index));
+                    if (availableCells.length === 0) return;
+                    
+                    const cell = availableCells[Math.floor(Math.random() * availableCells.length)];
+                    const cellIndex = Array.from(cells).indexOf(cell);
+                    
+                    // 根据时间调整难度
+                    let isVolleyball = Math.random() < 0.6; // 60%概率是排球
+                    
+                    let itemType, itemData;
+                    if (isVolleyball) {
+                        itemType = 'volleyball';
+                        itemData = items.volleyball;
+                    } else {
+                        // 选择干扰物品
+                        const distractors = ['plate', 'basketball', 'football', 'baseball', 'moon'];
+                        const weights = distractors.map(d => items[d].weight);
+                        const totalWeight = weights.reduce((a, b) => a + b, 0);
+                        let random = Math.random() * totalWeight;
+                        
+                        for (let i = 0; i < distractors.length; i++) {
+                            random -= weights[i];
+                            if (random <= 0) {
+                                itemType = distractors[i];
+                                itemData = items[itemType];
+                                break;
+                            }
+                        }
+                    }
+                    
+                    // 显示物品
+                    cell.innerHTML = `<span class="volleyball-game-item">${itemData.emoji}</span>`;
+                    gameState.activeItems.add(cellIndex);
+                    
+                    // 设置点击事件
+                    const clickHandler = () => {
+                        if (!gameState.activeItems.has(cellIndex)) return;
+                        
+                        gameState.totalClicks++;
+                        gameState.activeItems.delete(cellIndex);
+                        cell.innerHTML = '';
+                        cell.removeEventListener('click', clickHandler);
+                        
+                        if (itemType === 'volleyball') {
+                            // 点击排球
+                            gameState.hits++;
+                            gameState.combo++;
+                            if (gameState.combo > gameState.maxCombo) {
+                                gameState.maxCombo = gameState.combo;
+                            }
+                            
+                            let reward = itemData.reward();
+                            
+                            // 连击加成
+                            if (gameState.combo >= 11) {
+                                reward += 4;
+                            } else if (gameState.combo >= 6) {
+                                reward += 2;
+                            } else if (gameState.combo >= 3) {
+                                reward += 1;
+                            }
+                            
+                            gameState.money += reward;
+                            moneyEl.textContent = gameState.money;
+                            updateComboDisplay();
+                            showFeedback(cell, `+${reward}元`, true);
+                        } else {
+                            // 点击干扰物品
+                            gameState.misses++;
+                            gameState.combo = 0;
+                            gameState.money += itemData.penalty;
+                            moneyEl.textContent = gameState.money;
+                            updateComboDisplay();
+                            showFeedback(cell, `${itemData.penalty}元`, false);
+                            
+                            // 轻微震动效果
+                            gameContainer.style.animation = 'none';
+                            setTimeout(() => {
+                                gameContainer.style.animation = '';
+                            }, 10);
+                        }
+                    };
+                    
+                    cell.addEventListener('click', clickHandler);
+                    
+                    // 物品停留时间（延长）
+                    const lifetime = 1200 + Math.random() * 600; // 1.2-1.8秒
+                    setTimeout(() => {
+                        if (gameState.activeItems.has(cellIndex)) {
+                            gameState.activeItems.delete(cellIndex);
+                            cell.innerHTML = '';
+                            cell.removeEventListener('click', clickHandler);
+                            
+                            // 漏掉排球，连击中断
+                            if (itemType === 'volleyball') {
+                                gameState.combo = 0;
+                                updateComboDisplay();
+                            }
+                        }
+                    }, lifetime);
+                };
+                
+                // 游戏循环 - 生成物品
+                const spawnInterval = setInterval(() => {
+                    if (!gameState.isRunning) {
+                        clearInterval(spawnInterval);
+                        return;
+                    }
+                    spawnItem();
+                }, 600); // 每0.6秒生成一个物品
+                
+                // 倒计时
+                const timerInterval = setInterval(() => {
+                    gameState.timeLeft--;
+                    timerEl.textContent = gameState.timeLeft;
+                    
+                    if (gameState.timeLeft <= 0) {
+                        clearInterval(timerInterval);
+                        clearInterval(spawnInterval);
+                        gameState.isRunning = false;
+                        
+                        // 游戏结束
+                        setTimeout(() => {
+                            this.endVolleyballClickGame(gameContainer, gameState);
+                        }, 500);
+                    }
+                }, 1000);
+            }
+            
+            // 结束排球点击小游戏
+            endVolleyballClickGame(gameContainer, gameState) {
+                // 移除游戏容器
+                gameContainer.remove();
+                
+                // 确保金钱不为负
+                const finalMoney = Math.max(0, gameState.money);
+                
+                // 计算命中率
+                const accuracy = gameState.totalClicks > 0 
+                    ? Math.round((gameState.hits / gameState.totalClicks) * 100) 
+                    : 0;
+                
+                // 应用奖励
+                this.player.money += finalMoney;
+                this.player.mood = Math.min(100, this.player.mood + 10);
+                this.player.stress = Math.max(0, this.player.stress - 8);
+                this.player.energy = Math.max(0, this.player.energy - 3);
+                
+                // 更新统计
+                if (!this.playerStats.lifeActivities) {
+                    this.playerStats.lifeActivities = {};
+                }
+                if (!this.playerStats.lifeActivities.game) {
+                    this.playerStats.lifeActivities.game = 0;
+                }
+                this.playerStats.lifeActivities.game++;
+                
+                // 评价等级
+                let rating = '';
+                if (finalMoney >= 40 && accuracy >= 90) {
+                    rating = '火眼金睛！🔥';
+                } else if (finalMoney >= 30) {
+                    rating = '眼疾手快！⚡';
+                } else if (finalMoney >= 20) {
+                    rating = '反应不错！👍';
+                } else if (finalMoney >= 10) {
+                    rating = '继续练习！💪';
+                } else {
+                    rating = '多看看排球长啥样吧~😅';
+                }
+                
+                // 显示结果
+                const modal = document.getElementById('event-modal');
+                const title = document.getElementById('event-modal-title');
+                const text = document.getElementById('event-modal-text');
+                const choicesDiv = document.getElementById('event-modal-choices');
+                
+                title.textContent = '🎮 游戏结束！';
+                text.innerHTML = `
+                    <div style="text-align: center; line-height: 2;">
+                        <h3 style="color: #ffd700; margin-bottom: 15px;">${rating}</h3>
+                        <p><strong>💰 总收入：</strong>+${finalMoney}元</p>
+                        <p><strong>🔥 最高连击：</strong>${gameState.maxCombo}次</p>
+                        <p><strong>🎯 命中率：</strong>${accuracy}% (${gameState.hits}/${gameState.totalClicks})</p>
+                        <p><strong>❌ 失误：</strong>${gameState.misses}次</p>
+                    </div>
+                `;
+                
+                choicesDiv.innerHTML = '';
+                const continueBtn = document.createElement('button');
+                continueBtn.className = 'choice-btn';
+                continueBtn.textContent = '确定';
+                continueBtn.onclick = () => {
+                    modal.classList.remove('show');
+                    
+                    // 检查奇遇事件
+                    const hasEvent = this.checkAdventureEvents();
+                    if (hasEvent) {
+                        return;
+                    }
+                    
+                    // 返回周选择
+                    this.currentScene = 'weeklyHub';
+                    this.showScene('weeklyHub');
+                };
+                choicesDiv.appendChild(continueBtn);
+                
+                // 更新UI并显示弹窗
+                this.updateUI();
                 modal.classList.add('show');
             }
             
@@ -9591,8 +10063,9 @@
             
             applyEffect(effect) {
                 if (effect.reset) {
+                    // 重置游戏状态
                     this.player = {
-                        name: '新生',
+                        name: generateRandomName(),  // 使用随机名字而不是固定的"新生"
                         week: TEST_MODE ? TEST_CONFIG.skipToWeek : 1,
                         trainingCount: 0,
                         maxTrainingPerWeek: TEST_MODE ? TEST_CONFIG.maxTrainingPerWeek : 3,
@@ -9624,13 +10097,65 @@
                             coach: 50,
                             teammates: 50
                         },
-                        achievements: []
+                        achievements: [],
+                        matchesPlayed: 0,
+                        matchesWon: 0,
+                        performanceHistory: [],
+                        averagePerformance: 0
                     };
+                    
+                    // 重置其他游戏状态
                     this.rerollsRemaining = 5;
                     this.currentScene = 'nameInput';
+                    this.currentMatch = null;
+                    this.tournament = {
+                        active: false,
+                        type: null,
+                        currentRound: null,
+                        roundsCompleted: [],
+                        matchesWon: 0,
+                        matchesLost: 0,
+                        eliminated: false,
+                        finalRank: null
+                    };
+                    this.playerStats = {
+                        lifeActivities: {},
+                        triggeredEvents: [],
+                        permanentBuffs: {},
+                        titles: []
+                    };
+                    this.shopItems = this.initShopItems();
+                    this.player.ownedItems = {
+                        shoes: 'basic',
+                        protection: false,
+                        jersey: false,
+                        trainingEquipment: [],
+                        electronics: [],
+                        books: []
+                    };
+                    this.player.activeBuffs = [];
+                    this.player.purchaseCount = {};
+                    this.adventureEvents = this.initAdventureEvents();
+                    
+                    // 随机分配初始技能（非测试模式）
+                    if (!TEST_MODE) {
+                        this.rollAttributes();
+                    }
+                    
+                    // 更新UI
                     document.getElementById('character-panel').classList.remove('show');
                     document.getElementById('game-header').classList.remove('show');
                     this.updateUI();
+                    
+                    // 延迟更新名字输入框和初始技能显示
+                    setTimeout(() => {
+                        const nameInput = document.getElementById('player-name-input');
+                        if (nameInput) {
+                            nameInput.value = this.player.name;
+                        }
+                        this.updateInitialSkillsDisplay();
+                    }, 100);
+                    
                     return;
                 }
                 
@@ -9823,6 +10348,12 @@
                 console.log('showScene called with:', sceneId);
                 
                 // 先处理特殊场景（不需要在SCENES中定义）
+                // 排球点击小游戏
+                if (sceneId === 'volleyballClickGame') {
+                    this.startVolleyballClickGame();
+                    return;
+                }
+                
                 // 课余生活场景特殊渲染
                 if (sceneId === 'lifeChoice') {
                     this.renderLifeChoice();
@@ -9996,8 +10527,8 @@
         // 分享功能
         function shareGame() {
             const shareData = {
-                title: '排球之星 - 从菜鸟到冠军',
-                text: '我在玩排球之星，从菜鸟到冠军的成长之路！快来一起玩吧！',
+                title: '排球之星（北外内测版） - 从菜鸟到冠军',
+                text: '我在玩排球之星（北外内测版），从菜鸟到冠军的成长之路！快来一起玩吧！',
                 url: window.location.href
             };
             
