@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>排球之星 - 从菜鸟到冠军</title>
-    <!-- Version: 2.2.5 - Skill Growth Rebalance -->
+    <!-- Version: 2.2.0 - Skill Growth Rebalance -->
     
     <!-- SEO优化 -->
     <meta name="description" content="体验从大一新生到市级冠军的排球之旅！训练、比赛、成长，书写你的排球传奇！">
@@ -478,6 +478,17 @@
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
         }
         
+        /* 目标按钮 - 金黄色强调 */
+        .tab-btn-primary {
+            background: linear-gradient(135deg, #ffd700 0%, #ffb700 100%);
+            color: #333;
+            box-shadow: 0 2px 10px rgba(255, 215, 0, 0.4);
+        }
+        
+        .tab-btn-primary:hover {
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.6);
+        }
+        
         #stats-bar {
             display: flex;
             justify-content: space-around;
@@ -654,6 +665,88 @@
             .category-choices {
                 grid-template-columns: repeat(2, 1fr);
             }
+        }
+        
+        /* 反馈弹窗样式 */
+        .feedback-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            overflow-y: auto;
+        }
+        
+        .feedback-modal.show {
+            display: flex;
+        }
+        
+        .feedback-modal-content {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            border-radius: 15px;
+            padding: 30px;
+            max-width: 500px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            color: white;
+        }
+        
+        .feedback-modal-content h2 {
+            color: white;
+            margin-bottom: 20px;
+        }
+        
+        .feedback-info {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 20px;
+        }
+        
+        .contact-section {
+            margin: 20px 0;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            padding: 12px;
+            margin-bottom: 10px;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 8px;
+            font-size: 16px;
+        }
+        
+        .contact-icon {
+            font-size: 24px;
+            margin-right: 10px;
+        }
+        
+        .contact-label {
+            color: rgba(255, 255, 255, 0.8);
+            margin-right: 5px;
+        }
+        
+        .contact-value {
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+        }
+        
+        .qr-code-section {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .qr-code-placeholder {
+            text-align: center;
         }
         
         /* 商店系统样式 - 紧凑型一级入口 */
@@ -1113,32 +1206,80 @@
         
         .skills-container {
             display: flex;
-            gap: 20px;
-            align-items: center;
+            gap: 30px;
+            align-items: flex-start;
             margin-top: 15px;
         }
         
         .skills-left {
-            flex: 1;
+            flex: 0 0 35%;
             min-width: 0;
         }
         
         .skills-right {
-            flex-shrink: 0;
-            display: none; /* 隐藏雷达图 - 保留代码以便后续激活 */
-            /* display: flex; */ /* 取消注释此行可重新显示雷达图 */
-            justify-content: center;
-            align-items: center;
+            flex: 1;
+            min-width: 0;
         }
         
-        @media (max-width: 768px) {
-            .skills-container {
-                flex-direction: column;
-            }
-            
-            .skills-left {
-                width: 100%;
-            }
+        /* 状态值区域样式 */
+        .status-section {
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(240, 147, 251, 0.3);
+            border-radius: 10px;
+            padding: 15px 15px 10px 15px;
+            margin-top: -5px;
+        }
+        
+        .status-item {
+            display: flex;
+            align-items: center;
+            padding: 0;
+            height: 50px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .status-item:last-child {
+            border-bottom: none;
+        }
+        
+        .status-icon {
+            font-size: 20px;
+            width: 30px;
+            text-align: center;
+            flex-shrink: 0;
+        }
+        
+        .status-label {
+            flex: 1;
+            font-size: 15px;
+            font-weight: 500;
+            color: #333;
+            margin-left: 8px;
+        }
+        
+        .status-value {
+            font-size: 18px;
+            font-weight: bold;
+            color: #f093fb;
+            min-width: 50px;
+            text-align: right;
+            flex-shrink: 0;
+            margin-right: 5px;
+        }
+        
+        /* 排球技能区域样式 */
+        .volleyball-skills {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+        
+        .volleyball-skills .skill-bar {
+            height: 50px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            margin: 0;
         }
         
         #name-input-panel {
@@ -1371,44 +1512,6 @@
             opacity: 0.8;
         }
         
-        /* 分享按钮 */
-        .share-btn {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border: none;
-            padding: 12px 20px;
-            border-radius: 25px;
-            font-size: 14px;
-            font-weight: bold;
-            cursor: pointer;
-            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
-            z-index: 1000;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            transition: all 0.3s ease;
-        }
-        
-        .share-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
-        }
-        
-        .share-btn:active {
-            transform: translateY(0);
-        }
-        
-        @media (max-width: 768px) {
-            .share-btn {
-                bottom: 15px;
-                right: 15px;
-                padding: 10px 16px;
-                font-size: 13px;
-            }
-        }
         
         /* 跳过按钮 */
         .skip-btn {
@@ -1599,7 +1702,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: #ffffff;
+            background: rgba(0, 0, 0, 0.7);
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -1607,10 +1710,58 @@
             z-index: 10000;
         }
         
+        .volleyball-game-modal {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 30px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 90vh;
+            overflow: auto;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+        }
+        
+        /* 倒计时样式 */
+        .volleyball-game-countdown {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 10001;
+            pointer-events: none;
+        }
+        
+        .countdown-number {
+            font-size: 120px;
+            font-weight: bold;
+            color: #f093fb;
+            text-shadow: 0 0 20px rgba(240, 147, 251, 0.5);
+            animation: countdownPulse 1s ease-out;
+        }
+        
+        @keyframes countdownPulse {
+            0% {
+                transform: scale(0);
+                opacity: 0;
+            }
+            50% {
+                transform: scale(1.2);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+        
         .volleyball-game-header {
             display: flex;
             justify-content: space-around;
-            width: 90%;
+            width: 100%;
             max-width: 500px;
             margin-bottom: 20px;
             padding: 15px;
@@ -1619,6 +1770,7 @@
             font-size: 18px;
             font-weight: bold;
             color: #333;
+            transition: opacity 0.3s;
         }
         
         .volleyball-game-grid {
@@ -1626,14 +1778,13 @@
             grid-template-columns: repeat(4, 1fr);
             grid-template-rows: repeat(4, 1fr);
             gap: 10px;
-            width: 90vw;
-            height: 90vw;
+            width: 100%;
             max-width: 500px;
-            max-height: 500px;
+            aspect-ratio: 1;
             padding: 20px;
             background: rgba(0, 0, 0, 0.03);
             border-radius: 15px;
-            margin-bottom: 20px;
+            transition: opacity 0.3s;
         }
         
         .volleyball-game-cell {
@@ -1642,7 +1793,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 50px;
+            font-size: 60px;
             cursor: pointer;
             transition: all 0.2s;
             position: relative;
@@ -1671,10 +1822,17 @@
         
         .volleyball-game-hint {
             text-align: center;
-            font-size: 16px;
-            color: #ff6b6b;
-            margin-bottom: 10px;
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 15px;
             font-weight: bold;
+        }
+        
+        .hint-time {
+            color: #ff6b6b;
+            font-size: 32px;
+            font-weight: 900;
+            text-shadow: 0 2px 4px rgba(255, 107, 107, 0.3);
         }
         
         .volleyball-game-combo {
@@ -1718,17 +1876,31 @@
         
         /* 移动端优化 */
         @media (max-width: 768px) {
+            .volleyball-game-modal {
+                padding: 20px;
+                max-width: 95%;
+                border-radius: 15px;
+            }
+            
+            .countdown-number {
+                font-size: 80px;
+            }
+            
             .volleyball-game-header {
                 font-size: 14px;
                 padding: 10px;
             }
             
             .volleyball-game-cell {
-                font-size: 40px;
+                font-size: 45px;
             }
             
             .volleyball-game-hint {
-                font-size: 14px;
+                font-size: 18px;
+            }
+            
+            .hint-time {
+                font-size: 24px;
             }
         }
     </style>
@@ -1738,7 +1910,11 @@
         <div id="game-header">
             <div style="display: flex; justify-content: space-between; align-items: center;">
                 <h1>🏐 排球之星</h1>
-                <button id="goals-tab-btn" class="tab-btn" onclick="game.toggleGoalsPanel()">🎯 目标</button>
+                <div style="display: flex; gap: 10px;">
+                    <button id="goals-tab-btn" class="tab-btn tab-btn-primary" onclick="game.toggleGoalsPanel()">🎯 目标</button>
+                    <button id="feedback-btn" class="tab-btn" onclick="game.toggleFeedbackModal()">💬 反馈</button>
+                    <button id="share-btn" class="tab-btn" onclick="shareGame()">📤 分享</button>
+                </div>
             </div>
             <div id="current-goal">
                 <h3>📍 当前目标</h3>
@@ -1752,27 +1928,6 @@
                 <div class="stat">
                     <span class="stat-label">训练</span>
                     <span class="stat-value" id="training-count">0/3</span>
-                </div>
-
-                <div class="stat">
-                    <span class="stat-label">体力</span>
-                    <span class="stat-value" id="energy">100</span>
-                </div>
-                <div class="stat">
-                    <span class="stat-label">心情</span>
-                    <span class="stat-value" id="mood">80</span>
-                </div>
-                <div class="stat">
-                    <span class="stat-label">压力</span>
-                    <span class="stat-value" id="stress">20</span>
-                </div>
-                <div class="stat">
-                    <span class="stat-label">声望</span>
-                    <span class="stat-value" id="reputation">10</span>
-                </div>
-                <div class="stat">
-                    <span class="stat-label">金钱</span>
-                    <span class="stat-value" id="money">100</span>
                 </div>
                 <div class="stat">
                     <span class="stat-label">队伍</span>
@@ -1790,54 +1945,84 @@
                 <h3>📊 能力值</h3>
                 <div class="skills-container">
                     <div class="skills-left">
-                        <div class="skill-bar">
-                            <div class="skill-name">
-                                <span>发球</span>
-                                <span id="serve-value">0</span>
+                        <!-- 状态值区域 -->
+                        <div class="status-section">
+                            <div class="status-item">
+                                <span class="status-icon">💪</span>
+                                <span class="status-label">体力</span>
+                                <span class="status-value" id="energy">100</span>
                             </div>
-                            <div class="progress-bar">
-                                <div class="progress-fill" id="serve-bar" style="width: 0%">0</div>
+                            <div class="status-item">
+                                <span class="status-icon">😊</span>
+                                <span class="status-label">心情</span>
+                                <span class="status-value" id="mood">80</span>
                             </div>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="skill-name">
-                                <span>扣球</span>
-                                <span id="spike-value">0</span>
+                            <div class="status-item">
+                                <span class="status-icon">😰</span>
+                                <span class="status-label">压力</span>
+                                <span class="status-value" id="stress">20</span>
                             </div>
-                            <div class="progress-bar">
-                                <div class="progress-fill" id="spike-bar" style="width: 0%">0</div>
+                            <div class="status-item">
+                                <span class="status-icon">⭐</span>
+                                <span class="status-label">声望</span>
+                                <span class="status-value" id="reputation">10</span>
                             </div>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="skill-name">
-                                <span>拦网</span>
-                                <span id="block-value">0</span>
-                            </div>
-                            <div class="progress-bar">
-                                <div class="progress-fill" id="block-bar" style="width: 0%">0</div>
-                            </div>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="skill-name">
-                                <span>垫球</span>
-                                <span id="dig-value">0</span>
-                            </div>
-                            <div class="progress-bar">
-                                <div class="progress-fill" id="dig-bar" style="width: 0%">0</div>
-                            </div>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="skill-name">
-                                <span>托球</span>
-                                <span id="set-value">0</span>
-                            </div>
-                            <div class="progress-bar">
-                                <div class="progress-fill" id="set-bar" style="width: 0%">0</div>
+                            <div class="status-item">
+                                <span class="status-icon">💰</span>
+                                <span class="status-label">金钱</span>
+                                <span class="status-value" id="money">100</span>
                             </div>
                         </div>
                     </div>
                     <div class="skills-right">
-                        <canvas id="skills-radar" width="260" height="260"></canvas>
+                        <!-- 排球技能区域 -->
+                        <div class="volleyball-skills">
+                            <div class="skill-bar">
+                                <div class="skill-name">
+                                    <span>发球</span>
+                                    <span id="serve-value">0</span>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" id="serve-bar" style="width: 0%">0</div>
+                                </div>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-name">
+                                    <span>扣球</span>
+                                    <span id="spike-value">0</span>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" id="spike-bar" style="width: 0%">0</div>
+                                </div>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-name">
+                                    <span>拦网</span>
+                                    <span id="block-value">0</span>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" id="block-bar" style="width: 0%">0</div>
+                                </div>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-name">
+                                    <span>垫球</span>
+                                    <span id="dig-value">0</span>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" id="dig-bar" style="width: 0%">0</div>
+                                </div>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-name">
+                                    <span>托球</span>
+                                    <span id="set-value">0</span>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" id="set-bar" style="width: 0%">0</div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1849,15 +2034,10 @@
         <!-- 开发者署名和版本号 -->
         <div class="developer-credit">
             <span>开发者：小水</span>
-            <span class="version-number">v2.2.5</span>
+            <span class="version-number" id="game-version">v2.2.0</span>
         </div>
     </div>
     
-    <!-- 分享按钮 -->
-    <button class="share-btn" onclick="shareGame()">
-        <span>📤</span>
-        <span>分享游戏</span>
-    </button>
     
     <!-- 事件弹窗 -->
     <div id="event-modal">
@@ -1896,7 +2076,48 @@
         </div>
     </div>
 
+    <!-- 反馈弹窗 -->
+    <div id="feedback-modal" class="feedback-modal">
+        <div class="feedback-modal-content">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                <h2>💬 问题反馈</h2>
+                <button class="close-btn" onclick="game.toggleFeedbackModal()">✕</button>
+            </div>
+            <div class="feedback-info">
+                <p style="text-align: center; color: rgba(255, 255, 255, 0.9); margin-bottom: 20px;">
+                    遇到Bug或有建议？欢迎联系我！
+                </p>
+                <div class="contact-section">
+                    <div class="contact-item">
+                        <span class="contact-icon">📱</span>
+                        <span class="contact-label">小红书号：</span>
+                        <span class="contact-value">269540383</span>
+                    </div>
+                    <div class="contact-item">
+                        <span class="contact-icon">👤</span>
+                        <span class="contact-label">昵称：</span>
+                        <span class="contact-value">狗关卡设计师</span>
+                    </div>
+                </div>
+                <div class="qr-code-section">
+                    <p style="text-align: center; color: rgba(255, 255, 255, 0.85); font-size: 14px; margin-bottom: 10px;">
+                        扫描二维码在小红书找到我
+                    </p>
+                    <div class="qr-code-placeholder">
+                        <img src="https://s41.ax1x.com/2026/02/17/pZOyIeO.jpg" 
+                             alt="小红书二维码" 
+                             style="width: 200px; height: 200px; border-radius: 10px; background: #f5f5f5; display: block; margin: 0 auto;">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
+        // ==================== 游戏配置 ====================
+        // 版本号配置（统一管理）
+        const GAME_VERSION = '2.2.6';
+        
         // 姓氏库
         const SURNAMES = [
             // 常见单姓
@@ -2413,14 +2634,13 @@
                 choices: [
                     {
                         text: '去医院看病（花费80元）',
-                        effect: { energy: -10, mood: -5, money: -80 },
+                        effect: { energy: -5, mood: -5, money: -80 },
                         requirement: { money: 80 },
                         result: '医生给你开了药，休息几天就好了。'
                     },
                     {
-                        text: '自己买药吃（花费20元）',
-                        effect: { energy: -15, mood: -8, money: -20 },
-                        requirement: { money: 20 },
+                        text: '自己宿舍找药吃',
+                        effect: { energy: -20, mood: -8, },
                         result: '吃了药，但还是很难受。'
                     }
                 ]
@@ -4881,6 +5101,15 @@
                 } else {
                     this.renderGoalsPanel();
                     panel.classList.add('show');
+                }
+            }
+            
+            toggleFeedbackModal() {
+                const modal = document.getElementById('feedback-modal');
+                if (modal.classList.contains('show')) {
+                    modal.classList.remove('show');
+                } else {
+                    modal.classList.add('show');
                 }
             }
             
@@ -8958,206 +9187,242 @@
             
             // 排球点击小游戏
             startVolleyballClickGame() {
-                // 创建游戏容器
+                // 创建游戏容器（外层遮罩）
                 const gameContainer = document.createElement('div');
                 gameContainer.className = 'volleyball-game-container';
+                
+                // 创建弹窗内容
                 gameContainer.innerHTML = `
-                    <div class="volleyball-game-hint">只点击排球 🏐 其他都是陷阱！</div>
-                    <div class="volleyball-game-header">
-                        <div>⏱️ <span id="vb-timer">30</span>秒</div>
-                        <div>💰 <span id="vb-money">0</span>元</div>
-                        <div id="vb-combo-display">连击 <span id="vb-combo">0</span></div>
-                    </div>
-                    <div class="volleyball-game-grid" id="vb-grid">
-                        ${Array(16).fill('<div class="volleyball-game-cell"></div>').join('')}
+                    <div class="volleyball-game-modal">
+                        <div class="volleyball-game-hint"><span class="hint-time">20秒</span>内点击更多的排球！</div>
+                        <div class="volleyball-game-countdown" id="vb-countdown">
+                            <div class="countdown-number">3</div>
+                        </div>
+                        <div class="volleyball-game-header" style="opacity: 0;">
+                            <div>⏱️ <span id="vb-timer">20</span>秒</div>
+                            <div>💰 <span id="vb-money">0</span>元</div>
+                            <div id="vb-combo-display">连击 <span id="vb-combo">0</span></div>
+                        </div>
+                        <div class="volleyball-game-grid" id="vb-grid" style="opacity: 0;">
+                            ${Array(16).fill('<div class="volleyball-game-cell"></div>').join('')}
+                        </div>
                     </div>
                 `;
                 document.body.appendChild(gameContainer);
                 
-                // 游戏状态
-                const gameState = {
-                    timeLeft: 20,
-                    money: 0,
-                    combo: 0,
-                    maxCombo: 0,
-                    hits: 0,
-                    misses: 0,
-                    totalClicks: 0,
-                    isRunning: true,
-                    activeItems: new Set()
-                };
-                
-                // 物品类型定义
-                const items = {
-                    volleyball: { emoji: '🏐', reward: () => 2 + Math.floor(Math.random() * 2), weight: 100 },
-                    plate: { emoji: '⚪', penalty: -2, weight: 30 },
-                    basketball: { emoji: '🏀', penalty: -4, weight: 25 },
-                    football: { emoji: '⚽', penalty: -2, weight: 20 },
-                    baseball: { emoji: '⚾', penalty: -3, weight: 15 },
-                    moon: { emoji: '🌕', penalty: -2, weight: 10 }
-                };
-                
                 // 获取元素
+                const countdownEl = document.getElementById('vb-countdown');
+                const headerEl = gameContainer.querySelector('.volleyball-game-header');
+                const gridEl = document.getElementById('vb-grid');
                 const cells = gameContainer.querySelectorAll('.volleyball-game-cell');
                 const timerEl = document.getElementById('vb-timer');
                 const moneyEl = document.getElementById('vb-money');
                 const comboEl = document.getElementById('vb-combo');
                 const comboDisplay = document.getElementById('vb-combo-display');
                 
-                // 更新连击显示
-                const updateComboDisplay = () => {
-                    comboEl.textContent = gameState.combo;
-                    if (gameState.combo >= 5) {
-                        comboDisplay.classList.add('volleyball-game-combo');
+                // 倒计时动画
+                let countdownNum = 3;
+                const countdownInterval = setInterval(() => {
+                    countdownNum--;
+                    if (countdownNum > 0) {
+                        countdownEl.querySelector('.countdown-number').textContent = countdownNum;
+                        countdownEl.querySelector('.countdown-number').style.animation = 'none';
+                        setTimeout(() => {
+                            countdownEl.querySelector('.countdown-number').style.animation = 'countdownPulse 1s ease-out';
+                        }, 10);
                     } else {
-                        comboDisplay.classList.remove('volleyball-game-combo');
+                        countdownEl.querySelector('.countdown-number').textContent = '开始！';
+                        countdownEl.querySelector('.countdown-number').style.animation = 'countdownPulse 0.5s ease-out';
+                        setTimeout(() => {
+                            countdownEl.style.display = 'none';
+                            headerEl.style.opacity = '1';
+                            gridEl.style.opacity = '1';
+                            startGame();
+                        }, 500);
+                        clearInterval(countdownInterval);
                     }
-                };
+                }, 1000);
                 
-                // 显示反馈动画
-                const showFeedback = (cell, text, isPositive) => {
-                    const feedback = document.createElement('div');
-                    feedback.className = `volleyball-game-feedback ${isPositive ? 'feedback-positive' : 'feedback-negative'}`;
-                    feedback.textContent = text;
-                    feedback.style.left = '50%';
-                    feedback.style.top = '50%';
-                    feedback.style.transform = 'translate(-50%, -50%)';
-                    cell.appendChild(feedback);
-                    setTimeout(() => feedback.remove(), 1000);
-                };
-                
-                // 生成随机物品
-                const spawnItem = () => {
-                    if (!gameState.isRunning) return;
+                // 开始游戏的函数
+                const startGame = () => {
+                    // 游戏状态
+                    const gameState = {
+                        timeLeft: 20,
+                        money: 0,
+                        combo: 0,
+                        maxCombo: 0,
+                        hits: 0,
+                        misses: 0,
+                        totalClicks: 0,
+                        isRunning: true,
+                        activeItems: new Set()
+                    };
                     
-                    // 找到空闲的格子
-                    const availableCells = Array.from(cells).filter((_, index) => !gameState.activeItems.has(index));
-                    if (availableCells.length === 0) return;
+                    // 物品类型定义
+                    const items = {
+                        volleyball: { emoji: '🏐', reward: () => 2 + Math.floor(Math.random() * 2), weight: 100 },
+                        plate: { emoji: '⚪', penalty: -2, weight: 30 },
+                        basketball: { emoji: '🏀', penalty: -4, weight: 25 },
+                        football: { emoji: '⚽', penalty: -2, weight: 20 },
+                        baseball: { emoji: '⚾', penalty: -3, weight: 15 },
+                        moon: { emoji: '🌕', penalty: -2, weight: 10 }
+                    };
                     
-                    const cell = availableCells[Math.floor(Math.random() * availableCells.length)];
-                    const cellIndex = Array.from(cells).indexOf(cell);
-                    
-                    // 根据时间调整难度
-                    let isVolleyball = Math.random() < 0.6; // 60%概率是排球
-                    
-                    let itemType, itemData;
-                    if (isVolleyball) {
-                        itemType = 'volleyball';
-                        itemData = items.volleyball;
-                    } else {
-                        // 选择干扰物品
-                        const distractors = ['plate', 'basketball', 'football', 'baseball', 'moon'];
-                        const weights = distractors.map(d => items[d].weight);
-                        const totalWeight = weights.reduce((a, b) => a + b, 0);
-                        let random = Math.random() * totalWeight;
-                        
-                        for (let i = 0; i < distractors.length; i++) {
-                            random -= weights[i];
-                            if (random <= 0) {
-                                itemType = distractors[i];
-                                itemData = items[itemType];
-                                break;
-                            }
-                        }
-                    }
-                    
-                    // 显示物品
-                    cell.innerHTML = `<span class="volleyball-game-item">${itemData.emoji}</span>`;
-                    gameState.activeItems.add(cellIndex);
-                    
-                    // 设置点击事件
-                    const clickHandler = () => {
-                        if (!gameState.activeItems.has(cellIndex)) return;
-                        
-                        gameState.totalClicks++;
-                        gameState.activeItems.delete(cellIndex);
-                        cell.innerHTML = '';
-                        cell.removeEventListener('click', clickHandler);
-                        
-                        if (itemType === 'volleyball') {
-                            // 点击排球
-                            gameState.hits++;
-                            gameState.combo++;
-                            if (gameState.combo > gameState.maxCombo) {
-                                gameState.maxCombo = gameState.combo;
-                            }
-                            
-                            let reward = itemData.reward();
-                            
-                            // 连击加成
-                            if (gameState.combo >= 11) {
-                                reward += 4;
-                            } else if (gameState.combo >= 6) {
-                                reward += 2;
-                            } else if (gameState.combo >= 3) {
-                                reward += 1;
-                            }
-                            
-                            gameState.money += reward;
-                            moneyEl.textContent = gameState.money;
-                            updateComboDisplay();
-                            showFeedback(cell, `+${reward}元`, true);
+                    // 更新连击显示
+                    const updateComboDisplay = () => {
+                        comboEl.textContent = gameState.combo;
+                        if (gameState.combo >= 5) {
+                            comboDisplay.classList.add('volleyball-game-combo');
                         } else {
-                            // 点击干扰物品
-                            gameState.misses++;
-                            gameState.combo = 0;
-                            gameState.money += itemData.penalty;
-                            moneyEl.textContent = gameState.money;
-                            updateComboDisplay();
-                            showFeedback(cell, `${itemData.penalty}元`, false);
-                            
-                            // 轻微震动效果
-                            gameContainer.style.animation = 'none';
-                            setTimeout(() => {
-                                gameContainer.style.animation = '';
-                            }, 10);
+                            comboDisplay.classList.remove('volleyball-game-combo');
                         }
                     };
                     
-                    cell.addEventListener('click', clickHandler);
+                    // 显示反馈动画
+                    const showFeedback = (cell, text, isPositive) => {
+                        const feedback = document.createElement('div');
+                        feedback.className = `volleyball-game-feedback ${isPositive ? 'feedback-positive' : 'feedback-negative'}`;
+                        feedback.textContent = text;
+                        feedback.style.left = '50%';
+                        feedback.style.top = '50%';
+                        feedback.style.transform = 'translate(-50%, -50%)';
+                        cell.appendChild(feedback);
+                        setTimeout(() => feedback.remove(), 1000);
+                    };
                     
-                    // 物品停留时间（延长）
-                    const lifetime = 1200 + Math.random() * 600; // 1.2-1.8秒
-                    setTimeout(() => {
-                        if (gameState.activeItems.has(cellIndex)) {
+                    // 生成随机物品
+                    const spawnItem = () => {
+                        if (!gameState.isRunning) return;
+                        
+                        // 找到空闲的格子
+                        const availableCells = Array.from(cells).filter((_, index) => !gameState.activeItems.has(index));
+                        if (availableCells.length === 0) return;
+                        
+                        const cell = availableCells[Math.floor(Math.random() * availableCells.length)];
+                        const cellIndex = Array.from(cells).indexOf(cell);
+                        
+                        // 根据时间调整难度
+                        let isVolleyball = Math.random() < 0.6; // 60%概率是排球
+                        
+                        let itemType, itemData;
+                        if (isVolleyball) {
+                            itemType = 'volleyball';
+                            itemData = items.volleyball;
+                        } else {
+                            // 选择干扰物品
+                            const distractors = ['plate', 'basketball', 'football', 'baseball', 'moon'];
+                            const weights = distractors.map(d => items[d].weight);
+                            const totalWeight = weights.reduce((a, b) => a + b, 0);
+                            let random = Math.random() * totalWeight;
+                            
+                            for (let i = 0; i < distractors.length; i++) {
+                                random -= weights[i];
+                                if (random <= 0) {
+                                    itemType = distractors[i];
+                                    itemData = items[itemType];
+                                    break;
+                                }
+                            }
+                        }
+                        
+                        // 显示物品
+                        cell.innerHTML = `<span class="volleyball-game-item">${itemData.emoji}</span>`;
+                        gameState.activeItems.add(cellIndex);
+                        
+                        // 设置点击事件
+                        const clickHandler = () => {
+                            if (!gameState.activeItems.has(cellIndex)) return;
+                            
+                            gameState.totalClicks++;
                             gameState.activeItems.delete(cellIndex);
                             cell.innerHTML = '';
                             cell.removeEventListener('click', clickHandler);
                             
-                            // 漏掉排球，连击中断
                             if (itemType === 'volleyball') {
-                                gameState.combo = 0;
+                                // 点击排球
+                                gameState.hits++;
+                                gameState.combo++;
+                                if (gameState.combo > gameState.maxCombo) {
+                                    gameState.maxCombo = gameState.combo;
+                                }
+                                
+                                let reward = itemData.reward();
+                                
+                                // 连击加成
+                                if (gameState.combo >= 11) {
+                                    reward += 4;
+                                } else if (gameState.combo >= 6) {
+                                    reward += 2;
+                                } else if (gameState.combo >= 3) {
+                                    reward += 1;
+                                }
+                                
+                                gameState.money += reward;
+                                moneyEl.textContent = gameState.money;
                                 updateComboDisplay();
+                                showFeedback(cell, `+${reward}元`, true);
+                            } else {
+                                // 点击干扰物品
+                                gameState.misses++;
+                                gameState.combo = 0;
+                                gameState.money += itemData.penalty;
+                                moneyEl.textContent = gameState.money;
+                                updateComboDisplay();
+                                showFeedback(cell, `${itemData.penalty}元`, false);
+                                
+                                // 轻微震动效果
+                                gameContainer.style.animation = 'none';
+                                setTimeout(() => {
+                                    gameContainer.style.animation = '';
+                                }, 10);
                             }
-                        }
-                    }, lifetime);
-                };
-                
-                // 游戏循环 - 生成物品
-                const spawnInterval = setInterval(() => {
-                    if (!gameState.isRunning) {
-                        clearInterval(spawnInterval);
-                        return;
-                    }
-                    spawnItem();
-                }, 600); // 每0.6秒生成一个物品
-                
-                // 倒计时
-                const timerInterval = setInterval(() => {
-                    gameState.timeLeft--;
-                    timerEl.textContent = gameState.timeLeft;
-                    
-                    if (gameState.timeLeft <= 0) {
-                        clearInterval(timerInterval);
-                        clearInterval(spawnInterval);
-                        gameState.isRunning = false;
+                        };
                         
-                        // 游戏结束
+                        cell.addEventListener('click', clickHandler);
+                        
+                        // 物品停留时间（延长）
+                        const lifetime = 1200 + Math.random() * 600; // 1.2-1.8秒
                         setTimeout(() => {
-                            this.endVolleyballClickGame(gameContainer, gameState);
-                        }, 500);
-                    }
-                }, 1000);
+                            if (gameState.activeItems.has(cellIndex)) {
+                                gameState.activeItems.delete(cellIndex);
+                                cell.innerHTML = '';
+                                cell.removeEventListener('click', clickHandler);
+                                
+                                // 漏掉排球，连击中断
+                                if (itemType === 'volleyball') {
+                                    gameState.combo = 0;
+                                    updateComboDisplay();
+                                }
+                            }
+                        }, lifetime);
+                    };
+                    
+                    // 游戏循环 - 生成物品
+                    const spawnInterval = setInterval(() => {
+                        if (!gameState.isRunning) {
+                            clearInterval(spawnInterval);
+                            return;
+                        }
+                        spawnItem();
+                    }, 600); // 每0.6秒生成一个物品
+                    
+                    // 倒计时
+                    const timerInterval = setInterval(() => {
+                        gameState.timeLeft--;
+                        timerEl.textContent = gameState.timeLeft;
+                        
+                        if (gameState.timeLeft <= 0) {
+                            clearInterval(timerInterval);
+                            clearInterval(spawnInterval);
+                            gameState.isRunning = false;
+                            
+                            // 游戏结束
+                            setTimeout(() => {
+                                this.endVolleyballClickGame(gameContainer, gameState);
+                            }, 500);
+                        }
+                    }, 1000);
+                }; // 结束 startGame 函数
             }
             
             // 结束排球点击小游戏
@@ -9356,7 +9621,7 @@
             saveGame() {
                 try {
                     const saveData = {
-                        version: '2.2.5',
+                        version: GAME_VERSION,
                         timestamp: Date.now(),
                         player: this.player,
                         tournament: this.tournament,
@@ -10229,6 +10494,12 @@
             }
             
             applyEffect(effect) {
+                // 检查effect是否存在
+                if (!effect) {
+                    console.error('applyEffect called with undefined or null effect');
+                    return;
+                }
+                
                 if (effect.reset) {
                     // 删除存档
                     this.deleteSave();
@@ -10289,10 +10560,98 @@
                         finalRank: null
                     };
                     this.playerStats = {
-                        lifeActivities: {},
+                        // 训练相关
+                        totalTrainings: 0,
+                        trainingByType: {
+                            serve: 0,
+                            spike: 0,
+                            block: 0,
+                            dig: 0,
+                            set: 0,
+                            composite: 0
+                        },
+                        
+                        // 比赛相关
+                        casualMatchesPlayed: 0,
+                        casualMatchesWon: 0,
+                        formalMatchesPlayed: 0,
+                        formalMatchesWon: 0,
+                        tournamentRoundsWon: 0,
+                        
+                        // 消费相关
+                        totalMoneySpent: 0,
+                        equipmentPurchased: 0,
+                        coachingPurchased: 0,
+                        entertainmentSpent: 0,
+                        
+                        // 生活相关
+                        gamesPlayed: 0,
+                        moviesWatched: 0,
+                        socialEvents: 0,
+                        restTaken: 0,
+                        
+                        // 课余活动追踪（用于奇遇事件）
+                        lifeActivities: {
+                            scratchCard: 0,
+                            movie: 0,
+                            game: 0,
+                            social: 0,
+                            gift: 0,
+                            rest: 0,
+                            massage: 0,
+                            library: 0,
+                            casualMatch: 0,
+                            work: 0,
+                            food: 0
+                        },
+                        
+                        // 奇遇事件追踪
                         triggeredEvents: [],
-                        permanentBuffs: {},
-                        titles: []
+                        scratchCardJackpots: 0,
+                        hasLoveInterest: false,
+                        weeklyDateCount: 0,
+                        permanentBuffs: {
+                            scratchCardDiscount: false,
+                            movieMembership: false,
+                            foodDiscount: false,
+                            workBonus: false,
+                            trainingBonus: 0,
+                            stressReduction: 0,
+                            energyRecovery: 0,
+                            moodRecovery: 0,
+                            reputationGrowth: 0,
+                            injuryReduction: 0
+                        },
+                        titles: [],
+                        
+                        // 特殊行为
+                        positionChanges: 0,
+                        perfectWeeks: 0,
+                        burnoutWeeks: 0,
+                        richestWeek: 0,
+                        brokestWeek: Infinity,
+                        
+                        // 技能发展
+                        initialSkills: {
+                            serve: TEST_MODE ? TEST_CONFIG.initialSkills : 0,
+                            spike: TEST_MODE ? TEST_CONFIG.initialSkills : 0,
+                            block: TEST_MODE ? TEST_CONFIG.initialSkills : 0,
+                            dig: TEST_MODE ? TEST_CONFIG.initialSkills : 0,
+                            set: TEST_MODE ? TEST_CONFIG.initialSkills : 0
+                        },
+                        
+                        // 刮刮乐统计
+                        scratchCards: {
+                            total: 0,
+                            grand: 0,
+                            first: 0,
+                            second: 0,
+                            third: 0,
+                            consolation: 0,
+                            none: 0,
+                            totalSpent: 0,
+                            totalEarned: 0
+                        }
                     };
                     this.shopItems = this.initShopItems();
                     this.player.ownedItems = {
@@ -10778,6 +11137,13 @@
         
         window.addEventListener('DOMContentLoaded', () => {
             console.log('DOMContentLoaded fired');
+            
+            // 更新页面显示的版本号
+            const versionElement = document.getElementById('game-version');
+            if (versionElement) {
+                versionElement.textContent = 'v' + GAME_VERSION;
+            }
+            
             try {
                 console.log('Creating game instance...');
                 game = new VolleyballGame();
