@@ -88,12 +88,13 @@
         #game-header h1 {
             font-size: 28px;
             margin-bottom: 10px;
+            white-space: nowrap;
         }
         
         /* 移动端优化 */
         @media (max-width: 768px) {
             #game-header h1 {
-                font-size: 22px;
+                font-size: 16px;
                 margin-bottom: 8px;
             }
         }
@@ -471,6 +472,16 @@
             font-weight: bold;
             transition: all 0.3s;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            white-space: nowrap;
+        }
+        
+        /* 移动端优化 */
+        @media (max-width: 768px) {
+            .tab-btn {
+                padding: 6px 10px;
+                font-size: 12px;
+                border-radius: 15px;
+            }
         }
         
         .tab-btn:hover {
@@ -487,6 +498,14 @@
         
         .tab-btn-primary:hover {
             box-shadow: 0 4px 15px rgba(255, 215, 0, 0.6);
+        }
+        
+        /* 移动端优化 */
+        @media (max-width: 768px) {
+            .tab-btn-primary {
+                padding: 6px 10px;
+                font-size: 12px;
+            }
         }
         
         #stats-bar {
@@ -1200,40 +1219,42 @@
             }
             
             .skills-container {
-                gap: 20px;
-            }
-            
-            .skills-left {
-                flex: 0 0 32%;
+                gap: 12px;
             }
             
             .status-section {
                 padding: 10px;
+                gap: 6px;
             }
             
             .status-item {
-                height: 45px;
+                padding: 6px 3px;
             }
             
             .status-label {
-                font-size: 13px;
+                font-size: 11px;
             }
             
             .status-value {
                 font-size: 16px;
-                min-width: 45px;
             }
             
-            .volleyball-skills .skill-bar {
-                height: 45px;
+            .volleyball-skills {
+                gap: 6px;
             }
             
             .skill-name {
                 font-size: 13px;
+                margin-bottom: 4px;
             }
             
-            .skill-value {
-                font-size: 14px;
+            .progress-bar {
+                height: 22px;
+            }
+            
+            .progress-fill {
+                font-size: 11px;
+                padding-right: 6px;
             }
         }
         
@@ -1243,67 +1264,60 @@
         
         .skills-container {
             display: flex;
-            gap: 40px;
-            align-items: flex-start;
+            flex-direction: column;
+            gap: 15px;
             margin-top: 15px;
         }
         
         .skills-left {
-            flex: 0 0 30%;
-            min-width: 0;
+            width: 100%;
         }
         
         .skills-right {
-            flex: 1;
-            min-width: 0;
+            width: 100%;
         }
         
-        /* 状态值区域样式 */
+        /* 状态值区域样式 - 横向布局 */
         .status-section {
             background: rgba(255, 255, 255, 0.1);
             border-radius: 10px;
-            padding: 15px 15px 10px 15px;
-            margin-top: -5px;
+            padding: 12px 15px;
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 10px;
         }
         
         .status-item {
             display: flex;
+            flex-direction: column;
             align-items: center;
-            padding: 0;
-            height: 50px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .status-item:last-child {
-            border-bottom: none;
+            justify-content: center;
+            padding: 8px 5px;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 8px;
         }
         
         .status-label {
-            flex: 1;
-            font-size: 15px;
+            font-size: 13px;
             font-weight: 500;
-            color: #333;
+            color: #666;
+            margin-bottom: 4px;
         }
         
         .status-value {
             font-size: 18px;
             font-weight: bold;
             color: #f093fb;
-            min-width: 50px;
-            text-align: right;
-            flex-shrink: 0;
-            margin-right: 5px;
         }
         
         /* 排球技能区域样式 */
         .volleyball-skills {
             display: flex;
             flex-direction: column;
-            gap: 0;
+            gap: 8px;
         }
         
         .volleyball-skills .skill-bar {
-            height: 50px;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -1351,9 +1365,9 @@
         }
         
         #random-name-btn {
-            background: #f093fb;
-            color: white;
-            border: none;
+            background: #e9ecef;
+            color: #666;
+            border: 1px solid #dee2e6;
             padding: 15px;
             border-radius: 10px;
             font-size: 24px;
@@ -1368,8 +1382,8 @@
         }
         
         #random-name-btn:hover {
-            background: #e082ea;
-            transform: rotate(360deg) scale(1.1);
+            background: #dee2e6;
+            transform: rotate(360deg) scale(1.05);
         }
         
         #initial-attributes {
@@ -1417,32 +1431,57 @@
             align-items: center;
             gap: 10px;
             margin-top: 15px;
+            flex-wrap: nowrap;
         }
         
         #reroll-btn {
-            background: #f093fb;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 8px;
-            font-size: 16px;
+            background: #e9ecef;
+            color: #666;
+            border: 1px solid #dee2e6;
+            padding: 4px 10px;
+            border-radius: 5px;
+            font-size: 12px;
             cursor: pointer;
             transition: all 0.3s;
+            white-space: nowrap;
+            flex-shrink: 0;
         }
         
         #reroll-btn:hover:not(:disabled) {
-            background: #e082ea;
-            transform: scale(1.05);
+            background: #dee2e6;
+            transform: scale(1.02);
         }
         
         #reroll-btn:disabled {
-            background: #ccc;
+            background: #f8f9fa;
+            color: #adb5bd;
             cursor: not-allowed;
+            border-color: #e9ecef;
         }
         
         #reroll-count {
-            color: #666;
-            font-size: 14px;
+            color: #999;
+            font-size: 11px;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+        
+        /* 移动端优化 */
+        @media (max-width: 768px) {
+            #reroll-container {
+                gap: 6px;
+                margin-top: 10px;
+            }
+            
+            #reroll-btn {
+                padding: 3px 8px;
+                font-size: 11px;
+                border-radius: 4px;
+            }
+            
+            #reroll-count {
+                font-size: 10px;
+            }
         }
         
         #name-input-panel button {
@@ -1459,6 +1498,17 @@
         #name-input-panel button:hover {
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        
+        /* 开始游戏按钮特殊样式 */
+        #name-input-panel button.start-game-btn {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            box-shadow: 0 4px 15px rgba(245, 87, 108, 0.4);
+            font-weight: bold;
+        }
+        
+        #name-input-panel button.start-game-btn:hover {
+            box-shadow: 0 6px 20px rgba(245, 87, 108, 0.6);
         }
         
         .hidden {
@@ -1500,11 +1550,17 @@
             font-size: 14px;
         }
         
+        .skill-value {
+            font-weight: bold;
+            color: #667eea;
+        }
+        
         .progress-bar {
             background: #dee2e6;
-            height: 20px;
+            height: 24px;
             border-radius: 10px;
-            overflow: hidden;
+            overflow: visible;
+            position: relative;
         }
         
         .progress-fill {
@@ -1513,10 +1569,13 @@
             transition: width 0.5s;
             display: flex;
             align-items: center;
-            justify-content: center;
+            justify-content: flex-end;
+            padding-right: 8px;
             color: white;
             font-size: 12px;
             font-weight: bold;
+            border-radius: 10px;
+            min-width: 30px;
         }
         
         /* 开发者署名 */
@@ -1936,9 +1995,9 @@
 <body>
     <div id="game-container">
         <div id="game-header">
-            <div style="display: flex; justify-content: space-between; align-items: center;">
+            <div style="display: flex; justify-content: space-between; align-items: center; gap: 10px;">
                 <h1>🏐 排球之星</h1>
-                <div style="display: flex; gap: 10px;">
+                <div style="display: flex; gap: 8px; flex-shrink: 0;">
                     <button id="goals-tab-btn" class="tab-btn tab-btn-primary" onclick="game.toggleGoalsPanel()">🎯 目标</button>
                     <button id="feedback-btn" class="tab-btn" onclick="game.toggleFeedbackModal()">💬 反馈</button>
                     <button id="share-btn" class="tab-btn" onclick="shareGame()">📤 分享</button>
@@ -2139,7 +2198,7 @@
     <script>
         // ==================== 游戏配置 ====================
         // 版本号配置（统一管理）
-        const GAME_VERSION = '2.2.7';
+        const GAME_VERSION = '2.2.6';
         
         // 姓氏库
         const SURNAMES = [
@@ -3197,7 +3256,7 @@
                             <span id="reroll-count">剩余次数：5/5</span>
                         </div>
                     </div>
-                    <button onclick="game.submitName()">开始游戏</button>
+                    <button class="start-game-btn" onclick="game.submitName()">开始游戏</button>
                 </div>`,
                 choices: []
             },
@@ -3254,7 +3313,8 @@
             trainingChoice: {
                 text: `<h2>🏋️ 选择训练项目</h2>
                 <p>今天你想重点训练哪个技能？</p>
-                <p style="color: #999; font-size: 14px;">训练会消耗体力和心情，但能提升技能</p>`,
+                <p style="color: #999; font-size: 14px;">训练会消耗体力和心情，但能提升技能</p>
+                <p style="color: #f093fb; font-size: 16px; font-weight: bold; margin-top: 10px;">⚡ 当前体力：<span id="current-energy-display">0</span></p>`,
                 choices: [
                     {
                         text: '🎯 发球训练（体力-15，心情-5）',
@@ -5333,7 +5393,8 @@
                 const choicesDiv = document.getElementById('choices');
                 
                 storyText.innerHTML = `<h2>🌟 课余生活</h2>
-                    <p>训练结束了，你想做些什么来放松一下？</p>`;
+                    <p>训练结束了，你想做些什么来放松一下？</p>
+                    <p style="color: #f093fb; font-size: 16px; font-weight: bold; margin-top: 10px;">⚡ 当前体力：${this.player.energy}</p>`;
                 
                 // 定义分类
                 const categories = {
@@ -11091,6 +11152,15 @@
                 // 处理文本：如果是函数则调用，否则直接使用
                 const textContent = typeof scene.text === 'function' ? scene.text() : scene.text;
                 storyText.innerHTML = textContent;
+                
+                // 如果是训练选择场景，更新当前体力显示
+                if (sceneId === 'trainingChoice') {
+                    const energyDisplay = document.getElementById('current-energy-display');
+                    if (energyDisplay) {
+                        energyDisplay.textContent = this.player.energy;
+                    }
+                }
+                
                 choicesDiv.innerHTML = '';
                 
                 scene.choices.forEach(choice => {
@@ -11279,5 +11349,4 @@
     </script>
 </body>
 </html>
-
 
