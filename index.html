@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>排球之星 - 从菜鸟到冠军</title>
-    <!-- Version: 2.2.0 - Skill Growth Rebalance -->
+    <!-- Version: 2.2.5 - Skill Growth Rebalance -->
     
     <!-- SEO优化 -->
     <meta name="description" content="体验从大一新生到市级冠军的排球之旅！训练、比赛、成长，书写你的排球传奇！">
@@ -1849,7 +1849,7 @@
         <!-- 开发者署名和版本号 -->
         <div class="developer-credit">
             <span>开发者：小水</span>
-            <span class="version-number">v2.2.0</span>
+            <span class="version-number">v2.2.5</span>
         </div>
     </div>
     
@@ -1901,17 +1901,12 @@
         const SURNAMES = [
             // 常见单姓
             '张', '王', '李', '刘', '陈', '杨', '黄', '赵', '吴', '周',
-            '徐', '孙', '马', '朱', '胡', '郭', '何', '林', '高', '罗',
+            '徐', '孙', '马', '朱', '夏', '郭', '何', '林', '高', '罗',
             '郑', '梁', '谢', '宋', '唐', '许', '韩', '冯', '邓', '曹',
             '彭', '曾', '肖', '田', '董', '袁', '潘', '于', '蒋', '蔡',
             // 复姓
             '欧阳', '司马', '上官', '诸葛', '东方', '独孤', '南宫', '西门',
             '慕容', '轩辕', '令狐', '皇甫', '公孙', '澹台',
-            // 排球专有名词姓氏
-            '排', '球', '网', '场', '扣', '拦', '垫', '托', '发', '跳',
-            '二传', '主攻', '副攻', '接应', '教练', '裁判', '队长',
-            '前排', '后排', '轮转', '换位', '暂停', '局点', '赛点', '冠军',
-            '扣球', '拦网', '垫球', '传球', '发球', '救球', '防守', '进攻'
         ];
         
         // 名字库（排球/运动相关）
@@ -2918,7 +2913,7 @@
         const SCENES = {
             nameInput: {
                 text: `<div id="name-input-panel">
-                    <h2>🏐 欢迎来到排球之星（内测版）</h2>
+                    <h2>🏐 欢迎来到排球之星</h2>
                     <p style="margin-bottom: 20px; color: #666;">你即将开始一段从菜鸟到冠军的排球之旅</p>
                     <div id="name-input-container">
                         <input type="text" id="player-name-input" placeholder="请输入你的名字" maxlength="10" />
@@ -9361,7 +9356,7 @@
             saveGame() {
                 try {
                     const saveData = {
-                        version: '2.2.0',
+                        version: '2.2.5',
                         timestamp: Date.now(),
                         player: this.player,
                         tournament: this.tournament,
