@@ -1198,6 +1198,43 @@
                 padding: 12px;
                 margin-bottom: 15px;
             }
+            
+            .skills-container {
+                gap: 20px;
+            }
+            
+            .skills-left {
+                flex: 0 0 32%;
+            }
+            
+            .status-section {
+                padding: 10px;
+            }
+            
+            .status-item {
+                height: 45px;
+            }
+            
+            .status-label {
+                font-size: 13px;
+            }
+            
+            .status-value {
+                font-size: 16px;
+                min-width: 45px;
+            }
+            
+            .volleyball-skills .skill-bar {
+                height: 45px;
+            }
+            
+            .skill-name {
+                font-size: 13px;
+            }
+            
+            .skill-value {
+                font-size: 14px;
+            }
         }
         
         #character-panel.show {
@@ -1206,13 +1243,13 @@
         
         .skills-container {
             display: flex;
-            gap: 30px;
+            gap: 40px;
             align-items: flex-start;
             margin-top: 15px;
         }
         
         .skills-left {
-            flex: 0 0 35%;
+            flex: 0 0 30%;
             min-width: 0;
         }
         
@@ -1224,7 +1261,6 @@
         /* 状态值区域样式 */
         .status-section {
             background: rgba(255, 255, 255, 0.1);
-            border: 2px solid rgba(240, 147, 251, 0.3);
             border-radius: 10px;
             padding: 15px 15px 10px 15px;
             margin-top: -5px;
@@ -1242,19 +1278,11 @@
             border-bottom: none;
         }
         
-        .status-icon {
-            font-size: 20px;
-            width: 30px;
-            text-align: center;
-            flex-shrink: 0;
-        }
-        
         .status-label {
             flex: 1;
             font-size: 15px;
             font-weight: 500;
             color: #333;
-            margin-left: 8px;
         }
         
         .status-value {
@@ -1948,27 +1976,22 @@
                         <!-- 状态值区域 -->
                         <div class="status-section">
                             <div class="status-item">
-                                <span class="status-icon">💪</span>
                                 <span class="status-label">体力</span>
                                 <span class="status-value" id="energy">100</span>
                             </div>
                             <div class="status-item">
-                                <span class="status-icon">😊</span>
                                 <span class="status-label">心情</span>
                                 <span class="status-value" id="mood">80</span>
                             </div>
                             <div class="status-item">
-                                <span class="status-icon">😰</span>
                                 <span class="status-label">压力</span>
                                 <span class="status-value" id="stress">20</span>
                             </div>
                             <div class="status-item">
-                                <span class="status-icon">⭐</span>
                                 <span class="status-label">声望</span>
                                 <span class="status-value" id="reputation">10</span>
                             </div>
                             <div class="status-item">
-                                <span class="status-icon">💰</span>
                                 <span class="status-label">金钱</span>
                                 <span class="status-value" id="money">100</span>
                             </div>
@@ -3237,31 +3260,31 @@
                         text: '🎯 发球训练（体力-15，心情-5）',
                         next: 'lifeChoice',
                         requirement: { energy: 15 },
-                        effect: { serve: 3, energy: -15, mood: -5, stress: 3, trained: true, eventType: 'training' }
+                        effect: { serve: 3, energy: -15, mood: -5, stress: 3, trained: true, eventType: 'training', lastTraining: 'serve' }
                     },
                     {
                         text: '⚡ 扣球训练（体力-20，心情-8）',
                         next: 'lifeChoice',
                         requirement: { energy: 20 },
-                        effect: { spike: 3, energy: -20, mood: -8, stress: 5, trained: true, eventType: 'training' }
+                        effect: { spike: 3, energy: -20, mood: -8, stress: 5, trained: true, eventType: 'training', lastTraining: 'spike' }
                     },
                     {
                         text: '🛡️ 拦网训练（体力-18，心情-6）',
                         next: 'lifeChoice',
                         requirement: { energy: 18 },
-                        effect: { block: 3, energy: -18, mood: -6, stress: 4, trained: true, eventType: 'training' }
+                        effect: { block: 3, energy: -18, mood: -6, stress: 4, trained: true, eventType: 'training', lastTraining: 'block' }
                     },
                     {
                         text: '🤸 垫球训练（体力-15，心情-5）',
                         next: 'lifeChoice',
                         requirement: { energy: 15 },
-                        effect: { dig: 3, energy: -15, mood: -5, stress: 3, trained: true, eventType: 'training' }
+                        effect: { dig: 3, energy: -15, mood: -5, stress: 3, trained: true, eventType: 'training', lastTraining: 'dig' }
                     },
                     {
                         text: '🙌 托球训练（体力-15，心情-5）',
                         next: 'lifeChoice',
                         requirement: { energy: 15 },
-                        effect: { set: 3, energy: -15, mood: -5, stress: 3, trained: true, eventType: 'training' }
+                        effect: { set: 3, energy: -15, mood: -5, stress: 3, trained: true, eventType: 'training', lastTraining: 'set' }
                     },
                     {
                         text: '⏭️ 跳过训练，直接课余生活',
@@ -4638,6 +4661,83 @@
                                 { text: '我们还是分手吧', effect: { mood: -20, special: 'breakup', buff: 'dedicationBonus' } }
                             ]
                         }
+                    },
+                    
+                    // 专精训练请教事件（技能≥60时触发）
+                    {
+                        id: 'teach_serve',
+                        name: '请教发球',
+                        condition: { skills: { serve: 60 }, lastTraining: 'serve' },
+                        probability: 0.35,
+                        once: true,
+                        content: {
+                            title: '🎯 学弟的请教',
+                            text: '训练结束后，一个学弟跑过来："学长，你的发球好厉害！能教教我吗？"\n\n他眼神里充满期待。',
+                            choices: [
+                                { text: '当然，我来示范给你看', effect: { serve: 2, reputation: 8, mood: 10, relationship: 5 } },
+                                { text: '抱歉，我还要继续练', effect: { serve: 1, mood: -5 } }
+                            ]
+                        }
+                    },
+                    {
+                        id: 'teach_spike',
+                        name: '请教扣球',
+                        condition: { skills: { spike: 60 }, lastTraining: 'spike' },
+                        probability: 0.35,
+                        once: true,
+                        content: {
+                            title: '⚡ 学妹的请教',
+                            text: '一个学妹拿着排球走过来："学长，你的扣球力量好大！能教我怎么发力吗？"\n\n她看起来很认真。',
+                            choices: [
+                                { text: '好啊，我教你技巧', effect: { spike: 2, reputation: 8, mood: 12, relationship: 5 } },
+                                { text: '我也还在摸索中', effect: { spike: 1, mood: -3 } }
+                            ]
+                        }
+                    },
+                    {
+                        id: 'teach_block',
+                        name: '请教拦网',
+                        condition: { skills: { block: 60 }, lastTraining: 'block' },
+                        probability: 0.35,
+                        once: true,
+                        content: {
+                            title: '🛡️ 学弟的请教',
+                            text: '一个高个子学弟问你："学长，拦网时怎么判断对方的扣球路线？你总能拦到球！"\n\n他拿着笔记本准备记录。',
+                            choices: [
+                                { text: '我分享一下经验', effect: { block: 2, reputation: 8, mood: 10, relationship: 5 } },
+                                { text: '这个要靠实战积累', effect: { block: 1, mood: -4 } }
+                            ]
+                        }
+                    },
+                    {
+                        id: 'teach_dig',
+                        name: '请教垫球',
+                        condition: { skills: { dig: 60 }, lastTraining: 'dig' },
+                        probability: 0.35,
+                        once: true,
+                        content: {
+                            title: '🏐 学妹的请教',
+                            text: '一个学妹羡慕地说："学长，你的垫球好稳啊！我总是控制不好方向，能教教我吗？"\n\n她看起来有些沮丧。',
+                            choices: [
+                                { text: '没问题，我示范给你', effect: { dig: 2, reputation: 8, mood: 10, relationship: 5 } },
+                                { text: '多练就好了', effect: { dig: 1, mood: -3 } }
+                            ]
+                        }
+                    },
+                    {
+                        id: 'teach_set',
+                        name: '请教托球',
+                        condition: { skills: { set: 60 }, lastTraining: 'set' },
+                        probability: 0.35,
+                        once: true,
+                        content: {
+                            title: '🤲 学弟的请教',
+                            text: '一个学弟问你："学长，你的托球好精准！怎么才能像你一样把球传到最佳位置？"\n\n他看起来很好学。',
+                            choices: [
+                                { text: '我教你手型和发力', effect: { set: 2, reputation: 8, mood: 10, relationship: 5 } },
+                                { text: '这需要长期练习', effect: { set: 1, mood: -4 } }
+                            ]
+                        }
                     }
                 ];
             }
@@ -5860,6 +5960,24 @@
                         if (current < required) {
                             return false;
                         }
+                    }
+                }
+                
+                // 检查技能条件
+                if (condition.skills) {
+                    for (let skill in condition.skills) {
+                        const required = condition.skills[skill];
+                        const current = this.player.skills[skill] || 0;
+                        if (current < required) {
+                            return false;
+                        }
+                    }
+                }
+                
+                // 检查最后训练的技能类型
+                if (condition.lastTraining) {
+                    if (this.lastTrainingSkill !== condition.lastTraining) {
+                        return false;
                     }
                 }
                 
@@ -10784,6 +10902,11 @@
                                 break;
                         }
                     }
+                }
+                
+                // 记录最后训练的技能类型（用于专精请教事件）
+                if (effect.lastTraining) {
+                    this.lastTrainingSkill = effect.lastTraining;
                 }
                 
                 if (effect.trained) {
