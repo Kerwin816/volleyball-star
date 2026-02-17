@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>排球之星 - 从菜鸟到冠军</title>
-    <!-- Version: 2.2.3 - Skill Growth Rebalance -->
+    <!-- Version: 2.2.4 - Skill Growth Rebalance -->
     
     <!-- SEO优化 -->
     <meta name="description" content="体验从大一新生到市级冠军的排球之旅！训练、比赛、成长，书写你的排球传奇！">
@@ -1709,7 +1709,7 @@
         <!-- 开发者署名和版本号 -->
         <div class="developer-credit">
             <span>开发者：小水</span>
-            <span class="version-number">v2.2.3</span>
+            <span class="version-number">v2.2.4</span>
         </div>
     </div>
     
@@ -3694,7 +3694,7 @@
                         emoji: '🏐',
                         nextRound: 'round8',
                         eliminationRank: 'top16',
-                        opponentStrength: 55
+                        opponentStrength: 70  // 提高难度：55→70
                     },
                     round8: {
                         id: 'round8',
@@ -3703,7 +3703,7 @@
                         emoji: '⚡',
                         nextRound: 'round4',
                         eliminationRank: 'top8',
-                        opponentStrength: 65
+                        opponentStrength: 85  // 提高难度：65→85
                     },
                     round4: {
                         id: 'round4',
@@ -3712,7 +3712,7 @@
                         emoji: '🔥',
                         nextRound: 'final',
                         eliminationRank: 'top4',
-                        opponentStrength: 75
+                        opponentStrength: 100  // 提高难度：75→100
                     },
                     final: {
                         id: 'final',
@@ -3721,7 +3721,7 @@
                         emoji: '🏆',
                         nextRound: null,
                         eliminationRank: 'runner_up',
-                        opponentStrength: 85
+                        opponentStrength: 120  // 提高难度：85→120
                     }
                 };
                 
@@ -3791,7 +3791,7 @@
                             { id: 'energy_drink', name: '运动饮料', price: 50, effect: { energy: 10 }, description: '体力+10' },
                             { id: 'massage', name: '运动按摩', price: 150, effect: { energy: 40, mood: 15, stress: -10 }, description: '体力+40，心情+15，压力-10' },
                             { id: 'therapy', name: '深度理疗', price: 250, effect: { energy: 60, mood: 25, stress: -20 }, description: '体力+60，心情+25，压力-20' },
-                            { id: 'nutrition_plan', name: '营养餐计划', price: 400, type: 'buff', effect: { maxEnergyBonus: 15 }, duration: 4, description: '体力上限+15（持续4周）' }
+                            { id: 'nutrition_plan', name: '营养餐计划', price: 400, type: 'buff', effect: { maxEnergyBonus: 50 }, duration: 6, description: '体力上限+50（持续6周）' }
                         ]
                     },
                     gifts: {
@@ -3811,7 +3811,7 @@
                             { id: 'sports_watch', name: '运动手环', price: 400, type: 'permanent', effect: { mood: 15, weeklyStressReduction: 5 }, description: '心情+15，每周自动恢复压力-5（永久）' },
                             { id: 'new_phone', name: '新手机', price: 1200, type: 'permanent', effect: { mood: 30, stress: -20, reputation: 15, weeklyMoodBonus: 3 }, description: '心情+30，压力-20，声望+15，每周心情+3（永久）' },
                             { id: 'volleyball_book', name: '排球教学书', price: 200, effect: { randomSkill: 4 }, description: '随机技能+4', maxPurchases: 5 },
-                            { id: 'game_console', name: '游戏机', price: 800, type: 'permanent', effect: { mood: 25, stress: -15, weeklyRelax: true }, description: '心情+25，压力-15，每周可玩游戏（永久）' }
+                            { id: 'health_supplement', name: '冥想教材', price: 600, type: 'permanent', effect: { energy: 20, maxEnergy: 5, weeklyEnergyBonus: 10 }, description: '体力+20，体力上限+5，每周体力恢复+10（永久）', maxPurchases: 1 }
                         ]
                     }
                 };
@@ -5127,7 +5127,7 @@
                 if (item.id === 'training_ball') return this.player.ownedItems.trainingEquipment.includes('ball');
                 if (item.id === 'sports_watch') return this.player.ownedItems.electronics.includes('watch');
                 if (item.id === 'new_phone') return this.player.ownedItems.electronics.includes('phone');
-                if (item.id === 'game_console') return this.player.ownedItems.electronics.includes('console');
+                if (item.id === 'health_supplement') return this.player.ownedItems.electronics.includes('supplement');
                 
                 return false;
             }
@@ -5242,9 +5242,9 @@
                         if (!this.player.ownedItems.electronics) this.player.ownedItems.electronics = [];
                         this.player.ownedItems.electronics.push('phone');
                     }
-                    if (item.id === 'game_console') {
+                    if (item.id === 'health_supplement') {
                         if (!this.player.ownedItems.electronics) this.player.ownedItems.electronics = [];
-                        this.player.ownedItems.electronics.push('console');
+                        this.player.ownedItems.electronics.push('supplement');
                     }
                 }
                 
@@ -8716,6 +8716,10 @@
                     // 新手机：每周心情+3
                     if (this.player.ownedItems.electronics && this.player.ownedItems.electronics.includes('phone')) {
                         this.player.mood = Math.min(100, this.player.mood + 3);
+                    }
+                    // 营养补剂套装：每周体力+10
+                    if (this.player.ownedItems.electronics && this.player.ownedItems.electronics.includes('supplement')) {
+                        this.player.energy = Math.min(this.player.maxEnergy, this.player.energy + 10);
                     }
                 }
                 
