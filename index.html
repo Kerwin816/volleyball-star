@@ -3899,7 +3899,7 @@
         const TEST_MODE = false;  // 改为 true 启用测试模式
         
         const TEST_CONFIG = {
-            initialSkills: 50,      // 初始技能值（正常是0）
+            initialSkills: 70,      // 初始技能值（正常是0）
             initialMoney: 10000,    // 初始金钱（正常是500）
             initialEnergy: 100,     // 初始体力（正常是100）
             initialMood: 100,       // 初始心情（正常是80）
@@ -4361,12 +4361,12 @@
                     {
                         id: 'lucky_customer',
                         name: '幸运常客',
-                        condition: { activities: { scratchCard: 5 } },
+                        condition: { activities: { scratchCard: 3 } },
                         probability: 0.4,
                         once: true,
                         content: {
                             title: '🎫 幸运常客',
-                            text: '店老板认出了你："小伙子，你是我们的常客啊！这样吧，以后你来买刮刮乐，我给你打9折！"\n\n你获得了"VIP顾客"身份！',
+                            text: '店老板认出了你："小伙子，你是我们的常客啊！这样吧，以后你来买刮刮乐，我给你打7折！"\n\n你获得了"VIP顾客"身份！',
                             choices: [
                                 { text: '太好了，谢谢老板！', effect: { reputation: 5, buff: 'scratchCardDiscount' } },
                                 { text: '不用了，我只是偶尔玩玩', effect: { mood: 10 } }
@@ -4376,7 +4376,7 @@
                     {
                         id: 'mysterious_elder',
                         name: '神秘老人',
-                        condition: { activities: { scratchCard: 10 } },
+                        condition: { activities: { scratchCard: 6 } },
                         probability: 0.3,
                         once: true,
                         content: {
@@ -5406,7 +5406,9 @@
                 
                 storyText.innerHTML = `<h2>🌟 课余生活</h2>
                     <p>训练结束了，你想做些什么来放松一下？</p>
-                    <p style="color: #f093fb; font-size: 16px; font-weight: bold; margin-top: 10px;">⚡ 当前体力：${this.player.energy}</p>`;
+                    <p style="color: #f093fb; font-size: 16px; font-weight: bold; margin-top: 10px;">
+                        ⚡ 当前体力：${this.player.energy} &nbsp;&nbsp;&nbsp; 💰 当前金钱：${this.player.money}
+                    </p>`;
                 
                 // 定义分类
                 const categories = {
@@ -5454,9 +5456,9 @@
                             {
                                 icon: '🎫',
                                 title: '买刮刮乐',
-                                effects: this.playerStats.permanentBuffs.scratchCardDiscount ? '💰27 试试手气！(VIP 9折)' : '💰30 试试手气！',
+                                effects: this.playerStats.permanentBuffs.scratchCardDiscount ? '💰20 试试手气！(VIP 7折)' : '💰30 试试手气！',
                                 next: 'scratchCard',
-                                requirement: { money: this.playerStats.permanentBuffs.scratchCardDiscount ? 27 : 30 },
+                                requirement: { money: this.playerStats.permanentBuffs.scratchCardDiscount ? 20 : 30 },
                                 effect: { special: 'scratchCard', lifeActivity: 'scratchCard' }
                             },
                             {
@@ -5580,7 +5582,7 @@
                     // 特殊处理：刮刮乐
                     if (effect.special === 'scratchCard') {
                         // 计算实际价格（考虑VIP折扣）
-                        const price = this.playerStats.permanentBuffs.scratchCardDiscount ? 27 : 30;
+                        const price = this.playerStats.permanentBuffs.scratchCardDiscount ? 20 : 30;
                         
                         // 检查金钱是否足够
                         if (this.player.money < price) {
