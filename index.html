@@ -1565,7 +1565,7 @@
             background: #dee2e6;
             height: 24px;
             border-radius: 10px;
-            overflow: visible;
+            overflow: hidden;
             position: relative;
         }
         
@@ -1581,7 +1581,6 @@
             font-size: 12px;
             font-weight: bold;
             border-radius: 10px;
-            min-width: 30px;
         }
         
         /* 开发者署名 */
@@ -2204,7 +2203,7 @@
     <script>
         // ==================== 游戏配置 ====================
         // 版本号配置（统一管理）
-        const GAME_VERSION = '2.3.4';
+        const GAME_VERSION = '2.3.5';
         
         // 姓氏库
         const SURNAMES = [
@@ -3371,80 +3370,80 @@
                 ]
             },
             
-            lifeChoice: {
-                text: `<h2>🌟 课余生活</h2>
-                <p>训练结束了，你想做些什么来放松一下？</p>`,
-                choices: [
-                    {
-                        text: '🍜 吃夜宵（心情+15，体力-5，压力-5，花费20元）',
-                        next: 'checkRandomEvent',
-                        requirement: { money: 20 },
-                        effect: { mood: 15, energy: -5, stress: -5, money: -20, eventType: 'life' }
-                    },
-                    {
-                        text: '🏐 打野球（25分制比赛，体力-20）',
-                        next: 'casualMatch',
-                        requirement: { energy: 20 },
-                        effect: { matchType: 'casual', energy: -20 }
-                    },
-                    {
-                        text: '🎮 打游戏（心情+10，压力-8，体力-3）',
-                        next: 'volleyballClickGame',
-                        requirement: { energy: 3 }
-                    },
-                    {
-                        text: '� 去图书馆（心情+5，压力+3，声望+2）',
-                        next: 'checkRandomEvent',
-                        effect: { mood: 5, stress: 3, reputation: 2, eventType: 'life' }
-                    },
-                    {
-                        text: '� 早点休息（体力+20，心情+8，压力-5）',
-                        next: 'checkRandomEvent',
-                        effect: { energy: 20, mood: 8, stress: -5, eventType: 'life' }
-                    },
-                    {
-                        text: '👥 和队友聊天（心情+12，压力-6，关系+5）',
-                        next: 'checkRandomEvent',
-                        effect: { mood: 12, stress: -6, relationship: 5, eventType: 'life' }
-                    },
-                    {
-                        text: '🍿 看小排球（心情+18，压力-10，花费50元）',
-                        next: 'checkRandomEvent',
-                        requirement: { money: 50 },
-                        effect: { mood: 18, stress: -10, money: -50, eventType: 'life' }
-                    },
-                    {
-                        text: '🛒 买运动装备（技能+2，心情+10，花费250元）',
-                        next: 'checkRandomEvent',
-                        requirement: { money: 250 },
-                        effect: { serve: 2, spike: 2, block: 2, dig: 1, set: 1, mood: 10, money: -250, eventType: 'life' }
-                    },
-                    {
-                        text: '💼 兼职打工（金钱+150，体力-20，压力+8）',
-                        next: 'checkRandomEvent',
-                        requirement: { energy: 20 },
-                        effect: { money: 150, energy: -20, stress: 8, mood: -5, eventType: 'life' }
-                    },
-                    {
-                        text: '🍔 吃大餐（心情+25，体力+10，花费100元）',
-                        next: 'checkRandomEvent',
-                        requirement: { money: 100 },
-                        effect: { mood: 25, energy: 10, stress: -8, money: -100, eventType: 'life' }
-                    },
-                    {
-                        text: '🎁 给队友买礼物（关系+15，声望+5，花费80元）',
-                        next: 'checkRandomEvent',
-                        requirement: { money: 80 },
-                        effect: { relationship: 15, reputation: 5, mood: 8, money: -80, eventType: 'life' }
-                    },
-                    {
-                        text: '📱 买新手机（心情+20，压力-5，花费800元）',
-                        next: 'checkRandomEvent',
-                        requirement: { money: 800 },
-                        effect: { mood: 20, stress: -5, money: -800, eventType: 'life' }
-                    }
-                ]
-            },
+            // lifeChoice: {
+            //     text: `<h2>🌟 课余生活</h2>
+            //     <p>训练结束了，你想做些什么来放松一下？</p>`,
+            //     choices: [
+            //         {
+            //             text: '🍜 吃夜宵（心情+15，体力-5，压力-5，花费20元）',
+            //             next: 'checkRandomEvent',
+            //             requirement: { money: 20 },
+            //             effect: { mood: 15, energy: -5, stress: -5, money: -20, eventType: 'life' }
+            //         },
+            //         {
+            //             text: '🏐 打野球（25分制比赛，体力-20）',
+            //             next: 'casualMatch',
+            //             requirement: { energy: 20 },
+            //             effect: { matchType: 'casual', energy: -20 }
+            //         },
+            //         {
+            //             text: '🎮 打游戏（心情+10，压力-8，体力-3）',
+            //             next: 'volleyballClickGame',
+            //             requirement: { energy: 3 }
+            //         },
+            //         {
+            //             text: '� 去图书馆（心情+5，压力+3，声望+2）',
+            //             next: 'checkRandomEvent',
+            //             effect: { mood: 5, stress: 3, reputation: 2, eventType: 'life' }
+            //         },
+            //         {
+            //             text: '� 早点休息（体力+20，心情+8，压力-5）',
+            //             next: 'checkRandomEvent',
+            //             effect: { energy: 20, mood: 8, stress: -5, eventType: 'life' }
+            //         },
+            //         {
+            //             text: '👥 和队友聊天（心情+12，压力-6，关系+5）',
+            //             next: 'checkRandomEvent',
+            //             effect: { mood: 12, stress: -6, relationship: 5, eventType: 'life' }
+            //         },
+            //         {
+            //             text: '🍿 看小排球（心情+18，压力-10，花费50元）',
+            //             next: 'checkRandomEvent',
+            //             requirement: { money: 50 },
+            //             effect: { mood: 18, stress: -10, money: -50, eventType: 'life' }
+            //         },
+            //         {
+            //             text: '🛒 买运动装备（技能+2，心情+10，花费250元）',
+            //             next: 'checkRandomEvent',
+            //             requirement: { money: 250 },
+            //             effect: { serve: 2, spike: 2, block: 2, dig: 1, set: 1, mood: 10, money: -250, eventType: 'life' }
+            //         },
+            //         {
+            //             text: '💼 兼职打工（金钱+150，体力-20，压力+8）',
+            //             next: 'checkRandomEvent',
+            //             requirement: { energy: 20 },
+            //             effect: { money: 150, energy: -20, stress: 8, mood: -5, eventType: 'life' }
+            //         },
+            //         {
+            //             text: '🍔 吃大餐（心情+25，体力+10，花费100元）',
+            //             next: 'checkRandomEvent',
+            //             requirement: { money: 100 },
+            //             effect: { mood: 25, energy: 10, stress: -8, money: -100, eventType: 'life' }
+            //         },
+            //         {
+            //             text: '🎁 给队友买礼物（关系+15，声望+5，花费80元）',
+            //             next: 'checkRandomEvent',
+            //             requirement: { money: 80 },
+            //             effect: { relationship: 15, reputation: 5, mood: 8, money: -80, eventType: 'life' }
+            //         },
+            //         {
+            //             text: '📱 买新手机（心情+20，压力-5，花费800元）',
+            //             next: 'checkRandomEvent',
+            //             requirement: { money: 800 },
+            //             effect: { mood: 20, stress: -5, money: -800, eventType: 'life' }
+            //         }
+            //     ]
+            // },
             
             casualMatch: {
                 text: '',
@@ -4316,10 +4315,10 @@
                         name: '装备商店',
                         icon: '👟',
                         items: [
-                            { id: 'pro_shoes', name: '专业球鞋', price: 500, type: 'permanent', effect: { trainingBonus: 20 }, description: '训练效果+20%（永久）' },
+                            { id: 'pro_shoes', name: '专业球鞋', price: 600, type: 'permanent', effect: { trainingBonus: 20 }, description: '训练效果+20%（永久）' },
                             { id: 'protection', name: '护膝护腕套装', price: 250, type: 'permanent', effect: { injuryResist: 70 }, description: '减少受伤概率70%（永久）' },
-                            { id: 'jersey', name: '专业球衣', price: 350, type: 'permanent', effect: { mood: 15, reputation: 10, trainingBonus: 5 }, description: '心情+15，声望+10，训练效果+5%（永久）' },
-                            { id: 'training_ball', name: '专业训练球', price: 600, type: 'permanent', effect: { trainingBonus: 15 }, description: '技能训练+15%（永久）' }
+                            { id: 'jersey', name: '专业球衣', price: 350, type: 'permanent', effect: { mood: 15, reputation: 10, trainingBonus: 10 }, description: '心情+15，声望+10，训练效果+10%（永久）' },
+                            { id: 'training_ball', name: '专业训练球', price: 900, type: 'permanent', effect: { trainingBonus: 25 }, description: '训练效果+25%（永久）' }
                         ]
                     },
                     recovery: {
@@ -5465,8 +5464,7 @@
                                 title: '看小排球',
                                 effects: '体力+12 心情+20 压力-12 💰50',
                                 next: 'checkRandomEvent',
-                                requirement: { money: 50 },
-                                effect: { energy: 12, mood: 20, stress: -12, money: -50, eventType: 'life', lifeActivity: 'movie' }
+                                effect: { energy: 15, mood: 30, stress: -12, eventType: 'life', lifeActivity: 'movie' }
                             },
                             {
                                 icon: '📚',
@@ -6517,17 +6515,17 @@
                 
                 // 装备加成
                 if (this.player.ownedItems) {
-                    // 专业球鞋 +10%
+                    // 专业球鞋 +20%
                     if (this.player.ownedItems.shoes === 'pro') {
+                        totalBonus += 0.20;
+                    }
+                    // 专业球衣 +10%
+                    if (this.player.ownedItems.jersey) {
                         totalBonus += 0.10;
                     }
-                    // 专业球衣 +5%
-                    if (this.player.ownedItems.jersey) {
-                        totalBonus += 0.05;
-                    }
-                    // 专业训练球 +15%
+                    // 专业训练球 +25%
                     if (this.player.ownedItems.trainingEquipment && this.player.ownedItems.trainingEquipment.includes('ball')) {
-                        totalBonus += 0.15;
+                        totalBonus += 0.25;
                     }
                 }
                 
@@ -9082,6 +9080,10 @@
                     return;
                 }
                 
+                // 重置弹窗状态，确保可以显示
+                modal.style.display = '';
+                modal.classList.remove('show');
+                
                 title.textContent = event.title;
                 text.textContent = event.text;
                 choicesDiv.innerHTML = '';
@@ -10552,11 +10554,19 @@
                     positionStat.style.display = 'none';
                 }
                 
+                // 更新技能进度条（使用新的计算方式：最小25px + 剩余空间的百分比）
                 for (let skill in this.player.skills) {
                     const value = this.player.skills[skill];
                     document.getElementById(`${skill}-value`).textContent = value;
                     const bar = document.getElementById(`${skill}-bar`);
-                    bar.style.width = `${value}%`;
+                    
+                    // 计算进度条宽度：基础25px + 剩余空间的百分比
+                    // 假设进度条总宽度约225px（25px基础 + 200px可变）
+                    const baseWidth = 4;  // 25/225 ≈ 11.1%
+                    const variableWidth = 96;  // 200/225 ≈ 88.9%
+                    const displayWidth = baseWidth + (variableWidth * value / 100);
+                    
+                    bar.style.width = `${displayWidth}%`;
                     bar.textContent = value;
                 }
                 
