@@ -1338,6 +1338,7 @@
             text-align: center;
             max-width: 600px;
             margin: 0 auto;
+            position: relative;
         }
         
         /* 移动端优化 */
@@ -2228,6 +2229,11 @@
                     - <strong>加粗</strong>
                     - <br> 换行
                 -->
+                <h3 style="color: #a78bfa; margin-top: 0;">v2.5.1 (2024-02-20)</h3>
+                <ul style="color: rgba(255,255,255,0.85); line-height: 1.8;">
+                    <li>修复存档问题</li>
+                    <li>修复决赛无法进行问题</li>
+                </ul>
                 <h3 style="color: #a78bfa; margin-top: 0;">v2.5.0 (2024-02-20)</h3>
                 <ul style="color: rgba(255,255,255,0.85); line-height: 1.8;">
                     <li>新增队友系统</li>
@@ -2303,7 +2309,7 @@
     <script>
         // ==================== 游戏配置 ====================
         // 版本号配置（统一管理）
-        const GAME_VERSION = '2.5.0';
+        const GAME_VERSION = '2.5.1';
         
         // 姓氏库
         const SURNAMES = [
@@ -2883,7 +2889,7 @@
                     },
                     {
                         text: '优先训练',
-                        effect: { serve: 5, spike: 5, stress: 8, reputation: -5 },
+                        effect: { serve: 3, spike: 3, stress: 10, reputation: -5 },
                         result: '训练效果不错，但成绩不太理想。'
                     }
                 ]
@@ -3317,9 +3323,6 @@
                 text: `<div id="name-input-panel">
                     <h2>🏐 欢迎来到排球之星</h2>
                     <p style="margin-bottom: 20px; color: #666;">你即将开始一段从菜鸟到冠军的排球之旅</p>
-                    <div style="text-align: center; margin-bottom: 15px;">
-                        <button class="tab-btn" onclick="game.toggleChangelogModal()" style="font-size: 14px; padding: 8px 16px;">📋 版本更新日志</button>
-                    </div>
                     <div id="name-input-container">
                         <input type="text" id="player-name-input" placeholder="请输入你的名字" maxlength="10" />
                         <button id="random-name-btn" onclick="game.randomName()" title="随机名字">🎲</button>
@@ -3360,6 +3363,9 @@
                         </div>
                     </div>
                     <button class="start-game-btn" onclick="game.submitName()">开始游戏</button>
+                    <div style="position: absolute; bottom: 15px; right: 15px;">
+                        <button class="tab-btn" onclick="game.toggleChangelogModal()" style="font-size: 12px; padding: 6px 12px; opacity: 0.7;">📋 更新日志</button>
+                    </div>
                 </div>`,
                 choices: []
             },
@@ -4496,7 +4502,7 @@
                         emoji: '🏐',
                         nextRound: 'round8',
                         eliminationRank: 'top16',
-                        opponentStrength: 80  // 玩家综合实力75，期望胜率75%
+                        opponentStrength: 80
                     },
                     round8: {
                         id: 'round8',
@@ -4505,7 +4511,7 @@
                         emoji: '⚡',
                         nextRound: 'round4',
                         eliminationRank: 'top8',
-                        opponentStrength: 90  // 玩家综合实力78，期望胜率70%
+                        opponentStrength: 90
                     },
                     round4: {
                         id: 'round4',
@@ -4514,7 +4520,7 @@
                         emoji: '🔥',
                         nextRound: 'final',
                         eliminationRank: 'top4',
-                        opponentStrength: 110  // 玩家综合实力81，期望胜率65%
+                        opponentStrength: 110
                     },
                     final: {
                         id: 'final',
@@ -4523,7 +4529,7 @@
                         emoji: '🏆',
                         nextRound: null,
                         eliminationRank: 'runner_up',
-                        opponentStrength: 140  // 玩家综合实力83，期望胜率60%
+                        opponentStrength: 140
                     }
                 };
                 
@@ -4554,7 +4560,11 @@
                 if (this.hasSaveData()) {
                     console.log('发现存档，尝试加载...');
                     const loaded = this.loadGame();
-                    if (loaded) {
+                    if (loaded === 'gameOver') {
+                        // 游戏已结束，显示存档弹窗，继续后直接跳结局
+                        this.showContinueGamePrompt();
+                        return;
+                    } else if (loaded) {
                         console.log('存档加载成功');
                         // 显示继续游戏的提示
                         this.showContinueGamePrompt();
@@ -4584,6 +4594,32 @@
                 const text = document.getElementById('event-modal-text');
                 const choicesDiv = document.getElementById('event-modal-choices');
                 
+                // 检查是否在比赛中
+                let statusWarning = '';
+                if (this.player.gameOver === true) {
+                    statusWarning = `<div style="margin: 15px 0; padding: 15px; background: rgba(255, 215, 0, 0.2); border-radius: 8px; border-left: 4px solid #ffd700;">
+                        <p style="color: #ffd700; font-weight: bold;">🏆 游戏已结束</p>
+                        <p style="color: #ffd700;">继续将直接查看结局</p>
+                    </div>`;
+                } else if (this.inMatch && this.matchCheckpoint) {
+                    statusWarning = `<div style="margin: 15px 0; padding: 15px; background: rgba(255, 193, 7, 0.2); border-radius: 8px; border-left: 4px solid #ffc107;">
+                        <p style="color: #ff9800; font-weight: bold;">⚠️ 检测到比赛进行中</p>
+                        <p style="color: #ff9800;">继续游戏将重新开始比赛：${this.matchCheckpoint.matchName}</p>
+                    </div>`;
+                } else if (this.needRestartTournamentRound && this.tournament && this.tournament.active) {
+                    const roundNames = {
+                        'round16': '16强赛',
+                        'round8': '8强赛',
+                        'round4': '半决赛',
+                        'final': '决赛'
+                    };
+                    const roundName = roundNames[this.tournament.currentRound] || this.tournament.currentRound;
+                    statusWarning = `<div style="margin: 15px 0; padding: 15px; background: rgba(255, 193, 7, 0.2); border-radius: 8px; border-left: 4px solid #ffc107;">
+                        <p style="color: #ff9800; font-weight: bold;">⚠️ 检测到锦标赛进行中</p>
+                        <p style="color: #ff9800;">继续游戏将重新开始：${roundName}</p>
+                    </div>`;
+                }
+                
                 title.textContent = '💾 发现存档';
                 text.innerHTML = `
                     <p>检测到上次的游戏记录：</p>
@@ -4593,6 +4629,7 @@
                         <p><strong>队伍：</strong>${this.player.team === 'none' ? '无' : this.player.team === 'college' ? '院队' : '校队'}</p>
                         <p><strong>平均技能：</strong>${Math.round((this.player.skills.serve + this.player.skills.spike + this.player.skills.block + this.player.skills.dig + this.player.skills.set) / 5)}</p>
                     </div>
+                    ${statusWarning}
                     <p>是否继续上次的游戏？</p>
                 `;
                 
@@ -4607,10 +4644,80 @@
                     // 显示角色面板和游戏头部
                     document.getElementById('character-panel').classList.add('show');
                     document.getElementById('game-header').classList.add('show');
-                    // 更新UI并显示当前场景
-                    this.updateUI();
-                    this.updateGoalDisplay();
-                    this.showScene(this.currentScene);
+                    
+                    // 如果游戏已结束，直接跳结局
+                    if (this.player.gameOver === true) {
+                        this.updateUI();
+                        this.showScene(this.player.endingType || 'ending');
+                        return;
+                    }
+                    
+                    // 检查是否在比赛进行中刷新了页面
+                    if (this.inMatch && this.matchCheckpoint) {
+                        console.log('检测到比赛进行中刷新，将重新开始比赛');
+                        // 清除比赛标记
+                        this.inMatch = false;
+                        const checkpoint = this.matchCheckpoint;
+                        this.matchCheckpoint = null;
+                        
+                        // 更新UI
+                        this.updateUI();
+                        this.updateGoalDisplay();
+                        
+                        // 延迟重新开始比赛，确保UI已加载
+                        setTimeout(() => {
+                            this.startFormalMatch(checkpoint.matchType, checkpoint.matchName);
+                        }, 500);
+                    } else if (this.needRestartTournamentRound && this.tournament && this.tournament.active) {
+                        // 检查是否需要重新开始锦标赛轮次
+                        console.log('检测到锦标赛轮次场景刷新，将重新开始轮次');
+                        this.needRestartTournamentRound = false;
+                        const currentRound = this.tournament.currentRound;
+                        
+                        // 更新UI
+                        this.updateUI();
+                        this.updateGoalDisplay();
+                        
+                        // 延迟重新开始轮次
+                        setTimeout(() => {
+                            this.startTournamentRound(currentRound);
+                        }, 500);
+                    } else {
+                        // 正常继续游戏
+                        this.updateUI();
+                        this.updateGoalDisplay();
+                        
+                        // 如果场景是weeklyHub且第12周锦标赛进行中，恢复到当前轮次
+                        if (this.currentScene === 'weeklyHub' && this.tournament && this.tournament.active && 
+                            !this.tournament.eliminated && this.tournament.currentRound) {
+                            setTimeout(() => {
+                                this.startTournamentRound(this.tournament.currentRound);
+                            }, 500);
+                            return;
+                        }
+                        
+                        // 如果场景是weeklyHub，检查是否有应触发的比赛
+                        if (this.currentScene === 'weeklyHub') {
+                            const matchEvent = this.checkScheduledMatch();
+                            if (matchEvent) {
+                                if (matchEvent.type === 'match') {
+                                    this.showMatchPreview(matchEvent.matchType, matchEvent.matchName);
+                                } else if (matchEvent.type === 'tournament') {
+                                    this.startTournament(matchEvent.tournamentType);
+                                } else if (matchEvent.type === 'hiddenEnding') {
+                                    this.player.gameOver = true;
+                                    this.player.endingType = matchEvent.endingId;
+                                    this.saveGame();
+                                    this.showScene(matchEvent.endingId);
+                                } else {
+                                    this.showScene(this.currentScene);
+                                }
+                                return;
+                            }
+                        }
+                        
+                        this.showScene(this.currentScene);
+                    }
                 };
                 choicesDiv.appendChild(continueBtn);
                 
@@ -7462,6 +7569,8 @@
                 };
                 choicesDiv.appendChild(continueBtn);
                 
+                // 重置display样式并显示modal
+                modal.style.display = '';
                 modal.classList.add('show');
             }
             
@@ -8238,7 +8347,10 @@
                 // 添加随机波动
                 const opponent = baseOpponent + (Math.random() - 0.5) * 2 * randomRange;
                 
-                // 确保对手实力在合理范围
+                // 确保对手实力在合理范围（锦标赛不受上限限制）
+                if (matchType === 'tournament') {
+                    return Math.max(20, opponent);
+                }
                 return Math.max(20, Math.min(90, opponent));
             }
             
@@ -8559,6 +8671,19 @@
                 console.log('=== 开始正式比赛 ===');
                 console.log('比赛类型:', matchType);
                 console.log('比赛名称:', matchName);
+                
+                // 保存比赛前的状态（用于比赛中刷新时恢复）
+                this.matchCheckpoint = {
+                    matchType: matchType,
+                    matchName: matchName,
+                    week: this.player.week
+                };
+                
+                // 标记比赛进行中
+                this.inMatch = true;
+                
+                // 保存游戏（包含比赛检查点）
+                this.saveGame();
                 
                 // 先显示对阵页面
                 this.showMatchupScreen(matchType, matchName);
@@ -9293,6 +9418,10 @@
                 // 显示结果场景
                 const resultText = this.getMatchResultText(match.matchType, performance, won, setsDisplay) + rewardsDisplay;
                 
+                // 清除比赛进行中标记
+                this.inMatch = false;
+                this.matchCheckpoint = null;
+                
                 // 比赛结束后自动保存
                 this.saveGame();
                 
@@ -9345,7 +9474,7 @@
                 
                 // 根据比赛类型和表现等级设置奖励
                 if (matchType === 'collegeMatch') {
-                    rewards.nextGoal = 'universityTryout';
+                    rewards.goalUpdate = 'universityTryout';  // 使用goalUpdate而不是nextGoal
                     if (performance === 'excellent') {
                         // 出色表现（胜利）
                         rewards.reputation = 25;
@@ -9817,7 +9946,7 @@
             // 获取轮次开始文本
             getRoundStartText(roundInfo) {
                 const progress = this.renderTournamentProgress();
-                const starCount = Math.floor(roundInfo.opponentStrength / 20);
+                const starCount = Math.min(5, Math.floor(roundInfo.opponentStrength / 20));
                 const opponentStars = '★'.repeat(starCount) + '☆'.repeat(5 - starCount);
                 
                 let coachTip = '';
@@ -9924,6 +10053,23 @@
                     this.tournament.matchesWon++;
                     this.tournament.roundsCompleted.push(this.tournament.currentRound);
                     
+                    // 清除比赛进行中标记
+                    this.inMatch = false;
+                    this.matchCheckpoint = null;
+                    
+                    // 检查是否是决赛胜利
+                    if (!roundInfo.nextRound) {
+                        // 决赛胜利：标记游戏结束并立即保存
+                        this.player.gameOver = true;
+                        this.player.endingType = this.getTournamentEnding();
+                    } else {
+                        // 非决赛：提前更新currentRound为下一轮，方便刷新恢复
+                        this.tournament.currentRound = roundInfo.nextRound;
+                    }
+                    
+                    // 立即保存（清除inMatch标记，防止刷新误判为比赛进行中）
+                    this.saveGame();
+                    
                     // 显示晋级界面
                     this.showTournamentRoundResult(true, roundInfo);
                 } else {
@@ -9931,6 +10077,17 @@
                     this.tournament.matchesLost++;
                     this.tournament.eliminated = true;
                     this.tournament.finalRank = roundInfo.eliminationRank;
+                    
+                    // 清除比赛进行中标记
+                    this.inMatch = false;
+                    this.matchCheckpoint = null;
+                    
+                    // 标记游戏即将结束
+                    this.player.gameOver = true;
+                    this.player.endingType = this.getTournamentEnding();
+                    
+                    // 立即保存，防止玩家刷新重来
+                    this.saveGame();
                     
                     // 显示淘汰界面
                     this.showTournamentRoundResult(false, roundInfo);
@@ -13994,8 +14151,14 @@
                 const skillGains = [];
                 luckyTeammates.forEach(teammate => {
                     const posInfo = this.positions[teammate.position];
-                    // 优先提升核心技能
-                    const skillPool = Math.random() < 0.7 ? posInfo.coreSkills : posInfo.secondarySkills;
+                    // 优先提升核心技能，如果次要技能为空则只用核心技能
+                    let skillPool;
+                    if (Math.random() < 0.7 || posInfo.secondarySkills.length === 0) {
+                        skillPool = posInfo.coreSkills;
+                    } else {
+                        skillPool = posInfo.secondarySkills;
+                    }
+                    
                     const skill = skillPool[Math.floor(Math.random() * skillPool.length)];
                     const gain = Math.floor(Math.random() * 2) + 1; // 1-2
                     
@@ -14271,10 +14434,13 @@
                         shopItems: this.shopItems,
                         adventureEvents: this.adventureEvents,
                         currentScene: this.currentScene,
+                        currentGoal: this.currentGoal,  // 保存当前目标
                         weekStartNoticeShown: this.weekStartNoticeShown,
                         rerollsRemaining: this.rerollsRemaining,
                         teammates: this.teammates,  // 保存队友数据
-                        teamStats: this.teamStats   // 保存队伍统计
+                        teamStats: this.teamStats,   // 保存队伍统计
+                        inMatch: this.inMatch || false,  // 保存比赛进行中标记
+                        matchCheckpoint: this.matchCheckpoint || null  // 保存比赛检查点
                     };
                     
                     localStorage.setItem('volleyballStarSave', JSON.stringify(saveData));
@@ -14310,18 +14476,7 @@
                         };
                         this.teammates = saveData.teammates || [];
                         this.teamStats = saveData.teamStats || { averageChemistry: 0, averageSkill: 0, atmosphere: 0 };
-                        
-                        // 显示提示并跳转到结局场景
-                        setTimeout(() => {
-                            alert('此存档已结束，将显示结局画面');
-                            if (this.player.endingType) {
-                                this.showScene(this.player.endingType);
-                            } else {
-                                // 如果没有记录结局类型，显示通用结局
-                                this.showScene('ending');
-                            }
-                        }, 100);
-                        return true;
+                        return 'gameOver';
                     }
                     
                     // 兼容性检查：确保新字段存在
@@ -14348,10 +14503,52 @@
                     this.shopItems = saveData.shopItems || this.initShopItems();
                     this.adventureEvents = saveData.adventureEvents || this.initAdventureEvents();
                     this.currentScene = saveData.currentScene || 'weeklyHub';
+                    this.currentGoal = saveData.currentGoal || 'collegeTryout';  // 恢复当前目标
                     this.weekStartNoticeShown = saveData.weekStartNoticeShown || false;
                     this.rerollsRemaining = saveData.rerollsRemaining || 5;
                     this.teammates = saveData.teammates || [];  // 恢复队友数据
                     this.teamStats = saveData.teamStats || { averageChemistry: 0, averageSkill: 0, atmosphere: 0 };  // 恢复队伍统计
+                    this.inMatch = saveData.inMatch || false;  // 恢复比赛进行中标记
+                    this.matchCheckpoint = saveData.matchCheckpoint || null;  // 恢复比赛检查点
+                    
+                    // 修正场景：某些临时场景不应该在刷新后恢复
+                    const temporaryScenes = ['weekEnd', 'matchResult', 'tournamentRoundResult', 'eventResult'];
+                    const isRoundStartScene = this.currentScene.startsWith('roundStart_');
+                    const isTournamentResultScene = this.currentScene === 'tournamentRoundResult';
+                    
+                    if (temporaryScenes.includes(this.currentScene) || isRoundStartScene) {
+                        console.log(`检测到临时场景 ${this.currentScene}，重置为 weeklyHub`);
+                        this.currentScene = 'weeklyHub';
+                        
+                        // 如果是锦标赛轮次结果场景，且锦标赛还在进行中（未淘汰）
+                        if (isTournamentResultScene && this.tournament && this.tournament.active && 
+                            !this.tournament.eliminated && this.tournament.currentRound) {
+                            console.log(`检测到锦标赛晋级结果场景刷新，标记需要恢复到当前轮次: ${this.tournament.currentRound}`);
+                            this.needRestartTournamentRound = true;
+                        }
+                        
+                        // 如果是锦标赛轮次开始场景，需要标记重新开始锦标赛轮次
+                        if (isRoundStartScene && this.tournament && this.tournament.active && this.tournament.currentRound) {
+                            console.log(`检测到锦标赛轮次开始场景，标记需要重新开始轮次: ${this.tournament.currentRound}`);
+                            this.needRestartTournamentRound = true;
+                        }
+                    }
+                    
+                    // 智能修正目标（仅在锦标赛未进行时修正，锦标赛进行中不干预）
+                    const tournamentInProgress = this.tournament && this.tournament.active && 
+                                                 !this.tournament.eliminated &&
+                                                 !(this.tournament.roundsCompleted && this.tournament.roundsCompleted.includes('final'));
+                    
+                    if (!tournamentInProgress) {
+                        if (this.player.team === 'college' && this.currentGoal === 'collegeTryout') {
+                            this.currentGoal = 'collegeMatch';
+                            this.saveGame();
+                        } else if (this.player.team === 'university' && 
+                                   (this.currentGoal === 'collegeTryout' || this.currentGoal === 'universityTryout' || this.currentGoal === 'collegeMatch')) {
+                            this.currentGoal = 'universityLeague';
+                            this.saveGame();
+                        }
+                    }
                     
                     console.log('游戏加载成功，当前周次:', this.player.week);
                     return true;
@@ -14412,6 +14609,34 @@
                 // 校际联赛：第12周（游戏结束）
                 if (this.player.week === 12) {
                     console.log('第12周检查: 队伍状态 =', this.player.team);
+                    
+                    // 检查是否已经完成或淘汰锦标赛
+                    if (this.tournament && this.tournament.eliminated) {
+                        console.log('✓ 锦标赛已结束（淘汰），跳转到结局');
+                        const endingId = this.getTournamentEnding();
+                        return {
+                            type: 'hiddenEnding',
+                            endingId: endingId
+                        };
+                    }
+                    
+                    // 检查是否已经完成所有轮次（冠军）
+                    if (this.tournament && this.tournament.roundsCompleted && 
+                        this.tournament.roundsCompleted.includes('final')) {
+                        console.log('✓ 锦标赛已结束（冠军），跳转到结局');
+                        const endingId = this.getTournamentEnding();
+                        return {
+                            type: 'hiddenEnding',
+                            endingId: endingId
+                        };
+                    }
+                    
+                    // 如果锦标赛已经在进行中，不重新触发
+                    if (this.tournament && this.tournament.active) {
+                        console.log('✓ 锦标赛已在进行中，不重新触发');
+                        return null;
+                    }
+                    
                     if (this.player.team === 'university') {
                         console.log('✓ 已加入校队，触发校际联赛锦标赛');
                         return { 
