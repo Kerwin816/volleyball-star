@@ -12353,7 +12353,7 @@
                         position: position,
                         skills: skills,
                         averageSkill: avgSkill,
-                        chemistry: Math.floor(Math.random() * 6) + 5,  // 初始默契5-10（降低）
+                        chemistry: Math.floor(Math.random() * 11) + 20,  // 初始默契20-30（提高培养价值）
                         personality: ['热血型', '冷静型', '开朗型', '内向型', '严肃型'][Math.floor(Math.random() * 5)],
                         weeklyInteractions: {
                             chatted: false,    // 本周是否已聊天
@@ -13628,9 +13628,9 @@
                         neededPositions.splice(posIndex, 1);
                     }
                     
-                    // 提升保留队友的能力（+5）和默契（+10）
+                    // 提升保留队友的能力（+10）和默契（+10）
                     for (let skill in teammate.skills) {
-                        teammate.skills[skill] = Math.min(95, teammate.skills[skill] + 5);
+                        teammate.skills[skill] = Math.min(95, teammate.skills[skill] + 10);
                     }
                     teammate.averageSkill = Math.round((teammate.skills.serve + teammate.skills.spike + 
                                                         teammate.skills.block + teammate.skills.dig + 
