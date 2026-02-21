@@ -3467,81 +3467,6 @@
                 ]
             },
             
-            // lifeChoice: {
-            //     text: `<h2>🌟 课余生活</h2>
-            //     <p>训练结束了，你想做些什么来放松一下？</p>`,
-            //     choices: [
-            //         {
-            //             text: '🍜 吃夜宵（心情+15，体力-5，压力-5，花费20元）',
-            //             next: 'checkRandomEvent',
-            //             requirement: { money: 20 },
-            //             effect: { mood: 15, energy: -5, stress: -5, money: -20, eventType: 'life' }
-            //         },
-            //         {
-            //             text: '🏐 打野球（25分制比赛，体力-20）',
-            //             next: 'casualMatch',
-            //             requirement: { energy: 20 },
-            //             effect: { matchType: 'casual', energy: -20 }
-            //         },
-            //         {
-            //             text: '🎮 打游戏（心情+10，压力-8，体力-3）',
-            //             next: 'volleyballClickGame',
-            //             requirement: { energy: 3 }
-            //         },
-            //         {
-            //             text: '� 去图书馆（心情+5，压力+3，声望+2）',
-            //             next: 'checkRandomEvent',
-            //             effect: { mood: 5, stress: 3, reputation: 2, eventType: 'life' }
-            //         },
-            //         {
-            //             text: '� 早点休息（体力+20，心情+8，压力-5）',
-            //             next: 'checkRandomEvent',
-            //             effect: { energy: 20, mood: 8, stress: -5, eventType: 'life' }
-            //         },
-            //         {
-            //             text: '👥 和队友聊天（心情+12，压力-6，关系+5）',
-            //             next: 'checkRandomEvent',
-            //             effect: { mood: 12, stress: -6, relationship: 5, eventType: 'life' }
-            //         },
-            //         {
-            //             text: '🍿 看小排球（心情+18，压力-10，花费50元）',
-            //             next: 'checkRandomEvent',
-            //             requirement: { money: 50 },
-            //             effect: { mood: 18, stress: -10, money: -50, eventType: 'life' }
-            //         },
-            //         {
-            //             text: '🛒 买运动装备（技能+2，心情+10，花费250元）',
-            //             next: 'checkRandomEvent',
-            //             requirement: { money: 250 },
-            //             effect: { serve: 2, spike: 2, block: 2, dig: 1, set: 1, mood: 10, money: -250, eventType: 'life' }
-            //         },
-            //         {
-            //             text: '💼 兼职打工（金钱+150，体力-20，压力+8）',
-            //             next: 'checkRandomEvent',
-            //             requirement: { energy: 20 },
-            //             effect: { money: 150, energy: -20, stress: 8, mood: -5, eventType: 'life' }
-            //         },
-            //         {
-            //             text: '🍔 吃大餐（心情+25，体力+10，花费100元）',
-            //             next: 'checkRandomEvent',
-            //             requirement: { money: 100 },
-            //             effect: { mood: 25, energy: 10, stress: -8, money: -100, eventType: 'life' }
-            //         },
-            //         {
-            //             text: '🎁 给队友买礼物（关系+15，声望+5，花费80元）',
-            //             next: 'checkRandomEvent',
-            //             requirement: { money: 80 },
-            //             effect: { relationship: 15, reputation: 5, mood: 8, money: -80, eventType: 'life' }
-            //         },
-            //         {
-            //             text: '📱 买新手机（心情+20，压力-5，花费800元）',
-            //             next: 'checkRandomEvent',
-            //             requirement: { money: 800 },
-            //             effect: { mood: 20, stress: -5, money: -800, eventType: 'life' }
-            //         }
-            //     ]
-            // },
-            
             casualMatch: {
                 text: '',
                 choices: []
@@ -4520,7 +4445,7 @@
                         emoji: '🔥',
                         nextRound: 'final',
                         eliminationRank: 'top4',
-                        opponentStrength: 110
+                        opponentStrength: 100
                     },
                     final: {
                         id: 'final',
@@ -4529,7 +4454,7 @@
                         emoji: '🏆',
                         nextRound: null,
                         eliminationRank: 'runner_up',
-                        opponentStrength: 140
+                        opponentStrength: 120
                     }
                 };
                 
@@ -6328,7 +6253,7 @@
                             {
                                 icon: '😴',
                                 title: '早点休息',
-                                effects: '体力+30 心情+10 压力-15',
+                                effects: '体力+30 心情+10 压力-10',
                                 next: 'checkRandomEvent',
                                 effect: { energy: 30, mood: 10, stress: -15, eventType: 'life', lifeActivity: 'rest' }
                             },
@@ -6343,7 +6268,7 @@
                             {
                                 icon: '🎮',
                                 title: '打游戏',
-                                effects: '体力-3 心情+15 压力-10',
+                                effects: '体力-3',
                                 next: 'volleyballClickGame',
                                 requirement: { energy: 3 },
                                 effect: { lifeActivity: 'game' }
@@ -6359,17 +6284,17 @@
                             {
                                 icon: '🍿',
                                 title: '看小排球',
-                                effects: '体力+10 心情+40 压力-15',
+                                effects: '体力+10 心情+40',
                                 next: 'haikyuuEpisode',
                                 requirement: { money: 50 },
-                                effect: { energy: 10, mood: 40, stress: -15, eventType: 'life', lifeActivity: 'movie' }
+                                effect: { energy: 10, mood: 40, eventType: 'life', lifeActivity: 'movie' }
                             },
                             {
                                 icon: '📚',
                                 title: '去图书馆',
-                                effects: '体力+5 心情+8 压力-3 声望+3',
+                                effects: '体力+5 压力-10 声望+10',
                                 next: 'checkRandomEvent',
-                                effect: { energy: 5, mood: 8, stress: -3, reputation: 10, eventType: 'life', lifeActivity: 'library' }
+                                effect: { energy: 5, stress: -10, reputation: 10, eventType: 'life', lifeActivity: 'library' }
                             }
                         ]
                     },
@@ -6388,18 +6313,18 @@
                             {
                                 icon: '🍜',
                                 title: '吃夜宵',
-                                effects: '体力+8 心情+18 压力-8 💰20',
+                                effects: '体力+8 心情+20 压力-10 💰20',
                                 next: 'checkRandomEvent',
                                 requirement: { money: 20 },
-                                effect: { energy: 8, mood: 18, stress: -8, money: -20, eventType: 'life', lifeActivity: 'food' }
+                                effect: { energy: 8, mood: 20, stress: -10, money: -20, eventType: 'life', lifeActivity: 'food' }
                             },
                             {
                                 icon: '🍔',
                                 title: '吃大餐',
-                                effects: '体力+15 心情+28 压力-12 💰100',
+                                effects: '体力+15 心情+30 压力-40 💰100',
                                 next: 'checkRandomEvent',
                                 requirement: { money: 100 },
-                                effect: { energy: 15, mood: 28, stress: -12, money: -100, eventType: 'life', lifeActivity: 'food' }
+                                effect: { energy: 15, mood: 30, stress: -40, money: -100, eventType: 'life', lifeActivity: 'food' }
                             }
                         ]
                     },
@@ -7333,30 +7258,23 @@
                 // 保存当前事件ID（用于applyAdventureEffect中查找事件信息）
                 this.currentEventId = eventId;
                 
-                // 关闭模态框
+                // 关闭模态框（只用classList，不设置inline display）
                 const modal = document.getElementById('event-modal');
                 if (modal) {
-                    modal.style.display = 'none';
                     modal.classList.remove('show');
                 }
                 
-                // 应用效果
-                this.applyAdventureEffect(effect);
-                
-                // 如果有结果文本，显示结果
-                if (choice.result) {
-                    setTimeout(() => {
-                        this.showAdventureResult(choice, event);
-                    }, 300);  // 增加延迟到300ms，确保modal完全关闭后再打开
-                } else {
-                    // 更新UI
-                    this.updateUI();
-                    
-                    // 继续游戏流程
-                    if (this.currentScene === 'lifeChoice') {
-                        this.showScene('weeklyHub');
-                    }
+                // 应用效果（try-catch保护，确保即使出错也能显示结果）
+                try {
+                    this.applyAdventureEffect(effect);
+                } catch (e) {
+                    console.error('applyAdventureEffect出错:', e);
                 }
+                
+                // 始终显示结果弹窗（即使没有result文本，也显示属性变化）
+                setTimeout(() => {
+                    this.showAdventureResult(choice, event);
+                }, 300);
             }
             
             // 显示奇遇事件结果
@@ -7370,15 +7288,17 @@
                 
                 // 获取结果文本
                 let resultText = '';
-                if (typeof choice.result === 'object' && choice.result.success && choice.result.fail) {
-                    // 有成功/失败两种结果
-                    resultText = this.lastEventSuccess ? choice.result.success : choice.result.fail;
-                } else {
-                    resultText = choice.result;
+                if (choice.result) {
+                    if (typeof choice.result === 'object' && choice.result.success && choice.result.fail) {
+                        // 有成功/失败两种结果
+                        resultText = this.lastEventSuccess ? choice.result.success : choice.result.fail;
+                    } else {
+                        resultText = choice.result;
+                    }
                 }
                 
                 // 替换队友占位符
-                if (this.currentEventTeammate) {
+                if (this.currentEventTeammate && resultText) {
                     resultText = resultText.replace(/{teammate}/g, this.currentEventTeammate.name);
                 }
                 
@@ -7540,9 +7460,15 @@
                 }
                 
                 // 组合显示文本
-                let fullText = `<p style="white-space: pre-line; line-height: 1.6;">${resultText}</p>`;
+                let fullText = '';
+                if (resultText) {
+                    fullText = `<p style="white-space: pre-line; line-height: 1.6;">${resultText}</p>`;
+                }
                 if (hasChanges) {
                     fullText += changesText;
+                }
+                if (!fullText) {
+                    fullText = '<p style="white-space: pre-line; line-height: 1.6;">你做出了选择。</p>';
                 }
                 
                 text.innerHTML = fullText;
